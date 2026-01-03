@@ -1,86 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>About - Clark Galloway</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Clark Galloway</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Learn more about Clark Galloway - Web Developer and Dental Nurse with a passion for building, learning, and fitness.">
+    <meta name="author" content="Clark Galloway">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://clarkgalloway.uk/about.html">
+    <meta property="og:title" content="About Clark Galloway">
+    <meta property="og:description"
+        content="Web Developer and Dental Nurse with a passion for building, learning, and fitness.">
+    <meta property="og:image" content="images/headshot.jpeg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        .about-card {
-            background: rgba(30, 30, 30, 0);
-            max-width: 700px;
-            width: 96vw;
-            margin: 60px auto 0 auto;
-            padding: 6vw 4vw;
-            border-radius: 18px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-        .about-avatar {
-            width: 160px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff700;
-            margin-bottom: 18px;
-            box-shadow: 0 4px 4px #000;
-        }
-        .about-title {
-            font-size: 2.2em;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: #fff700;
-            text-shadow: 0 4px 4px #000;
-        }
-        .about-subtitle {
-            font-size: 1.1em;
-            color: #ffffff;
-            text-shadow: #222 4px 4px 4px;
-            margin-bottom: 18px;
-        }
-        .about-desc {
-            font-size: 1.05em;
-            margin-bottom: 22px;
-            text-shadow: 0 4px 4px #000;
-            text-align: left;
-            color: #ffffff;
-        }
-        .finishingline {
-            font-weight: bold;
-            color: #fff700;
-            font-size: 1em;
-            text-shadow: 0 4px 4px #000;
-            margin-top: 12px;
-        }
-    </style>
 </head>
+
 <body>
+    <!-- Skip to Content -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Fade Overlay -->
     <div id="fade-overlay"></div>
-    <div class="about-card">
-        <img src="images/headshot.jpeg" alt="Your Avatar" class="about-avatar">
-        <div class="about-title">Clark Galloway</div>
-        <div class="about-subtitle">Web Developer & Dental Nurse </div>
-        <div class="about-desc">
-            Welcome to my digital business card.<br>
-            I build, I learn, I lift.<br>
-            This site is a little hobby of mine and a portfolio of all my digital projects. If you have any good ideas on small or even large projects, please feel free to send me your suggestion.<br>
-            <br>
-            <div class="finishingline">Let's connect and level up <b>together.</b></div>
+
+    <!-- Navigation Header -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">CG</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="about-card">
+            <img src="images/headshot.jpeg" alt="Clark Galloway headshot" class="about-avatar" loading="lazy">
+            <h1 class="about-title">Clark Galloway</h1>
+            <p class="about-subtitle">Web Developer & Dental Nurse</p>
+            <div class="about-desc">
+                <p>Welcome to my digital business card.</p>
+                <p>I build, I learn, I lift.</p>
+                <p>This site is a little hobby of mine and a portfolio of all my digital projects. If you have any good
+                    ideas on small or even large projects, please feel free to send me your suggestion.</p>
+                <br>
+                <p class="highlight">Let's connect and level up <strong>together.</strong></p>
+            </div>
         </div>
-    </div>
-<script src="script.js"></script>
+    </main>
+
+    <!-- Footer -->
     <footer id="site-footer">
-        <div class="footer-links">
-            <a href="Home.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener"><img src="images/instagramlink.png" alt=" instagram"></a>
-            <a href="https://github.com/Verodicia" target="_blank" rel="noopener"><img src="images/githublink.png" alt="github"></a>
-            <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener"><img src="images/facebooklink.png" alt="facebook"></a>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <img src="images/instagramlink.png" alt="" loading="lazy">
+                </a>
+                <a href="https://github.com/Verodicia" target="_blank" rel="noopener" aria-label="GitHub">
+                    <img src="images/githublink.png" alt="" loading="lazy">
+                </a>
+                <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener" aria-label="Facebook">
+                    <img src="images/facebooklink.png" alt="" loading="lazy">
+                </a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
         </div>
-        <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
 </body>
+
 </html>
