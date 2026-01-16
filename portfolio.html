@@ -1,149 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio - Clark Galloway</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <style>
-        .portfolio-card {
-            max-width: 700px;
-            width: 96vw;
-            margin: 60px auto 0 auto;
-            padding: 6vw 4vw;
-            border-radius: 18px;
-            text-shadow: 0 4px 4px #000;
-            box-sizing: border-box;
-        }
-        .portfolio-title {
-            font-size: 2em;
-            font-weight: 700;
-            color: #fff700;
-            margin-bottom: 18px;
-            text-align: center;
-        }
-        .portfolio-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .portfolio-item {
-            background: #444;
-            border-radius: 10px;
-            margin-bottom: 18px;
-            padding: 18px 16px;
-            box-shadow: 0 2px 8px #222;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .portfolio-item-title {
-            font-size: 1.2em;
-            color: #fff700;
-            font-weight: bold;
-            text-shadow: 0 4px 4px #000;
-        }
-        .portfolio-item-desc {
-            font-size: 1em;
-            text-shadow: 0 4px 4px #000;
-            color: #eee;
-        }
-        .portfolio-item-link {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            text-shadow: 0 4px 4px #000;
-            transition: color 0.5s;
-        }
-        .portfolio-item-link:hover {
-            color: #fff700;
-        }
-        @media (max-width: 600px) {
-            .portfolio-card {
-                max-width: 99vw;
-                padding: 8vw 2vw;
-                margin: 24px auto 0 auto;
-                border-radius: 12px;
-            }
-            .portfolio-title {
-                font-size: 1.3em;
-            }
-        }
-        #fade-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #222;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transition: opacity 0.7s;
-        }
+    <title>Portfolio - Clark Galloway</title>
 
-        body.fade-out #fade-overlay {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        body.fade-in #fade-overlay {
-            opacity: 0;
-            pointer-events: none;
-        }
-    </style>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Explore Clark Galloway's web development projects including skill trees, fitness trackers, and more.">
+    <meta name="author" content="Clark Galloway">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clarkgalloway.uk/portfolio.html">
+    <meta property="og:title" content="Portfolio - Clark Galloway">
+    <meta property="og:description"
+        content="Explore web development projects including skill trees, fitness trackers, and more.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Skip to Content -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <!-- Fade Overlay -->
     <div id="fade-overlay"></div>
-    <div class="portfolio-card">
-        <div class="portfolio-title">My Web Projects</div>
-        <ul class="portfolio-list">
-            <li class="portfolio-item">
-                <div class="portfolio-item-title">Skill Tree Website</div>
-                <div class="portfolio-item-desc">
-                    <p>A small project to see how far i could push creating skill trees and their links using java and css.</p>
-                    <p>I might try and use this template to make a fun reward structure for achieving set goals or turning it into a leveling system for roleplaying games</p>
-                    <p>I decided to go with a metro style theme with 4 primary colours representing corresponding lines</p>
-                </div>
-                <a href="talent.html" class="portfolio-item-link">View Project</a>
-            </li>
-            <li class="portfolio-item">
-                <div class="portfolio-item-title">Dental Nurse Portal</div>
-                <div class="portfolio-item-desc">
-                    <p>A portal for dental nurses to access a collection of links to free CPD sites.</p>
-                    <p>Bonus: Maybe form a template to help keep a record of CPD for the ongoing cycle.</p>
+
+    <!-- Navigation Header -->
+    <header class="site-header">
+        <nav class="nav-container">
+            <a href="index.html" class="nav-logo">CG</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="portfolio-card">
+            <h1 class="portfolio-title">My Web Projects</h1>
+            <ul class="portfolio-list">
+                <li class="portfolio-item">
+                    <h2 class="portfolio-item-title">Skill Tree Website</h2>
+                    <div class="portfolio-item-desc">
+                        <p>A small project to see how far I could push creating skill trees and their links using
+                            JavaScript and CSS.</p>
+                        <p>I might try and use this template to make a fun reward structure for achieving set goals or
+                            turning it into a leveling system for roleplaying games.</p>
+                        <p>I decided to go with a metro style theme with 4 primary colours representing corresponding
+                            lines.</p>
                     </div>
-                <a href="#" class="portfolio-item-link">Demo Coming Soon</a>
-            </li>
-            <li class="portfolio-item">
-                <div class="portfolio-item-title">Fitness Progress Tracker</div>
-                <div class="portfolio-item-desc">
-                    <p>Track your running, lifting, and progress visually. Responsive and mobile-friendly.</p>
-                    <p>With a focus is on simplicty, think a mildly orgainised scrapbook</p>
-                </div>
-                <a href="#" class="portfolio-item-link">Demo Coming Soon</a>
-            </li>
-            <li class="portfolio-item">
-                <div class="portfolio-item-title">Photography</div>
-                <div class="portfolio-item-desc">
-                    <p>A Collection of various photographs i have taken</p>
-                    <p>From landscapes to wildlife, showcasing my photography skills.</p>
-                </div>
-                <a href="Photography.html" class="portfolio-item-link">View Project</a>
-            </li>
-            <!-- Add more projects here -->
-        </ul>
-    </div>
-    <footer id="site-footer">
-        <div class="footer-links">
-            <a href="Home.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener"><img src="images/instagramlink.png" alt=" instagram"></a>
-            <a href="https://github.com/Verodicia" target="_blank" rel="noopener"><img src="images/githublink.png" alt="github"></a>
-            <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener"><img src="images/facebooklink.png" alt="facebook"></a>
+                    <a href="talent.html" class="portfolio-item-link">View Project</a>
+                </li>
+
+                <li class="portfolio-item">
+                    <h2 class="portfolio-item-title">Dental Nurse Portal</h2>
+                    <div class="portfolio-item-desc">
+                        <p>A portal for dental nurses to access a collection of links to free CPD sites.</p>
+                        <p>Bonus: Maybe form a template to help keep a record of CPD for the ongoing cycle.</p>
+                    </div>
+                    <a href="#" class="portfolio-item-link">Demo Coming Soon</a>
+                </li>
+
+                <li class="portfolio-item">
+                    <h2 class="portfolio-item-title">Fitness Progress Tracker</h2>
+                    <div class="portfolio-item-desc">
+                        <p>Track your running, lifting, and progress visually. Responsive and mobile-friendly.</p>
+                        <p>With a focus on simplicity, think a mildly organised scrapbook.</p>
+                    </div>
+                    <a href="#" class="portfolio-item-link">Demo Coming Soon</a>
+                </li>
+
+                <li class="portfolio-item">
+                    <h2 class="portfolio-item-title">Photography</h2>
+                    <div class="portfolio-item-desc">
+                        <p>A collection of various photographs I have taken.</p>
+                        <p>From landscapes to wildlife, showcasing my photography skills.</p>
+                    </div>
+                    <a href="Photography.html" class="portfolio-item-link">View Project</a>
+                </li>
+
+                <li class="portfolio-item">
+                    <h2 class="portfolio-item-title">Clark's Wardrobe</h2>
+                    <div class="portfolio-item-desc">
+                        <p>A tribute to the 1995 classic movie Clueless.</p>
+                        <p>I got bored while watching Clueless and thought it would be fun to recreate the wardrobe
+                            program she used in the movie.</p>
+                    </div>
+                    <a href="clueless.html" class="portfolio-item-link">View Project</a>
+                </li>
+            </ul>
         </div>
-        <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
+    </main>
+
+    <!-- Footer -->
+    <footer id="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <img src="images/instagramlink.png" alt="" loading="lazy">
+                </a>
+                <a href="https://github.com/Verodicia" target="_blank" rel="noopener" aria-label="GitHub">
+                    <img src="images/githublink.png" alt="" loading="lazy">
+                </a>
+                <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener" aria-label="Facebook">
+                    <img src="images/facebooklink.png" alt="" loading="lazy">
+                </a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
 </body>
+
 </html>

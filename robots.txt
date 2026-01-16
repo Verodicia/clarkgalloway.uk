@@ -1,0 +1,7 @@
+# robots.txt for clarkgalloway.uk
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://clarkgalloway.uk/sitemap.xml
