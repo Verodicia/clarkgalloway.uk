@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/clueless/:path*",
+      "destination": "https://clueless-ruddy.vercel.app/:path*"
+    },
+    {
+      "source": "/clueless",
+      "destination": "https://clueless-ruddy.vercel.app/"
+    }
+  ]
+}
