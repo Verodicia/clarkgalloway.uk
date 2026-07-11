@@ -160,31 +160,7 @@ body {
     color: var(--color-primary);
 }
 
-.nav-toggle {
-    margin-left: 2rem;
-    background: var(--color-primary);
-    border: none;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    transition: transform var(--transition-fast);
-}
 
-.nav-toggle:hover {
-    transform: scale(1.05);
-}
-
-.nav-toggle span {
-    width: 24px;
-    height: 3px;
-    background: var(--color-text);
-    display: block;
-}
 
 /* --- MAIN CONTENT --- */
 main {
@@ -246,16 +222,15 @@ main {
     flex-direction: column;
     position: relative;
     background: var(--color-bg);
-    transition: all var(--transition-fast);
+    transition: background var(--transition-medium), border-color var(--transition-medium);
     text-decoration: none;
     color: var(--color-text);
     min-height: 550px;
 }
 
 .project-card:hover {
-    background: var(--color-primary);
+    background: rgba(255, 69, 0, 0.06);
     border-color: var(--color-text);
-    color: var(--color-text);
 }
 
 /* Central interactive hover block */
@@ -273,7 +248,6 @@ main {
     color: var(--color-primary);
 }
 
-.project-card:hover .card-title,
 .project-card.active-state .card-title {
     color: var(--color-text);
 }
@@ -429,23 +403,105 @@ main {
 
 /* Connection Network Icon */
 .network-icon {
-    width: 100%;
-    height: 100%;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 /* Bottom spacing bar */
 .bottom-bar {
     display: flex;
+    align-items: center;
     height: 40px;
     margin-top: 2rem;
+    gap: 2rem;
 }
 .bottom-bar-segment {
     flex: 1;
+    height: 100%;
     background: var(--color-primary);
 }
-.bottom-bar-segment:nth-child(2) {
+.bottom-bar-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.bottom-bar-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+.bottom-bar-links a:hover {
+    color: var(--color-primary);
+}
+
+/* --- CONTACT FORM --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group textarea {
+    border: 2px solid var(--color-text);
     background: transparent;
-    flex: 0.5;
+    padding: 1rem;
+    font-family: var(--font-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-primary);
+    background: rgba(255, 69, 0, 0.05);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(26, 26, 26, 0.4);
+}
+
+.submit-btn {
+    border: 2px solid var(--color-text);
+    background: var(--color-primary);
+    color: var(--color-text);
+    padding: 1.2rem;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+    border-radius: 0;
+}
+
+.submit-btn:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
 }
 
 /* --- RESPONSIVE --- */
@@ -465,8 +521,17 @@ main {
 @media (max-width: 768px) {
     .hero-block-orange { font-size: 4rem; padding: 1rem; }
     .hero-line { font-size: 3rem; }
-    .nav-links { display: none; }
-    .site-header { padding: 1rem; }
+    .nav-links { 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        font-size: 1rem;
+    }
+    .nav-links li::after {
+        display: none !important;
+    }
+    .site-header { padding: 1rem; justify-content: center; }
     main { padding: 0 1rem 1rem; }
     .project-grid {
         grid-template-columns: 1fr;

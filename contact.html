@@ -1,112 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Clark Galloway</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Get in touch with Clark Galloway for collaborations, projects, or just to say hello.">
-    <meta name="author" content="Clark Galloway">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://clarkgalloway.uk/contact.html">
-    <meta property="og:title" content="Contact Clark Galloway">
-    <meta property="og:description" content="Get in touch for collaborations, projects, or just to say hello.">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" href="favicon.png">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Clark Galloway</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <!-- Skip to Content -->
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <!-- Background Vectors (Subtle Cyber-Swiss Accents) -->
+  <div class="bg-vectors" aria-hidden="true">
+    <!-- Shadow Backdrop Japanese -->
+    <div class="bg-japanese-text jp-left">送信</div>
+    <div class="bg-japanese-text jp-right">通信</div>
+    <!-- Crosshair Top-Left -->
+    <svg class="bg-vector-item crosshair-top-left" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
+      <line x1="50" y1="0" x2="50" y2="100" />
+      <line x1="0" y1="50" x2="100" y2="50" />
+      <circle cx="50" cy="50" r="20" />
+      <circle cx="50" cy="50" r="3" />
+    </svg>
 
-    <!-- Fade Overlay -->
-    <div id="fade-overlay"></div>
+    <!-- Tech Circle Graphic Behind Hero -->
+    <svg class="bg-vector-item tech-circle-back" viewBox="0 0 200 200" fill="none" stroke="#1A1A1A" stroke-width="0.75">
+      <circle cx="100" cy="100" r="90" stroke-dasharray="2 4" />
+      <circle cx="100" cy="100" r="70" />
+      <circle cx="100" cy="100" r="40" stroke-dasharray="8 8" />
+      <line x1="100" y1="0" x2="100" y2="200" />
+      <line x1="0" y1="100" x2="200" y2="100" />
+      <path d="M40 40 L160 160 M40 160 L160 40" stroke-dasharray="4 8" />
+      <text x="105" y="95" fill="#1A1A1A" font-family="monospace" font-size="5" letter-spacing="1">COORD.8942-SYS</text>
+    </svg>
 
-    <!-- Navigation Header -->
-    <header class="site-header">
-        <nav class="nav-container">
-            <a href="index.html" class="nav-logo">CG</a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-    </header>
+    <!-- Tech Grid Specs Bottom-Left -->
+    <svg class="bg-vector-item tech-grid-specs" viewBox="0 0 150 60" fill="none" stroke="#1A1A1A" stroke-width="0.75">
+      <rect x="0" y="0" width="150" height="60" stroke-dasharray="2 2" />
+      <line x1="30" y1="0" x2="30" y2="60" />
+      <line x1="0" y1="20" x2="150" y2="20" />
+      <line x1="0" y1="40" x2="150" y2="40" />
+      <text x="5" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS.V-01</text>
+      <text x="35" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS: READY // STANDBY_</text>
+      <text x="5" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">LOC.52</text>
+      <text x="35" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">GRID REF: [55.86 / -4.25]</text>
+      <text x="5" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">EST.89</text>
+      <text x="35" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">PARAMETRIC OVERDRIVE MATRIX ACTIVE</text>
+    </svg>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <div class="contact-card">
-            <h1 class="contact-title">Contact Me</h1>
-            <p class="contact-desc">
-                Want to collaborate, hire, or just say hi?<br>
-                Fill out the form below or reach out on social media.
-            </p>
-            <form class="contact-form" action="#" method="POST">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" placeholder="Hi Clark, I'd love to..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+    <!-- Crosshair Bottom-Right -->
+    <svg class="bg-vector-item crosshair-bottom-right" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
+      <line x1="50" y1="0" x2="50" y2="100" />
+      <line x1="0" y1="50" x2="100" y2="50" />
+      <rect x="35" y="35" width="30" height="30" />
+    </svg>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">INDEX</a></li>
+        <li><a href="interests.html">INTERESTS</a></li>
+        <li><a href="portfolio.html">ARCHIVE</a></li>
+        <li><a href="about.html">INTEL</a></li>
+        <li><a href="contact.html" class="active">TRANSMIT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="hero">
+      <div class="hero-block-orange">\\.CLark G</div>
+      <div class="hero-line">TRANSMIT INQUIRY</div>
+      <div class="hero-line">SECURE CLIENT PROTOCOL</div>
+      <div class="hero-line">EST. 1989</div>
+    </section>
+
+    <!-- Asymmetric 2-Column Grid -->
+    <section class="project-grid" style="grid-template-columns: repeat(2, 1fr);">
+      
+      <!-- Connection Card (Left Column) -->
+      <div class="project-card" style="grid-column: span 1; gap: 2rem;">
+        <div class="card-title">NET DIRECTORY</div>
+        
+        <div class="card-icon-area" style="max-height: none; height: 180px; border: 2px solid var(--color-text); position: relative;">
+          <!-- Custom network mapping graphic -->
+          <svg class="card-icon network-icon" viewBox="0 0 100 100" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="2" style="width: 100px; height: 100px;">
+            <circle cx="50" cy="50" r="10" fill="var(--color-primary)" stroke="none" />
+            <circle cx="20" cy="20" r="5" />
+            <circle cx="80" cy="20" r="5" />
+            <circle cx="80" cy="80" r="5" />
+            <circle cx="20" cy="80" r="5" />
+            <line x1="50" y1="50" x2="20" y2="20" />
+            <line x1="50" y1="50" x2="80" y2="20" />
+            <line x1="50" y1="50" x2="80" y2="80" />
+            <line x1="50" y1="50" x2="20" y2="80" />
+          </svg>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer id="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener" aria-label="Instagram">
-                    <img src="images/instagramlink.png" alt="" loading="lazy">
-                </a>
-                <a href="https://github.com/Verodicia" target="_blank" rel="noopener" aria-label="GitHub">
-                    <img src="images/githublink.png" alt="" loading="lazy">
-                </a>
-                <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener" aria-label="Facebook">
-                    <img src="images/facebooklink.png" alt="" loading="lazy">
-                </a>
-            </div>
-            <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
+        <div class="card-meta">
+          <div class="serial-no">Serial: CG-SOC-8942</div>
+          <div class="barcode">1098472938</div>
+          <div class="barcode-text"><span>9 781536</span><span>290111</span></div>
+          
+          <table class="data-table" style="margin-top: 1rem;">
+            <tr><th>PLATFORM</th><th>DESTINATION</th></tr>
+            <tr>
+              <td>INSTAGRAM</td>
+              <td><a href="https://www.instagram.com/clarkconcarne/" target="_blank" rel="noopener" style="color: var(--color-primary); font-weight: bold; text-decoration: none;">@clark19669</a></td>
+            </tr>
+            <tr>
+              <td>GITHUB</td>
+              <td><a href="https://github.com/Verodicia" target="_blank" rel="noopener" style="color: var(--color-primary); font-weight: bold; text-decoration: none;">Verodicia</a></td>
+            </tr>
+            <tr>
+              <td>FACEBOOK</td>
+              <td><a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener" style="color: var(--color-primary); font-weight: bold; text-decoration: none;">clark.galloway1</a></td>
+            </tr>
+          </table>
         </div>
-    </footer>
+      </div>
 
-    <!-- Scripts -->
-    <script src="script.js" defer></script>
+      <!-- Transmission Form (Right Column) -->
+      <div class="project-card" style="grid-column: span 1; justify-content: flex-start; gap: 2rem;">
+        <div class="card-title">FORM PROTOCOL</div>
+        
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" placeholder="Type transmission content here..." style="min-height: 150px; resize: vertical;" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Transmit Message</button>
+        </form>
+      </div>
+
+    </section>
+
+    <div class="bottom-bar">
+      <div class="bottom-bar-segment"></div>
+      <div class="bottom-bar-links">
+        <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener">FACEBOOK</a>
+        <a href="https://www.instagram.com/clarkconcarne/" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://github.com/Verodicia" target="_blank" rel="noopener">GITHUB</a>
+      </div>
+      <div class="bottom-bar-segment"></div>
+    </div>
+  </main>
+  <!-- Scripts -->
+  <script src="script.js" defer></script>
 </body>
-
 </html>

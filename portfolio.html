@@ -1,145 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Clark Galloway</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Explore Clark Galloway's web development projects including skill trees, fitness trackers, and more.">
-    <meta name="author" content="Clark Galloway">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://clarkgalloway.uk/portfolio.html">
-    <meta property="og:title" content="Portfolio - Clark Galloway">
-    <meta property="og:description"
-        content="Explore web development projects including skill trees, fitness trackers, and more.">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" href="favicon.png">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Clark Galloway</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <!-- Skip to Content -->
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <!-- Background Vectors (Subtle Cyber-Swiss Accents) -->
+  <div class="bg-vectors" aria-hidden="true">
+    <!-- Shadow Backdrop Japanese -->
+    <div class="bg-japanese-text jp-left">書庫</div>
+    <div class="bg-japanese-text jp-right">実績</div>
+    <!-- Crosshair Top-Left -->
+    <svg class="bg-vector-item crosshair-top-left" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
+      <line x1="50" y1="0" x2="50" y2="100" />
+      <line x1="0" y1="50" x2="100" y2="50" />
+      <circle cx="50" cy="50" r="20" />
+      <circle cx="50" cy="50" r="3" />
+    </svg>
 
-    <!-- Fade Overlay -->
-    <div id="fade-overlay"></div>
+    <!-- Tech Circle Graphic Behind Hero -->
+    <svg class="bg-vector-item tech-circle-back" viewBox="0 0 200 200" fill="none" stroke="#1A1A1A" stroke-width="0.75">
+      <circle cx="100" cy="100" r="90" stroke-dasharray="2 4" />
+      <circle cx="100" cy="100" r="70" />
+      <circle cx="100" cy="100" r="40" stroke-dasharray="8 8" />
+      <line x1="100" y1="0" x2="100" y2="200" />
+      <line x1="0" y1="100" x2="200" y2="100" />
+      <path d="M40 40 L160 160 M40 160 L160 40" stroke-dasharray="4 8" />
+      <text x="105" y="95" fill="#1A1A1A" font-family="monospace" font-size="5" letter-spacing="1">COORD.8942-SYS</text>
+    </svg>
 
-    <!-- Navigation Header -->
-    <header class="site-header">
-        <nav class="nav-container">
-            <a href="index.html" class="nav-logo">CG</a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-    </header>
+    <!-- Tech Grid Specs Bottom-Left -->
+    <svg class="bg-vector-item tech-grid-specs" viewBox="0 0 150 60" fill="none" stroke="#1A1A1A" stroke-width="0.75">
+      <rect x="0" y="0" width="150" height="60" stroke-dasharray="2 2" />
+      <line x1="30" y1="0" x2="30" y2="60" />
+      <line x1="0" y1="20" x2="150" y2="20" />
+      <line x1="0" y1="40" x2="150" y2="40" />
+      <text x="5" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS.V-01</text>
+      <text x="35" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS: READY // STANDBY_</text>
+      <text x="5" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">LOC.52</text>
+      <text x="35" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">GRID REF: [55.86 / -4.25]</text>
+      <text x="5" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">EST.89</text>
+      <text x="35" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">PARAMETRIC OVERDRIVE MATRIX ACTIVE</text>
+    </svg>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <div class="portfolio-card">
-            <h1 class="portfolio-title">My Web Projects</h1>
-            <ul class="portfolio-list">
-                <li class="portfolio-item">
-                    <h2 class="portfolio-item-title">Skill Tree Website</h2>
-                    <div class="portfolio-item-desc">
-                        <p>A small project to see how far I could push creating skill trees and their links using
-                            JavaScript and CSS.</p>
-                        <p>I might try and use this template to make a fun reward structure for achieving set goals or
-                            turning it into a leveling system for roleplaying games.</p>
-                        <p>I decided to go with a metro style theme with 4 primary colours representing corresponding
-                            lines.</p>
-                    </div>
-                    <a href="talent.html" class="portfolio-item-link">View Project</a>
-                </li>
+    <!-- Crosshair Bottom-Right -->
+    <svg class="bg-vector-item crosshair-bottom-right" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
+      <line x1="50" y1="0" x2="50" y2="100" />
+      <line x1="0" y1="50" x2="100" y2="50" />
+      <rect x="35" y="35" width="30" height="30" />
+    </svg>
+  </div>
 
-                <li class="portfolio-item">
-                    <h2 class="portfolio-item-title">Dental Nurse Portal</h2>
-                    <div class="portfolio-item-desc">
-                        <p>A portal for dental nurses to access a collection of links to free CPD sites.</p>
-                        <p>Bonus: Maybe form a template to help keep a record of CPD for the ongoing cycle.</p>
-                    </div>
-                    <a href="#" class="portfolio-item-link">Demo Coming Soon</a>
-                </li>
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">INDEX</a></li>
+        <li><a href="interests.html">INTERESTS</a></li>
+        <li><a href="portfolio.html" class="active">ARCHIVE</a></li>
+        <li><a href="about.html">INTEL</a></li>
+        <li><a href="contact.html">TRANSMIT</a></li>
+      </ul>
+    </nav>
+  </header>
 
-                <li class="portfolio-item">
-                    <h2 class="portfolio-item-title">Fitness Progress Tracker</h2>
-                    <div class="portfolio-item-desc">
-                        <p>Track your running, lifting, and progress visually. Responsive and mobile-friendly.</p>
-                        <p>With a focus on simplicity, think a mildly organised scrapbook.</p>
-                    </div>
-                    <a href="https://www.lgrfitness.uk" class="portfolio-item-link">View Project</a>
-                </li>
+  <!-- Main Content -->
+  <main>
+    <section class="hero">
+      <div class="hero-block-orange">\\.CLark G</div>
+      <div class="hero-line">PROJECT ARCHIVE</div>
+      <div class="hero-line">COMPLETED SYSTEMS // REPOSITORIES</div>
+      <div class="hero-line">EST. 1989</div>
+    </section>
 
-                <li class="portfolio-item">
-                    <h2 class="portfolio-item-title">Photography</h2>
-                    <div class="portfolio-item-desc">
-                        <p>A collection of various photographs I have taken.</p>
-                        <p>From landscapes to wildlife, showcasing my photography skills.</p>
-                    </div>
-                    <a href="Photography.html" class="portfolio-item-link">View Project</a>
-                </li>
-
-                <li class="portfolio-item">
-                    <h2 class="portfolio-item-title">Clark's Wardrobe</h2>
-                    <div class="portfolio-item-desc">
-                        <p>A tribute to the 1995 classic movie Clueless.</p>
-                        <p>I got bored while watching Clueless and thought it would be fun to recreate the wardrobe
-                            program she used in the movie.</p>
-                    </div>
-                    <a href="clueless/" class="portfolio-item-link">View Project</a>
-                </li>
-            </ul>
+    <!-- Project List styled as Rigid Cyber-Swiss Cards -->
+    <section class="project-grid" style="grid-template-columns: repeat(3, 1fr);">
+      
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="card-title">DENTAL NURSE<br>PORTAL</div>
+        <div class="card-icon-area">
+          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
+            <path d="M20 20 Q50 40 80 20 L80 80 Q50 60 20 80 Z" />
+            <line x1="50" y1="30" x2="50" y2="70" />
+          </svg>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer id="site-footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="contact.html">Contact</a>
+        <div class="card-meta">
+          <div class="serial-no">Serial: ARC-DN-8432</div>
+          <div class="barcode">4820938472</div>
+          <div class="barcode-text"><span>4 012345</span><span>678901</span></div>
+          <p style="font-family: monospace; font-size: 0.85rem; line-height: 1.4; margin: 0.5rem 0;">
+            A centralized hub designed for dental nurses to access free CPD resources and manage learning logs.
+          </p>
+          <div class="tech-stack">
+            <div class="tech-list" style="font-size: 1rem;">
+              <span>Resource Library</span>
+              <span>CPD Tracker</span>
+              <span>Portal UI</span>
             </div>
-            <div class="footer-social">
-                <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener" aria-label="Instagram">
-                    <img src="images/instagramlink.png" alt="" loading="lazy">
-                </a>
-                <a href="https://github.com/Verodicia" target="_blank" rel="noopener" aria-label="GitHub">
-                    <img src="images/githublink.png" alt="" loading="lazy">
-                </a>
-                <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener" aria-label="Facebook">
-                    <img src="images/facebooklink.png" alt="" loading="lazy">
-                </a>
-            </div>
-            <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
+            <div class="warning-icon" style="font-size: 1.2rem; border-width: 1px; width: 30px; height: 25px; padding-bottom: 2px;">!</div>
+          </div>
+          <div class="unit-badge" style="color: var(--color-primary); border-color: var(--color-primary);">STATUS: STANDBY</div>
         </div>
-    </footer>
+      </div>
 
-    <!-- Scripts -->
-    <script src="script.js" defer></script>
+      <!-- Project 3 -->
+      <a href="https://www.lgrfitness.uk" class="project-card">
+        <div class="card-title">FITNESS<br>TRACKER</div>
+        <div class="card-icon-area">
+          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
+            <circle cx="50" cy="50" r="30" />
+            <path d="M50 20 L50 50 L70 50" />
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="serial-no">Serial: ARC-FIT-3829</div>
+          <div class="barcode">3829471928</div>
+          <div class="barcode-text"><span>8 472938</span><span>492837</span></div>
+          <p style="font-family: monospace; font-size: 0.85rem; line-height: 1.4; margin: 0.5rem 0;">
+            Visual tracker focusing on weights, running progress, and simple digital scrapbook layout logs. Mobile responsive.
+          </p>
+          <div class="tech-stack">
+            <div class="tech-list" style="font-size: 1rem;">
+              <span>LGRFITNESS.UK</span>
+              <span>Activity Logging</span>
+              <span>Data Charts</span>
+            </div>
+          </div>
+          <div class="unit-badge">DEPLOYED.02</div>
+        </div>
+      </a>
+
+      <!-- Project 4 -->
+      <a href="interests.html" class="project-card">
+        <div class="card-title">PHOTOGRAPHY<br>SPECIMENS</div>
+        <div class="card-icon-area">
+          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
+            <rect x="20" y="20" width="60" height="60" />
+            <circle cx="50" cy="50" r="15" />
+            <circle cx="70" cy="30" r="3" fill="#1A1A1A" />
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="serial-no">Serial: ARC-PH-5729</div>
+          <div class="barcode">5729384729</div>
+          <div class="barcode-text"><span>1 234567</span><span>890128</span></div>
+          <p style="font-family: monospace; font-size: 0.85rem; line-height: 1.4; margin: 0.5rem 0;">
+            Collection of photography specimens spanning architectural structures, geometry, landscapes, and wildlife profiles.
+          </p>
+          <div class="tech-stack">
+            <div class="tech-list" style="font-size: 1rem;">
+              <span>Image Catalog</span>
+              <span>Brutalist Details</span>
+            </div>
+          </div>
+          <div class="unit-badge">DEPLOYED.03</div>
+        </div>
+      </a>
+
+      <!-- Project 5 -->
+      <a href="clueless/" class="project-card">
+        <div class="card-title">CLARK'S<br>WARDROBE</div>
+        <div class="card-icon-area">
+          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
+            <path d="M15 90 L30 10 L70 10 L85 90 Z" />
+            <line x1="30" y1="35" x2="70" y2="35" />
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="serial-no">Serial: ARC-CL-1995</div>
+          <div class="barcode">1995071989</div>
+          <div class="barcode-text"><span>5 109847</span><span>382947</span></div>
+          <p style="font-family: monospace; font-size: 0.85rem; line-height: 1.4; margin: 0.5rem 0;">
+            An interactive tribute recreation of Cher's matching wardrobe selection software system from Clueless (1995).
+          </p>
+          <div class="tech-stack">
+            <div class="tech-list" style="font-size: 1rem;">
+              <span>Cher Outfit Selector</span>
+              <span>Nostalgia UI</span>
+            </div>
+          </div>
+          <div class="unit-badge">DEPLOYED.04</div>
+        </div>
+      </a>
+
+      <!-- Back to Main Page -->
+      <a href="index.html" class="project-card active-state">
+        <div class="card-title">RETURN<br>TO MAIN</div>
+        <div class="active-status">[ACTION]<br>/ NAVIGATE</div>
+        <div class="active-text-large">ESC</div>
+      </a>
+      
+    </section>
+
+    <div class="bottom-bar">
+      <div class="bottom-bar-segment"></div>
+      <div class="bottom-bar-links">
+        <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener">FACEBOOK</a>
+        <a href="https://www.instagram.com/clarkconcarne/" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://github.com/Verodicia" target="_blank" rel="noopener">GITHUB</a>
+      </div>
+      <div class="bottom-bar-segment"></div>
+    </div>
+  </main>
+  <!-- Scripts -->
+  <script src="script.js" defer></script>
 </body>
-
 </html>
