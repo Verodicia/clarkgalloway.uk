@@ -1,118 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clark Galloway - Web Developer & Dental Nurse</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description"
-    content="Clark Galloway - Web Developer and Dental Nurse. Explore my portfolio of web projects, skills, and professional experience.">
-  <meta name="keywords" content="Clark Galloway, Web Developer, Dental Nurse, Portfolio, Web Development">
-  <meta name="author" content="Clark Galloway">
-
-  <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://clarkgalloway.uk/">
-  <meta property="og:title" content="Clark Galloway - Web Developer & Dental Nurse">
-  <meta property="og:description" content="Explore my portfolio of web projects, skills, and professional experience.">
-  <meta property="og:image" content="images/headshot.jpeg">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Clark Galloway - Web Developer & Dental Nurse">
-  <meta name="twitter:description" content="Explore my portfolio of web projects, skills, and professional experience.">
-
-  <!-- Favicon -->
+  <title>Clark Galloway - Systems Architecture</title>
+  
+  <meta name="description" content="Clark Galloway - Systems Architecture & Creative Overdrive">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/png" href="favicon.png">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
+  
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <!-- Skip to Content (Accessibility) -->
-  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+  <!-- Background Vectors (Subtle Cyber-Swiss Accents) -->
+  <div class="bg-vectors" aria-hidden="true">
+    <!-- Shadow Backdrop Japanese -->
+    <div class="bg-japanese-text jp-left">システム設計</div>
+    <div class="bg-japanese-text jp-right">限界突破</div>
+    <!-- Crosshair Top-Left -->
+    <svg class="bg-vector-item crosshair-top-left" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
+      <line x1="50" y1="0" x2="50" y2="100"/>
+      <line x1="0" y1="50" x2="100" y2="50"/>
+      <circle cx="50" cy="50" r="20"/>
+      <circle cx="50" cy="50" r="3"/>
+    </svg>
 
-  <!-- Fade Overlay -->
-  <div id="fade-overlay"></div>
+    <!-- Tech Circle Graphic Behind Hero -->
+    <svg class="bg-vector-item tech-circle-back" viewBox="0 0 200 200" fill="none" stroke="#1A1A1A" stroke-width="0.75">
+      <circle cx="100" cy="100" r="90" stroke-dasharray="2 4"/>
+      <circle cx="100" cy="100" r="70"/>
+      <circle cx="100" cy="100" r="40" stroke-dasharray="8 8"/>
+      <line x1="100" y1="0" x2="100" y2="200"/>
+      <line x1="0" y1="100" x2="200" y2="100"/>
+      <path d="M40 40 L160 160 M40 160 L160 40" stroke-dasharray="4 8"/>
+      <text x="105" y="95" fill="#1A1A1A" font-family="monospace" font-size="5" letter-spacing="1">COORD.8942-SYS</text>
+    </svg>
 
+    <!-- Tech Grid Specs Bottom-Left -->
+    <svg class="bg-vector-item tech-grid-specs" viewBox="0 0 150 60" fill="none" stroke="#1A1A1A" stroke-width="0.75">
+      <rect x="0" y="0" width="150" height="60" stroke-dasharray="2 2"/>
+      <line x1="30" y1="0" x2="30" y2="60"/>
+      <line x1="0" y1="20" x2="150" y2="20"/>
+      <line x1="0" y1="40" x2="150" y2="40"/>
+      <text x="5" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS.V-01</text>
+      <text x="35" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS: READY // STANDBY_</text>
+      <text x="5" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">LOC.52</text>
+      <text x="35" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">GRID REF: [55.86 / -4.25]</text>
+      <text x="5" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">EST.89</text>
+      <text x="35" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">PARAMETRIC OVERDRIVE MATRIX ACTIVE</text>
+    </svg>
+
+    <!-- Crosshair Bottom-Right -->
+    <svg class="bg-vector-item crosshair-bottom-right" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
+      <line x1="50" y1="0" x2="50" y2="100"/>
+      <line x1="0" y1="50" x2="100" y2="50"/>
+      <rect x="35" y="35" width="30" height="30"/>
+    </svg>
+  </div>
   <!-- Navigation Header -->
   <header class="site-header">
-    <nav class="nav-container">
-      <a href="index.html" class="nav-logo">CG</a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="portfolio.html">ARCHIVE</a></li>
+        <li><a href="about.html">INTEL</a></li>
+        <li><a href="contact.html">TRANSMIT</a></li>
       </ul>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </nav>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 
   <!-- Main Content -->
-  <main id="main-content">
-    <div class="homepage-card">
-      <h1 class="homepage-title">Clark<br>Galloway</h1>
+  <main>
+    <section class="hero">
+      <div class="hero-block-orange">\\.CLark G</div>
+      <div class="hero-line">SYSTEMS ARCHITECTURE</div>
+      <div class="hero-line">CREATIVE OVERDRIVE</div>
+      <div class="hero-line">EST. 1989 </div>
+    </section>
 
-      <div class="rotating-text-container">
-        <span class="rotating-text">
-          Web Development<br>
-          Dental Nursing<br>
-          Fitness & Health<br>
-          Adventures<br>
-          Problem Solving
-        </span>
+    <section class="project-grid">
+      <!-- Card 1 -->
+      <a href="portfolio.html" class="project-card">
+        <div class="card-title">Website<br>Interfacing</div>
+        <div class="card-icon-area">
+          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
+            <circle cx="30" cy="50" r="20"/>
+            <rect x="60" y="30" width="30" height="40"/>
+            <path d="M50 50 L60 50"/>
+            <path d="M20 50 Q30 30 40 50 T60 50" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="serial-no">Serial: PROJ-ARC-8942</div>
+          <div class="barcode">1234567890</div>
+          <div class="barcode-text"><span>9 781536</span><span>290111</span></div>
+          <div class="tech-stack">
+            <div class="tech-list">
+              <span>UI/UX</span>
+              <span>WebGL</span>
+              <span>React</span>
+              <span>C++</span>
+              <span>what look do you desire?</span>
+            </div>
+            <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
+              <path d="M12 2L2 22h20L12 2zm0 14h-2v-6h2v6zm0 4h-2v-2h2v2z"/>
+            </svg>
+          </div>
+          <div class="unit-badge">UNIT-01</div>
+        </div>
+      </a>
+
+      <!-- Card 2 (Active/Hover State) -->
+        <a href="portfolio.html" class="project-card">
+        <div class="card-title">NETWORK<br>ARCHITECTURE</div>
+        <div class="card-icon-area">
+          <svg class="card-icon network-icon" viewBox="0 0 100 100" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="2">
+            <circle cx="20" cy="50" r="5"/>
+            <circle cx="40" cy="30" r="5"/>
+            <circle cx="60" cy="40" r="5"/>
+            <circle cx="80" cy="20" r="5"/>
+            <circle cx="50" cy="70" r="5"/>
+            <circle cx="70" cy="60" r="5"/>
+            <line x1="20" y1="50" x2="40" y2="30"/>
+            <line x1="40" y1="30" x2="60" y2="40"/>
+            <line x1="60" y1="40" x2="80" y2="20"/>
+            <line x1="20" y1="50" x2="50" y2="70"/>
+            <line x1="50" y1="70" x2="70" y2="60"/>
+            <line x1="70" y1="60" x2="60" y2="40"/>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="serial-no">PROJ-NET-2219</div>
+          <div class="barcode">2468135790</div>
+          <div class="barcode-text"><span>1 234567</span><span>890128</span></div>
+          <div class="tech-stack" style="margin-top: 1rem;">
+            <div class="tech-list">
+              <span>Networking</span>
+              <span>API</span>
+              <span>Rust</span>
+              <span>Docker</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="portfolio.html" class="project-card">
+        <div class="card-title">DIGITAL<br>FABRICATION</div>
+        <div class="card-icon-area">
+          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
+            <circle cx="50" cy="50" r="25" stroke-dasharray="10 5"/>
+            <circle cx="50" cy="50" r="10" fill="#1A1A1A"/>
+            <path d="M50 25 L50 15 M50 75 L50 85 M25 50 L15 50 M75 50 L85 50 M32 32 L25 25 M68 68 L75 75 M32 68 L25 75 M68 32 L75 25" stroke-width="4"/>
+          </svg>
+        </div>
+        <div class="card-meta">
+          <div class="serial-no">PROJ-MAN-4031</div>
+          <div class="barcode">9876543210</div>
+          <div class="barcode-text"><span>4 012345</span><span>678901</span></div>
+          <div class="tech-stack">
+            <div class="tech-list">
+              <span>Digital deployment</span>
+              <span>Private ownership</span>
+              <span>Personal software</span>
+            </div>
+          </div>
+          <table class="data-table">
+            <tr><th>DATA</th><th>SPEC</th><th>SPEC</th><th>DATA</th><th>DATA</th><th>NAME</th></tr>
+            <tr><td>01</td><td>7.50</td><td>550</td><td>2590</td><td></td><td></td></tr>
+            <tr><td>03</td><td>5.00</td><td></td><td>3200</td><td></td><td></td></tr>
+            <tr><td>23</td><td></td><td>305</td><td>3325</td><td></td><td></td></tr>
+            <tr><td>DATA</td><td></td><td>283</td><td>2732</td><td></td><td></td></tr>
+          </table>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <div class="project-card active-state">
+        <div class="card-title">HOVER<br>INTERACTION</div>
+        <div class="active-status">[SELECTED]<br>/ ACTIVE</div>
+        <div class="active-text-large">01</div>
       </div>
+    </section>
 
-      <p class="homepage-desc">
-        Welcome to my personal site.<br>
-        Explore my <b>skills</b>, <b>projects</b>, and <b>progress</b>.<br><br>
-        <span class="text-primary">Are you ready to level up?</span>
-      </p>
-
-      <a href="portfolio.html" class="btn btn-primary">View My Projects</a>
+    <div class="bottom-bar">
+      <div class="bottom-bar-segment"></div>
+      <div class="bottom-bar-segment"></div>
+      <div class="bottom-bar-segment"></div>
     </div>
   </main>
-
-  <!-- Footer -->
-  <footer id="site-footer">
-    <div class="footer-content">
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/clark19669/" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="images/instagramlink.png" alt="" loading="lazy">
-        </a>
-        <a href="https://github.com/Verodicia" target="_blank" rel="noopener" aria-label="GitHub">
-          <img src="images/githublink.png" alt="" loading="lazy">
-        </a>
-        <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="images/facebooklink.png" alt="" loading="lazy">
-        </a>
-      </div>
-      <p class="footer-copyright">&copy; 2025 Clark Galloway</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="script.js" defer></script>
 </body>
-
 </html>
