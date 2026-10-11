@@ -143,6 +143,7 @@ h1, h2, h3, h4, .font-delta, .font-gothic {
   text-transform: uppercase;
   background: linear-gradient(135deg, #fff 30%, var(--crimson-bright) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1;
 }
