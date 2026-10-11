@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Crimson Sacrament — D&D 5e Campaign Setting & World Compendium</title>
+  <meta name="description"
+    content="The Crimson Sacrament: An original dark fantasy D&D 5e campaign universe. Explore the 1,000-year mystery of the Ruby Blade, the four fallen kingdoms, the Aegis Security Guild, custom squad mechanics, and an interactive character forge.">
+  <link rel="stylesheet" href="crimson-sacrament.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+
+<body>
+  <!-- Ambient Crimson Particle Canvas -->
+  <canvas id="ember-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation & HUD Header -->
+  <header class="hub-header">
+    <div class="hub-nav-inner">
+      <div class="nav-left">
+        <a href="index.html#card-dnd" class="back-link" id="btn-back">
+          <span>←</span> Portfolio
+        </a>
+        <div class="brand-wrapper">
+          <span class="brand-title font-delta">The Crimson Sacrament</span>
+          <span class="brand-subtitle">Dark Fantasy Campaign Setting &amp; Codex</span>
+        </div>
+      </div>
+
+      <div class="nav-hud-controls">
+        <div class="hud-pill" title="Current in-world era">
+          <span>⏳ Year 1,000 · Millennial Jubilee</span>
+        </div>
+        <div class="hud-pill" title="Player starting outpost">
+          <span>📍 Outpost: Faylight</span>
+        </div>
+        <button class="hud-btn" id="hud-toggle-dm" type="button" title="Toggle between Player View and DM Spoilers">
+          <span>👁️</span> DM Secrets: <em>Concealed</em>
+        </button>
+        <button class="hud-btn" id="hud-toggle-audio" type="button" title="Toggle atmospheric ambient hearth/drone">
+          <span>🕯️</span> Ambient: <em>Off</em>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-crimson">
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="campaign-tag">
+          <span>✦</span> D&amp;D 5e Dark Fantasy Universe · Homebrew Compendium
+        </div>
+        <h1 class="hero-title font-delta">
+          The Crimson <span>Sacrament</span>
+        </h1>
+        <p class="hero-quote font-gothic">
+          "Blood remembers what the stones have forgotten."
+        </p>
+        <p class="hero-desc">
+          For one thousand years, the Kingdom of Aethelgard has stood impregnable while every neighboring realm dissolved in fire, civil war, and oceanic maelstroms. The silent cornerstone of this millennium of peace is an artifact guarded in the deepest palace vaults: a ruby blade capable of slaying any being in existence, demanding only the bearer's own soul in return.
+        </p>
+        <div class="hero-quick-stats">
+          <div class="quick-stat-item">
+            <span class="stat-label">Setting</span>
+            <span class="stat-val">Aethelgard &amp; The 4 Fallen Realms</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="stat-label">Player Origin</span>
+            <span class="stat-val">The Aegis Cohort (Hereditary Security Guild)</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="stat-label">Starting Outpost</span>
+            <span class="stat-val">Faylight Village (Verdant Border)</span>
+          </div>
+          <div class="quick-stat-item">
+            <span class="stat-label">Inciting Event</span>
+            <span class="stat-val">The Millennial Jubilee &amp; Vault Breach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Navigation Tabs -->
+  <nav class="tab-navigation-bar" aria-label="Campaign Compendium Sections">
+    <div class="tabs-container" role="tablist">
+      <button class="tab-btn active" data-tab="atlas" role="tab" aria-selected="true">
+        <span>🗺️</span> World &amp; Atlas
+      </button>
+      <button class="tab-btn" data-tab="relic" role="tab" aria-selected="false">
+        <span>🗡️</span> The Sacrament
+      </button>
+      <button class="tab-btn" data-tab="factions" role="tab" aria-selected="false">
+        <span>⚔️</span> Factions &amp; Guild
+      </button>
+      <button class="tab-btn" data-tab="characters" role="tab" aria-selected="false">
+        <span>🎭</span> Dramatis Personae
+      </button>
+      <button class="tab-btn" data-tab="mechanics" role="tab" aria-selected="false">
+        <span>📜</span> Game Mechanics
+      </button>
+      <button class="tab-btn" data-tab="forge" role="tab" aria-selected="false">
+        <span>🛡️</span> Character Forge
+      </button>
+      <button class="tab-btn" data-tab="oracle" role="tab" aria-selected="false">
+        <span>🎲</span> DM Oracle
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Tab Panels -->
+  <main class="tab-panels">
+
+    <!-- 1. WORLD & ATLAS TAB -->
+    <section class="tab-panel active" id="tab-atlas" role="tabpanel">
+      <div class="atlas-grid">
+        <div class="map-card">
+          <div class="map-card-header">
+            <span class="font-gothic" style="font-weight: 700; color: #fff;">✦ Regional Map of the Known Realms</span>
+            <span style="font-size: 0.75rem; color: var(--gold-bright);">Click any pin to inspect realm lore</span>
+          </div>
+          <div class="map-interactive-view" id="map-interactive-view">
+            <img src="projects/crimson-map.jpg" alt="Illuminated Map of Aethelgard and Surrounding Kingdoms" class="map-image" id="map-image">
+            <div id="map-pins-layer"></div>
+          </div>
+        </div>
+
+        <div class="realm-detail-card" id="realm-detail-card">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+
+      <!-- Downfall of the Kingdoms Timeline -->
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="campaign-tag"><span>⏳</span> Historical Chronology</div>
+          <h3 class="font-gothic" style="font-size: 1.5rem; color: #fff; margin-top: 0.35rem;">
+            The Decline of the Surrounding Realms
+          </h3>
+          <p style="font-size: 0.9rem; color: var(--fg-muted);">
+            While Aethelgard has stood unbroken for 1,000 years through the secret deterrent of the Ruby Blade, every neighboring civilization fell into catastrophe.
+          </p>
+        </div>
+        <div class="timeline-flow">
+          <div class="timeline-step">
+            <div class="timeline-time">~250 Years Ago</div>
+            <h4 class="timeline-title font-gothic">The Sundering of Valoria</h4>
+            <p class="timeline-desc">
+              Succession dispute ignited a bloody four-decade civil war between great houses. The kingdom collapsed into lawless warlord enclaves now known as the <strong>Sundered Marches</strong>, governed from Talon's Rest.
+            </p>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">~150 Years Ago</div>
+            <h4 class="timeline-title font-gothic">The Elysian Cataclysm</h4>
+            <p class="timeline-desc">
+              Mages attempted to tap a primal subterranean ley-nexus for eternal harvest. The ritual destabilized, discharging a pyroclastic wave that scorched the paradise into the <strong>Ashen Wastes</strong>, centered around Cinderfall.
+            </p>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">~100 Years Ago</div>
+            <h4 class="timeline-title font-gothic">The Shattering of Solara</h4>
+            <p class="timeline-desc">
+              A supernatural oceanic maelstrom—rumored to be a rogue elemental storm or divine retribution—shattered the maritime archipelago into the <strong>Broken Isles</strong>, with Shattered Point as its corsair capital.
+            </p>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-time">Present Day</div>
+            <h4 class="timeline-title font-gothic">The Millennial Jubilee</h4>
+            <p class="timeline-desc">
+              Aethelgard marks 1,000 years of reign. Amidst tournaments and masquerades, the players' security squad arrives from Faylight just as conspirators move to breach the sovereign vault.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. THE SACRAMENT (RELIC & VAULT) TAB -->
+    <section class="tab-panel" id="tab-relic" role="tabpanel">
+      <div class="relic-showcase">
+        <div class="relic-art-frame">
+          <img src="projects/crimsonsac.jpg" alt="The Ceremonial Ruby Blade">
+          <div class="relic-glow-badge">✦ Artifact of Absolute Will</div>
+        </div>
+        <div class="relic-details">
+          <div class="campaign-tag"><span>🩸</span> The Central Turning Point</div>
+          <h2 class="font-gothic">The Ruby Blade</h2>
+          <p class="relic-aka font-gothic">Known in Heretical Texts as: "The Tyrant's Bane" &amp; "The Sovereign's Cost"</p>
+          <p class="realm-text" style="margin-bottom: 1.5rem;">
+            Forged with a blade of pure ruby crystalline glass and a handle carved from black lacquered bone, this dagger possesses unknown, legendary origins. Its capabilities are guarded as the crown's most sacred state secret: it can kill whomever the bearer desires, but solely on the condition that the wielder surrenders their own life and soul in the strike.
+          </p>
+
+          <div class="relic-rule-card">
+            <div class="relic-rule-title">The Soul-for-Soul Covenant</div>
+            <p class="relic-rule-text">
+              "A sacrifice of soul for soul binds the tyrant's bane." When plunged into the heart of the wielder with true intention, the chosen victim on any plane is instantly slain. Both bearer and target disintegrate into scarlet ash.
+            </p>
+          </div>
+
+          <div class="relic-rule-card">
+            <div class="relic-rule-title">The Purity of Will (Why Coercion Always Fails)</div>
+            <p class="relic-rule-text">
+              The blade cannot be triggered by proxies, thralls, mind-controlled victims, or paid assassins. Centuries ago, Aethelgard tried to control the power by forcing criminals and peasants to wield it; every attempt failed catastrophically until monarchs realized only genuine, self-sacrificing conviction will awaken the enchantment.
+            </p>
+          </div>
+
+          <div class="relic-rule-card">
+            <div class="relic-rule-title">The Sovereign Vault of Aethelgard</div>
+            <p class="relic-rule-text">
+              Restricted to the personal possession of the King and high religious nobles, the dagger rests behind seven obsidian wards in the palace's deepest vault. Whispers claim that during lunar eclipses, a faint crimson glow bleeds through the stones of the highest palace parapets.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FACTIONS & GUILD TAB -->
+    <section class="tab-panel" id="tab-factions" role="tabpanel">
+      <div class="factions-grid">
+        <!-- Aegis Guild -->
+        <article class="faction-card">
+          <div class="faction-header">
+            <div class="faction-type">Player Allegiance · Hereditary Martial Order</div>
+            <h3 class="faction-title font-gothic">The Aegis Cohort</h3>
+          </div>
+          <p class="faction-motto">"One Wall. One Breath. One Duty."</p>
+          <p class="faction-desc">
+            A prestigious security guild operating across all known kingdoms. Unlike common mercenary outfits, the Aegis Cohort is a generational caste where membership is inherited from parent to child. Members are trained from early childhood in unit cohesion, interlocking shield maneuvers, and tactical confrontation.
+          </p>
+          <div class="faction-player-role">
+            <strong>Player Role:</strong> You are a bonded squad within the 4th Company, contracted to provide high-tier security for the Millennial Jubilee in Aethelgard.
+          </div>
+        </article>
+
+        <!-- Court Archivists -->
+        <article class="faction-card">
+          <div class="faction-header">
+            <div class="faction-type">Scholars &amp; Hidden Dissidents</div>
+            <h3 class="faction-title font-gothic">The Court Archivists</h3>
+          </div>
+          <p class="faction-motto">"The ink outlives the empire."</p>
+          <p class="faction-desc">
+            Led by the enigmatic Lord Alden Vance, these high-ranking scholars maintain the historical annals of the realm. Having pieced together redacted royal texts and court disappearances, they know the thousand-year peace was bought through secret ritual murders.
+          </p>
+          <div class="faction-player-role">
+            <strong>Plot Dynamic:</strong> Lord Vance seeks trustworthy outside agents—untainted by court corruption—to help him expose or neutralize the vault.
+          </div>
+        </article>
+
+        <!-- Sanguine Crown -->
+        <article class="faction-card">
+          <div class="faction-header">
+            <div class="faction-type">The Monarchy &amp; Secret Police</div>
+            <h3 class="faction-title font-gothic">The Sanguine Crown &amp; Inquisition</h3>
+          </div>
+          <p class="faction-motto">"Order at all costs."</p>
+          <p class="faction-desc">
+            King Aldous IV and Grand Inquisitor Morgana Vane rule with velvet gloves concealing iron gauntlets. They enforce strict censorship: anyone speaking of the palace's crimson glow or questioning the kingdom's miraculous stability is quietly silenced.
+          </p>
+          <div class="faction-player-role">
+            <strong>Plot Dynamic:</strong> The party is in their employ for the festival, but Morgana's censors watch every outsider with hawk-eyed scrutiny.
+          </div>
+        </article>
+
+        <!-- Syndicate of Hollow Hand -->
+        <article class="faction-card">
+          <div class="faction-header">
+            <div class="faction-type">Underground Syndicate</div>
+            <h3 class="faction-title font-gothic">The Hollow Hand</h3>
+          </div>
+          <p class="faction-motto">"No cage holds what is already stolen."</p>
+          <p class="faction-desc">
+            A clandestine syndicate of master burglars, disgraced Valorian duelists, and relic smugglers based out of Talon's Rest. Aware that the royal vault contains a relic of unimaginable value, they plan to use the Millennial Jubilee masquerade as cover for a daring vault heist.
+          </p>
+          <div class="faction-player-role">
+            <strong>Plot Dynamic:</strong> Dangerous competitors or unpredictable conspirators when infiltration begins.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. NOTABLE CHARACTERS TAB -->
+    <section class="tab-panel" id="tab-characters" role="tabpanel">
+      <div class="chars-controls-bar">
+        <div class="chars-filter-group">
+          <button class="filter-btn active" data-filter="all">All Characters</button>
+          <button class="filter-btn" data-filter="guild">Aegis Guild</button>
+          <button class="filter-btn" data-filter="archivists">Archivists</button>
+          <button class="filter-btn" data-filter="crown">The Crown &amp; Censors</button>
+          <button class="filter-btn" data-filter="outlanders">Outlanders &amp; Nomads</button>
+        </div>
+        <button class="hud-btn" id="btn-open-add-npc" type="button">
+          <span>➕</span> Add Custom Character
+        </button>
+      </div>
+
+      <div class="chars-grid" id="chars-grid">
+        <!-- Dynamically rendered by JS -->
+      </div>
+    </section>
+
+    <!-- 5. GAME MECHANICS TAB -->
+    <section class="tab-panel" id="tab-mechanics" role="tabpanel">
+      <div class="mechanics-container">
+        <!-- Artifact Rules -->
+        <div class="mechanic-system-card">
+          <span class="system-tag">Legendary 5e Artifact</span>
+          <h3 class="system-title font-gothic">The Ruby Sacrament (Artifact Rulebook)</h3>
+          <p class="system-desc">
+            How the lethal "Soul-for-Soul" mechanic functions mechanically at the game table for DMs and players.
+          </p>
+          <div class="rules-subgrid">
+            <div class="rule-block">
+              <div class="rule-name">True Will Attunement</div>
+              <p class="rule-detail">
+                Cannot be attuned through mind control, geas, intimidation, or mercenary payment. If an unwilling or coerced creature attempts the rite, they suffer 10d10 psychic damage and the blade remains inert.
+              </p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">The Soul-for-Soul Strike</div>
+              <p class="rule-detail">
+                As an action, the wielder impales their own heart while naming their target anywhere on the plane. The target takes 1,000 necrotic and force damage (ignoring resistances/immunities). The wielder's soul is consumed and both bodies turn to red crystal dust.
+              </p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">Lunar Eclipse Resonance</div>
+              <p class="rule-detail">
+                Within 500ft of the blade during a lunar eclipse, spellcasters who roll a natural 1 on an arcane spell suffer 1d8 necrotic damage as their blood vibrates to the dagger's frequency.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Squad Tactics System -->
+        <div class="mechanic-system-card">
+          <span class="system-tag">Guild Class Options</span>
+          <h3 class="system-title font-gothic">Aegis Cohort Squad Tactics</h3>
+          <p class="system-desc">
+            Because all players were raised in the hereditary security guild, every party member gains access to these squad synergy maneuvers:
+          </p>
+          <div class="rules-subgrid">
+            <div class="rule-block">
+              <div class="rule-name">Shield-Lock Interception (Reaction)</div>
+              <p class="rule-detail">
+                When an ally within 5 feet is targeted by an attack, use your reaction to interpose your shield or blade, granting +2 AC (+3 if using a shield).
+              </p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">Breaching Cadence (Bonus Action)</div>
+              <p class="rule-detail">
+                Once per combat, call out cadence: all guild squad-mates within 15ft gain +10ft movement speed and advantage on their next Athletics or Acrobatics check.
+              </p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">Vanguard Focus (Passive)</div>
+              <p class="rule-detail">
+                Advantage on saving throws against being surprised or frightened while within 10 feet of a conscious guild squad-mate.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Infiltration & Suspicion Gauge -->
+        <div class="mechanic-system-card">
+          <span class="system-tag">Exploration &amp; Social Stealth</span>
+          <h3 class="system-title font-gothic">The Jubilee Suspicion Gauge</h3>
+          <p class="system-desc">
+            Tracked on a 0 to 10 scale during the Millennial Jubilee festivities in Aethelgard.
+          </p>
+          <div class="rules-subgrid">
+            <div class="rule-block">
+              <div class="rule-name">Level 0–2: Honored Guests</div>
+              <p class="rule-detail">Free access to public festival grounds, standard palace passes, friendly merchant interactions.</p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">Level 3–5: Whispers &amp; Tails</div>
+              <p class="rule-detail">Inquisitor informants trail the party. DC for Stealth and Deception checks in aristocratic areas increases by +2.</p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">Level 6–9: Palace Lockdown</div>
+              <p class="rule-detail">The Obsidian Cloister is sealed. Mute paladins patrol the corridors. Guild charter is suspended.</p>
+            </div>
+            <div class="rule-block">
+              <div class="rule-name">Level 10: High Treason Alert</div>
+              <p class="rule-detail">Grand Inquisitor Morgana orders immediate capture or execution. The festival bells toll in warning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CHARACTER FORGE (CREATOR) TAB -->
+    <section class="tab-panel" id="tab-forge" role="tabpanel">
+      <div class="forge-layout">
+        <!-- Interactive Creator Controls -->
+        <div class="forge-wizard-card">
+          <div class="campaign-tag"><span>⚔️</span> Aegis Cohort Enlistment</div>
+          <h2 class="font-gothic" style="margin-bottom: 1.5rem; color: #fff;">Guild Vanguard Forge</h2>
+
+          <!-- Step 1: Character Identity -->
+          <div class="forge-step">
+            <div class="step-label">Step 1: Identity &amp; Callsign</div>
+            <div class="step-title font-gothic">Officer Designation</div>
+            <div class="form-group">
+              <label class="form-label" for="forge-name">Character Name</label>
+              <input type="text" id="forge-name" class="form-input" value="Caelen Thorne" placeholder="Enter character name...">
+            </div>
+          </div>
+
+          <!-- Step 2: Realm of Origin -->
+          <div class="forge-step">
+            <div class="step-label">Step 2: Lineage</div>
+            <div class="step-title font-gothic">Choose Heritage &amp; Homeland</div>
+            <div class="card-select-grid" id="forge-origins-grid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Step 3: Guild Caste -->
+          <div class="forge-step">
+            <div class="step-label">Step 3: Specialization</div>
+            <div class="step-title font-gothic">Aegis Guild Caste</div>
+            <div class="card-select-grid" id="forge-castes-grid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Step 4: Upbringing & Bond -->
+          <div class="forge-step">
+            <div class="step-label">Step 4: Upbringing</div>
+            <div class="step-title font-gothic">Hereditary Guild Bond</div>
+            <div class="form-group">
+              <label class="form-label" for="forge-bond-select">Generational Oath</label>
+              <select id="forge-bond-select" class="form-select"></select>
+            </div>
+          </div>
+
+          <!-- Step 5: Personal Secret -->
+          <div class="forge-step">
+            <div class="step-label">Step 5: Hidden Truth</div>
+            <div class="step-title font-gothic">Personal Secret / Hook</div>
+            <div class="form-group">
+              <label class="form-label" for="forge-secret-select">Classified Background Lore</label>
+              <select id="forge-secret-select" class="form-select"></select>
+            </div>
+          </div>
+
+          <!-- Step 6: Ability Scores -->
+          <div class="forge-step" style="border-bottom: none;">
+            <div class="step-label">Step 6: Attributes</div>
+            <div class="step-title font-gothic">Ability Scores</div>
+            <div class="stat-roll-grid">
+              <div class="stat-box">
+                <span class="stat-abbr">STR</span>
+                <input type="number" id="stat-val-str" class="form-input" style="text-align:center; padding:0.3rem;" min="3" max="20" value="15">
+              </div>
+              <div class="stat-box">
+                <span class="stat-abbr">DEX</span>
+                <input type="number" id="stat-val-dex" class="form-input" style="text-align:center; padding:0.3rem;" min="3" max="20" value="12">
+              </div>
+              <div class="stat-box">
+                <span class="stat-abbr">CON</span>
+                <input type="number" id="stat-val-con" class="form-input" style="text-align:center; padding:0.3rem;" min="3" max="20" value="14">
+              </div>
+              <div class="stat-box">
+                <span class="stat-abbr">INT</span>
+                <input type="number" id="stat-val-int" class="form-input" style="text-align:center; padding:0.3rem;" min="3" max="20" value="10">
+              </div>
+              <div class="stat-box">
+                <span class="stat-abbr">WIS</span>
+                <input type="number" id="stat-val-wis" class="form-input" style="text-align:center; padding:0.3rem;" min="3" max="20" value="13">
+              </div>
+              <div class="stat-box">
+                <span class="stat-abbr">CHA</span>
+                <input type="number" id="stat-val-cha" class="form-input" style="text-align:center; padding:0.3rem;" min="3" max="20" value="8">
+              </div>
+            </div>
+            <div class="roll-btn-row">
+              <button class="sheet-btn primary" id="btn-roll-stats" type="button">
+                <span>🎲</span> Roll 4d6 (Drop Lowest)
+              </button>
+              <button class="sheet-btn" id="btn-standard-array" type="button">
+                <span>⚖️</span> Standard Array
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Parchment Sheet Preview -->
+        <aside class="character-sheet-preview" id="character-sheet-preview">
+          <span class="sheet-badge">✦ Aegis Vanguard Dossier</span>
+          <h3 class="sheet-char-name font-gothic" id="sheet-name">Caelen Thorne</h3>
+          <div class="sheet-char-subtitle" id="sheet-subtitle">The Aegis Bulwark · Verdant Expanse</div>
+
+          <div class="sheet-stat-ribbon">
+            <div class="stat-box" id="preview-stat-str">
+              <span class="stat-abbr">STR</span>
+              <div class="stat-value">15</div>
+              <div class="stat-mod">+2</div>
+            </div>
+            <div class="stat-box" id="preview-stat-dex">
+              <span class="stat-abbr">DEX</span>
+              <div class="stat-value">12</div>
+              <div class="stat-mod">+1</div>
+            </div>
+            <div class="stat-box" id="preview-stat-con">
+              <span class="stat-abbr">CON</span>
+              <div class="stat-value">14</div>
+              <div class="stat-mod">+2</div>
+            </div>
+            <div class="stat-box" id="preview-stat-int">
+              <span class="stat-abbr">INT</span>
+              <div class="stat-value">10</div>
+              <div class="stat-mod">+0</div>
+            </div>
+            <div class="stat-box" id="preview-stat-wis">
+              <span class="stat-abbr">WIS</span>
+              <div class="stat-value">13</div>
+              <div class="stat-mod">+1</div>
+            </div>
+            <div class="stat-box" id="preview-stat-cha">
+              <span class="stat-abbr">CHA</span>
+              <div class="stat-value">8</div>
+              <div class="stat-mod">-1</div>
+            </div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Origin Trait</div>
+            <div class="sheet-section-content" id="sheet-origin-trait">--</div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Signature Guild Maneuver</div>
+            <div class="sheet-section-content" id="sheet-caste-maneuver">--</div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Standard Gear</div>
+            <div class="sheet-section-content" id="sheet-equipment">--</div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Hereditary Bond</div>
+            <div class="sheet-section-content" id="sheet-bond">--</div>
+          </div>
+
+          <div class="sheet-section">
+            <div class="sheet-section-title">Personal Secret</div>
+            <div class="sheet-section-content" id="sheet-secret" style="color: #ff99aa;">--</div>
+          </div>
+
+          <div class="sheet-actions">
+            <button class="sheet-btn primary" id="btn-copy-sheet" type="button">
+              <span>📋</span> Copy Markdown
+            </button>
+            <button class="sheet-btn" id="btn-download-json" type="button">
+              <span>💾</span> Download JSON
+            </button>
+            <button class="sheet-btn" id="btnPrintSheet" type="button">
+              <span>🖨️</span> Print Dossier
+            </button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 7. DM ORACLE (INSPIRATION ENGINE) TAB -->
+    <section class="tab-panel" id="tab-oracle" role="tabpanel">
+      <div class="oracle-dashboard">
+        <!-- Rumor Generator -->
+        <div class="oracle-tool-card">
+          <div class="oracle-tool-header">
+            <span class="oracle-icon">🍷</span>
+            <h3 class="oracle-tool-title font-gothic">Tavern Whispers</h3>
+            <span class="oracle-tool-sub">Overheard at Faylight &amp; Aethelgard inns</span>
+          </div>
+          <div class="oracle-output-box" id="oracle-rumor-output">
+            "The guards around the palace vault were replaced last moon with mute warriors who never remove their obsidian helms."
+          </div>
+          <button class="oracle-roll-btn" id="btn-roll-rumor" type="button">
+            <span>🎲</span> Roll New Rumor
+          </button>
+        </div>
+
+        <!-- Festival Encounters -->
+        <div class="oracle-tool-card">
+          <div class="oracle-tool-header">
+            <span class="oracle-icon">🎪</span>
+            <h3 class="oracle-tool-title font-gothic">Jubilee Encounters</h3>
+            <span class="oracle-tool-sub">Unscripted street incidents &amp; masquerade hooks</span>
+          </div>
+          <div class="oracle-output-box" id="oracle-encounter-output">
+            "A masked noblewoman slips a sealed wax cylinder into the player's coat pocket before vanishing into a procession of dancers."
+          </div>
+          <button class="oracle-roll-btn" id="btn-roll-encounter" type="button">
+            <span>🎲</span> Roll Festival Encounter
+          </button>
+        </div>
+
+        <!-- Vault Obstacles -->
+        <div class="oracle-tool-card">
+          <div class="oracle-tool-header">
+            <span class="oracle-icon">🗝️</span>
+            <h3 class="oracle-tool-title font-gothic">Vault Infiltration Hazards</h3>
+            <span class="oracle-tool-sub">Obsidian warded chambers &amp; clockwork traps</span>
+          </div>
+          <div class="oracle-output-box" id="oracle-vault-output">
+            "The Hall of Mirrors: Obsidian glass mirrors that cast reflections with slight delays; stepping on an unsynced tile triggers guillotine blades."
+          </div>
+          <button class="oracle-roll-btn" id="btn-roll-vault" type="button">
+            <span>🎲</span> Roll Vault Hazard
+          </button>
+        </div>
+
+        <!-- Campaign Hooks -->
+        <div class="oracle-tool-card">
+          <div class="oracle-tool-header">
+            <span class="oracle-icon">📜</span>
+            <h3 class="oracle-tool-title font-gothic">Major Plot Hooks</h3>
+            <span class="oracle-tool-sub">Key branching turns for the narrative</span>
+          </div>
+          <div class="oracle-output-box" id="oracle-hook-output">
+            "Lord Vance invites the squad to an intimate midnight meeting in the royal archives, offering a fortune in gold if they can retrieve a ledger before the High Inquisitor burns it."
+          </div>
+          <button class="oracle-roll-btn" id="btn-roll-hook" type="button">
+            <span>🎲</span> Roll Plot Hook
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top: 2.5rem; text-align: center;">
+        <button class="sheet-btn primary" id="btn-generate-npc-oracle" type="button" style="padding: 0.85rem 1.75rem; font-size: 1rem; border-radius: 999px;">
+          <span>✨</span> Instantly Generate New Notable NPC &amp; Save to Roster
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Add Custom NPC -->
+  <div class="modal-overlay" id="add-npc-modal" role="dialog" aria-modal="true" aria-labelledby="modal-add-title">
+    <div class="modal-window">
+      <button class="modal-close-btn" id="modal-close-btn" type="button" aria-label="Close dialog">&times;</button>
+      <div class="campaign-tag"><span>🎭</span> Character Registry</div>
+      <h3 class="font-gothic" id="modal-add-title" style="font-size: 1.5rem; color: #fff; margin-bottom: 1.25rem;">
+        Add Custom Character to Lore
+      </h3>
+      <form id="form-add-npc">
+        <div class="form-group">
+          <label class="form-label" for="npc-input-name">Full Name</label>
+          <input type="text" id="npc-input-name" class="form-input" placeholder="e.g. Inquisitor Kaelen Ward" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="npc-input-title">Title / Station</label>
+          <input type="text" id="npc-input-title" class="form-input" placeholder="e.g. Master of the Obsidian Cloister" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="npc-input-role">Campaign Role</label>
+          <input type="text" id="npc-input-role" class="form-input" placeholder="e.g. Treacherous Ally / Vault Architect">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="npc-input-affiliation">Faction Affiliation</label>
+          <input type="text" id="npc-input-affiliation" class="form-input" placeholder="e.g. Aegis Guild, Court Archivists, Crown, etc.">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="npc-input-quote">Characteristic Quote</label>
+          <input type="text" id="npc-input-quote" class="form-input" placeholder="e.g. Trust no smile in this marble city.">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="npc-input-public">Public Information / Reputation</label>
+          <textarea id="npc-input-public" class="form-input" rows="3" placeholder="What the players learn upon asking around..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="npc-input-secret">DM Secret / Plot Twist</label>
+          <textarea id="npc-input-secret" class="form-input" rows="3" placeholder="Hidden motives, loyalties, or plot twists..." required></textarea>
+        </div>
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="submit" class="sheet-btn primary">
+            <span>💾</span> Save Character to Codex
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notice Element -->
+  <div class="toast-notice" id="toast-notice" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="crimson-data.js"></script>
+  <script src="crimson-sacrament.js"></script>
+</body>
+
+</html>
