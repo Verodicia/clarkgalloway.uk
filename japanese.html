@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Japanese Learning Portal — Clark Galloway</title>
+  <meta name="description"
+    content="Interactive Japanese reinforcement learning environment: 28 bite-sized lessons, spaced repetition, audio synthesis, XP progression, and streaks.">
+  <link rel="stylesheet" href="japanese.css">
+</head>
+
+<body>
+  <!-- Ambient background lighting -->
+  <div class="glow-bg" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <!-- Confetti canvas for positive reinforcement celebrations -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Navigation & HUD Header -->
+  <header class="hub-header">
+    <div class="hub-nav-inner">
+      <div class="nav-left">
+        <a href="index.html#card-languages" class="back-link" id="btn-back">
+          <span>←</span> Portfolio
+        </a>
+        <div class="hub-brand">
+          <span class="hub-brand-title font-delta">日本語 Mastery</span>
+          <span class="hub-brand-sub">Reinforcement Learning Hub</span>
+        </div>
+      </div>
+
+      <div class="nav-hud">
+        <div class="hud-pill streak-pill" title="Daily study streak">
+          <span class="streak-icon">🔥</span>
+          <span id="hud-streak">1 Day</span>
+        </div>
+        <div class="hud-pill level-pill" id="hud-level-pill" title="Current Level & Rank">
+          Lv.1 見習い
+        </div>
+        <div class="hud-pill xp-pill" id="hud-xp" title="Total Experience Points">
+          0 XP
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Hub -->
+  <main class="hub-main">
+    <!-- Hero Progression Banner -->
+    <section class="hero-progress">
+      <div class="welcome-card">
+        <div class="welcome-badge">
+          <span>🎌</span> Japanese Mastery Curriculum · Chapter 1 (Lessons 01–28)
+        </div>
+        <h1 class="welcome-title font-delta">
+          Master Japanese in Bite-Sized Steps.
+        </h1>
+        <p class="welcome-desc">
+          Structured positive reinforcement system: earn XP, maintain your daily streak, unlock achievements, and build lasting conversational recall with native audio.
+        </p>
+        <div class="action-bar">
+          <button class="btn-primary" id="btn-start-review">
+            <span>🎴</span> Start Quick Daily Review
+          </button>
+          <a href="#roadmap-container" class="btn-secondary">
+            <span>🗺️</span> Explore 28 Lessons
+          </a>
+        </div>
+      </div>
+
+      <div class="level-card">
+        <div class="level-card-top">
+          <div>
+            <div class="level-rank" id="hero-rank">Apprentice</div>
+            <h2 class="level-name font-delta" id="hero-level-title">Level 1: 見習い</h2>
+          </div>
+          <div style="font-size: 2.2rem;">⛩️</div>
+        </div>
+
+        <div class="level-progress-wrap">
+          <div class="progress-header">
+            <span>Level Progression</span>
+            <span id="progress-text">0 / 200 XP</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value" id="stat-completed">0 / 28</div>
+            <div class="stat-label">Lessons</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="stat-xp">0</div>
+            <div class="stat-label">Total XP</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" id="stat-badges">0 / 9</div>
+            <div class="stat-label">Badges</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="hub-tabs">
+      <button class="tab-btn active" data-target="tab-roadmap">
+        <span>🗺️</span> Lesson Roadmap (1–28)
+      </button>
+      <button class="tab-btn" data-target="tab-flashcards">
+        <span>🎴</span> Quick Flashcards Drill
+      </button>
+      <button class="tab-btn" data-target="tab-badges">
+        <span>🏆</span> Milestones &amp; Badges
+      </button>
+    </div>
+
+    <!-- Tab 1: Lesson Roadmap Grid -->
+    <section class="tab-content active" id="tab-roadmap">
+      <div id="roadmap-container">
+        <!-- Injected dynamically by javascript -->
+      </div>
+    </section>
+
+    <!-- Tab 2: Spaced Repetition Flashcards -->
+    <section class="tab-content" id="tab-flashcards">
+      <div class="flashcard-deck">
+        <div style="text-align: center; margin-bottom: 1.5rem; color: var(--mut); font-size: 0.95rem;" id="fc-counter">
+          Card 1 of 56
+        </div>
+
+        <div class="flashcard" id="study-flashcard">
+          <!-- Front Face -->
+          <div class="flashcard-face flashcard-front">
+            <div style="font-size: 0.85rem; color: var(--mut); text-transform: uppercase; letter-spacing: 0.1em;">
+              🇯🇵 Japanese
+            </div>
+            <div style="margin: auto 0;">
+              <div class="flashcard-ja" id="fc-ja">すみません英語が分かりますか？</div>
+              <p style="color: var(--mut); font-size: 0.88rem; margin-top: 0.75rem;">(Click or tap to flip)</p>
+            </div>
+            <button class="speak-btn" id="fc-speak-btn" title="Listen pronunciation">
+              🔊
+            </button>
+          </div>
+
+          <!-- Back Face -->
+          <div class="flashcard-face flashcard-back">
+            <div style="font-size: 0.85rem; color: var(--ac-purple); text-transform: uppercase; letter-spacing: 0.1em;">
+              English &amp; Reading
+            </div>
+            <div style="margin: auto 0;">
+              <div class="flashcard-romaji" id="fc-romaji">Sumimasen, eigo ga wakarimasu ka?</div>
+              <div class="flashcard-en" id="fc-en">Excuse me, do you understand English?</div>
+            </div>
+            <div style="font-size: 0.82rem; color: var(--mut);">
+              Spaced Repetition Review
+            </div>
+          </div>
+        </div>
+
+        <div class="flashcard-controls">
+          <button class="btn-secondary" id="fc-btn-review">
+            <span>🔄</span> Review Soon
+          </button>
+          <button class="btn-primary" id="fc-btn-got-it">
+            <span>✅</span> Got It! (+15 XP)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Milestones & Badges -->
+    <section class="tab-content" id="tab-badges">
+      <div style="margin-bottom: 2rem;">
+        <h2 class="font-delta" style="font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff;">Milestones &amp; Reinforcement Badges</h2>
+        <p style="color: var(--mut); font-size: 0.95rem;">Unlock positive rewards and level up as you conquer key conversational benchmarks.</p>
+      </div>
+      <div class="badges-grid" id="badges-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Bite-Sized Lesson Player Modal -->
+  <div class="modal-overlay" id="lesson-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-lesson-title">
+    <div class="lesson-modal">
+      <div class="modal-header">
+        <div>
+          <h3 class="font-delta" id="modal-lesson-title" style="font-size: 1.35rem; color: #fff; margin-bottom: 0.2rem;">Lesson 1: First Encounters</h3>
+          <p id="modal-lesson-sub" style="font-size: 0.85rem; color: var(--mut);">レッスン 一 · 日本語が分かりますか？</p>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close lesson">&times;</button>
+      </div>
+
+      <div class="modal-steps-nav">
+        <button class="step-tab active" data-step="phrases">
+          <span>💬</span> 1. Core Phrases
+        </button>
+        <button class="step-tab" data-step="capsule">
+          <span>💡</span> 2. Grammar &amp; Culture
+        </button>
+        <button class="step-tab" data-step="drill">
+          <span>🎯</span> 3. Quick Drill
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Step 1: Phrases -->
+        <div class="modal-step-pane" id="step-phrases">
+          <p style="color: var(--mut); font-size: 0.92rem; margin-bottom: 1.5rem;">
+            Listen and repeat each phrase aloud. Tap the speaker icon 🔊 to hear native Japanese pronunciation.
+          </p>
+          <div id="phrases-list">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Step 2: Grammar & Culture Capsule -->
+        <div class="modal-step-pane" id="step-capsule" style="display: none;">
+          <div class="capsule-box">
+            <div class="capsule-badge">Key Linguistic Rule</div>
+            <h4 class="capsule-title">Grammar Focus</h4>
+            <p class="capsule-text" id="capsule-grammar-text">
+              Particle usage and polite forms.
+            </p>
+          </div>
+          <div class="capsule-box">
+            <div class="capsule-badge">Cultural Etiquette</div>
+            <h4 class="capsule-title">Japanese Social Context</h4>
+            <p class="capsule-text" id="capsule-culture-text">
+              Politeness and conversational nuances.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3: Quick Reinforcement Drill -->
+        <div class="modal-step-pane" id="step-drill" style="display: none;">
+          <div class="quiz-header">
+            <span id="quiz-counter">Question 1 of 3</span>
+            <span style="color: var(--ac-gold); font-weight: 600;">+100 XP On Completion</span>
+          </div>
+
+          <div class="quiz-question-box">
+            <div class="quiz-q-text" id="quiz-q-text">Loading question...</div>
+          </div>
+
+          <div class="quiz-options" id="quiz-options-container">
+            <!-- Options injected dynamically -->
+          </div>
+
+          <div class="quiz-feedback" id="quiz-feedback-box"></div>
+
+          <div style="text-align: right;">
+            <button class="btn-primary" id="quiz-next-btn" style="display: none;">
+              Next Question →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="japanese-data.js"></script>
+  <script src="japanese.js"></script>
+</body>
+
+</html>

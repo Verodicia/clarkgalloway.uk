@@ -3,231 +3,372 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clark Galloway - Systems Architecture</title>
-
-  <meta name="description" content="Clark Galloway - Systems Architecture & Creative Overdrive">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clark Galloway— Portfolio</title>
+  <meta name="description" content="Personal portfolio: websites, running, photography, D&D, philosophy and languages.">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Background Vectors (Subtle Cyber-Swiss Accents) -->
-  <div class="bg-vectors" aria-hidden="true">
-    <!-- Shadow Backdrop Japanese -->
-    <div class="bg-japanese-text jp-left">システム設計</div>
-    <div class="bg-japanese-text jp-right">限界突破</div>
-    <!-- Crosshair Top-Left -->
-    <svg class="bg-vector-item crosshair-top-left" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="1">
-      <line x1="50" y1="0" x2="50" y2="100" />
-      <line x1="0" y1="50" x2="100" y2="50" />
-      <circle cx="50" cy="50" r="20" />
-      <circle cx="50" cy="50" r="3" />
-    </svg>
+  <div class="cursor" id="cursor"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
 
-    <!-- Tech Circle Graphic Behind Hero -->
-    <svg class="bg-vector-item tech-circle-back" viewBox="0 0 200 200" fill="none" stroke="#1A1A1A" stroke-width="0.75">
-      <circle cx="100" cy="100" r="90" stroke-dasharray="2 4" />
-      <circle cx="100" cy="100" r="70" />
-      <circle cx="100" cy="100" r="40" stroke-dasharray="8 8" />
-      <line x1="100" y1="0" x2="100" y2="200" />
-      <line x1="0" y1="100" x2="200" y2="100" />
-      <path d="M40 40 L160 160 M40 160 L160 40" stroke-dasharray="4 8" />
-      <text x="105" y="95" fill="#1A1A1A" font-family="monospace" font-size="5" letter-spacing="1">COORD.8942-SYS</text>
-    </svg>
-
-    <!-- Tech Grid Specs Bottom-Left -->
-    <svg class="bg-vector-item tech-grid-specs" viewBox="0 0 150 60" fill="none" stroke="#1A1A1A" stroke-width="0.75">
-      <rect x="0" y="0" width="150" height="60" stroke-dasharray="2 2" />
-      <line x1="30" y1="0" x2="30" y2="60" />
-      <line x1="0" y1="20" x2="150" y2="20" />
-      <line x1="0" y1="40" x2="150" y2="40" />
-      <text x="5" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS.V-01</text>
-      <text x="35" y="12" fill="#1A1A1A" font-family="monospace" font-size="5">SYS: READY // STANDBY_</text>
-      <text x="5" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">LOC.52</text>
-      <text x="35" y="32" fill="#1A1A1A" font-family="monospace" font-size="5">GRID REF: [55.86 / -4.25]</text>
-      <text x="5" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">EST.89</text>
-      <text x="35" y="52" fill="#1A1A1A" font-family="monospace" font-size="5">PARAMETRIC OVERDRIVE MATRIX ACTIVE</text>
-    </svg>
-
-    <!-- Crosshair Bottom-Right -->
-    <svg class="bg-vector-item crosshair-bottom-right" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A"
-      stroke-width="1">
-      <line x1="50" y1="0" x2="50" y2="100" />
-      <line x1="0" y1="50" x2="100" y2="50" />
-      <rect x="35" y="35" width="30" height="30" />
-    </svg>
-  </div>
-  <!-- Navigation Header -->
-  <header class="site-header">
-    <nav class="nav-container">
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="active">INDEX</a></li>
-        <li><a href="interests.html">INTERESTS</a></li>
-        <li><a href="portfolio.html">ARCHIVE</a></li>
-        <li><a href="about.html">INTEL</a></li>
-        <li><a href="contact.html">TRANSMIT</a></li>
-      </ul>
+  <header class="nav">
+    <a href="#top" class="logo" id="logo">CG.</a>
+    <nav>
+      <a href="#hobbies" id="nav-hobbies">Hobbies</a>
+      <a href="#about" id="nav-about">About</a>
+      <a href="#contact" id="nav-contact">Contact</a>
+      <a href="https://www.instagram.com/clarkconcarne" id="nav-insta" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </header>
 
-  <!-- Main Content -->
-  <main>
+  <main id="top">
     <section class="hero">
-      <div class="hero-block-orange">\\.CLark G</div>
-      <div class="hero-line">SYSTEMS ARCHITECTURE</div>
-      <div class="hero-line">CREATIVE OVERDRIVE</div>
-      <div class="hero-line">EST. 1989 </div>
+      <p class="eyebrow reveal">Portfolio — 2026</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="line"><span>Creator,</span></span>
+        <span class="line"><span>runner &amp;</span></span>
+        <span class="line"><span class="accent">wanderer.</span></span>
+      </h1>
+      <p class="lead reveal">Six passions, one curious mind. Scroll to explore what I do when I'm not working.</p>
+      <div class="scroll-hint reveal"><span></span>Scroll</div>
     </section>
 
-    <section class="project-grid">
-      <!-- Card 1 -->
-      <a href="interests.html" class="project-card">
-        <div class="card-title">Design<br>and Aesthetics</div>
-        <div class="card-icon-area">
-          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
-            <circle cx="30" cy="50" r="20" />
-            <rect x="60" y="30" width="30" height="40" />
-            <path d="M50 50 L60 50" />
-            <path d="M20 50 Q30 30 40 50 T60 50" stroke-width="2" />
-          </svg>
-        </div>
-        <div class="card-meta">
-          <div class="serial-no">Serial: PROJ-ARC-8942</div>
-          <div class="barcode">1234567890</div>
-          <div class="barcode-text"><span>9 781536</span><span>290111</span></div>
-          <div class="tech-stack">
-            <div class="tech-list">
-              <span>UI/UX</span>
-              <span>WebGL</span>
-              <span>React</span>
-              <span>what look do you desire?</span>
-            </div>
-            <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
-              <path d="M12 2L2 22h20L12 2zm0 14h-2v-6h2v6zm0 4h-2v-2h2v2z" />
-            </svg>
-          </div>
-          <div class="unit-badge">UNIT-01</div>
-        </div>
-      </a>
-
-      <!-- Card 2 (Active/Hover State) -->
-      <a href="portfolio.html" class="project-card">
-        <div class="card-title">NETWORK<br>ARCHITECTURE</div>
-        <div class="card-icon-area">
-          <svg class="card-icon network-icon" viewBox="0 0 100 100" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="2">
-            <circle cx="20" cy="50" r="5" />
-            <circle cx="40" cy="30" r="5" />
-            <circle cx="60" cy="40" r="5" />
-            <circle cx="80" cy="20" r="5" />
-            <circle cx="50" cy="70" r="5" />
-            <circle cx="70" cy="60" r="5" />
-            <line x1="20" y1="50" x2="40" y2="30" />
-            <line x1="40" y1="30" x2="60" y2="40" />
-            <line x1="60" y1="40" x2="80" y2="20" />
-            <line x1="20" y1="50" x2="50" y2="70" />
-            <line x1="50" y1="70" x2="70" y2="60" />
-            <line x1="70" y1="60" x2="60" y2="40" />
-          </svg>
-        </div>
-        <div class="card-meta">
-          <div class="serial-no">PROJ-NET-2219</div>
-          <div class="barcode">2468135790</div>
-          <div class="barcode-text"><span>1 234567</span><span>890128</span></div>
-          <div class="tech-stack" style="margin-top: 1rem;">
-            <div class="tech-list">
-              <span>Networking</span>
-              <span>API</span>
-              <span>Hardware Procurement</span>
-              <span>Software Stacks</span>
-            </div>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 3 -->
-      <a href="portfolio.html" class="project-card">
-        <div class="card-title">DIGITAL<br>FABRICATION</div>
-        <div class="card-icon-area">
-          <svg class="card-icon" viewBox="0 0 100 100" fill="none" stroke="#1A1A1A" stroke-width="6">
-            <circle cx="50" cy="50" r="25" stroke-dasharray="10 5" />
-            <circle cx="50" cy="50" r="10" fill="#1A1A1A" />
-            <path
-              d="M50 25 L50 15 M50 75 L50 85 M25 50 L15 50 M75 50 L85 50 M32 32 L25 25 M68 68 L75 75 M32 68 L25 75 M68 32 L75 25"
-              stroke-width="4" />
-          </svg>
-        </div>
-        <div class="card-meta">
-          <div class="serial-no">PROJ-MAN-4031</div>
-          <div class="barcode">9876543210</div>
-          <div class="barcode-text"><span>4 012345</span><span>678901</span></div>
-          <div class="tech-stack">
-            <div class="tech-list">
-              <span>Online deployment</span>
-              <span>Private ownership</span>
-              <span>Personalised software</span>
-            </div>
-          </div>
-          <table class="data-table">
-            <tr>
-              <th>DATA</th>
-              <th>SPEC</th>
-              <th>SPEC</th>
-              <th>DATA</th>
-              <th>DATA</th>
-              <th>NAME</th>
-            </tr>
-            <tr>
-              <td>01</td>
-              <td>7.50</td>
-              <td>550</td>
-              <td>2590</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>03</td>
-              <td>5.00</td>
-              <td></td>
-              <td>3200</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>23</td>
-              <td></td>
-              <td>305</td>
-              <td>3325</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>DATA</td>
-              <td></td>
-              <td>283</td>
-              <td>2732</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
-        </div>
-      </a>
-
-    </section>
-
-    <div class="bottom-bar">
-      <div class="bottom-bar-segment"></div>
-      <div class="bottom-bar-links">
-        <a href="https://www.facebook.com/clark.galloway1" target="_blank" rel="noopener">FACEBOOK</a>
-        <a href="https://www.instagram.com/clarkconcarne/" target="_blank" rel="noopener">INSTAGRAM</a>
-        <a href="https://github.com/Verodicia" target="_blank" rel="noopener">GITHUB</a>
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Websites ✦ Running ✦ Photography ✦ D&amp;D ✦ Philosophy ✦ Languages ✦ </span>
+        <span>Websites ✦ Running ✦ Photography ✦ D&amp;D ✦ Philosophy ✦ Languages ✦ </span>
       </div>
-      <div class="bottom-bar-segment"></div>
     </div>
+
+    <section id="hobbies" class="section">
+      <h2 class="section-title reveal">Hobbies</h2>
+      <div class="grid">
+        <article class="card card-web reveal" id="card-websites" style="--h:265">
+          <div class="thumb web-thumb">
+            <div class="web-mockup">
+              <div class="web-browser-bar">
+                <div class="web-dots"><span></span><span></span><span></span></div>
+                <a class="web-url-pill" id="web-url-pill" href="https://www.lgrfitness.uk" target="_blank"
+                  rel="noopener">www.lgrfitness.uk ↗</a>
+                <div class="web-tag-chip" id="web-tag-chip">SaaS</div>
+              </div>
+
+              <div class="web-screen" id="web-screen">
+                <div class="web-slide active" data-index="0" data-name="LGR Fitness"
+                  data-tag="Hypertrophy Training Tracker" data-url="www.lgrfitness.uk"
+                  data-link="https://www.lgrfitness.uk" data-chip="Workout App"
+                  data-desc="Complete hypertrophy tracker for dumbbells, machines & cables with periodized routines.">
+                  <img src="projects/lgr-fitness.png" alt="LGR Fitness web application" loading="lazy">
+                  <div class="slide-badge">LGR Fitness</div>
+                </div>
+                <div class="web-slide" data-index="1" data-name="Apex Practice" data-tag="Dental Clinical Software"
+                  data-url="apex-practice-muo3.vercel.app" data-link="https://apex-practice-muo3.vercel.app"
+                  data-chip="Healthcare"
+                  data-desc="Clinical dental management suite with interactive six-point periodontal pocket charting.">
+                  <img src="projects/apex-practice.png" alt="Apex Practice dental software" loading="lazy">
+                  <div class="slide-badge">Apex Dental</div>
+                </div>
+                <div class="web-slide" data-index="2" data-name="Clueless Closet" data-tag="90s Interactive Wardrobe"
+                  data-url="clueless-ruddy.vercel.app" data-link="https://clueless-ruddy.vercel.app"
+                  data-chip="Interactive UI"
+                  data-desc="Iconic 90s Cher Horowitz wardrobe matcher built with retro Mac OS interface & outfit cycling.">
+                  <img src="projects/clueless-closet.png" alt="Clueless Closet interactive wardrobe app" loading="lazy">
+                  <div class="slide-badge">Clueless Closet</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="web-nav-tabs" id="web-nav-tabs">
+              <button class="web-tab active" data-tab="0" type="button">LGR Fitness</button>
+              <button class="web-tab" data-tab="1" type="button">Apex</button>
+              <button class="web-tab" data-tab="2" type="button">Clueless</button>
+            </div>
+
+            <button class="web-preview-btn" id="web-preview-btn" type="button" aria-label="Open project gallery">
+              <span>Explore 3 Sites ↗</span>
+            </button>
+          </div>
+          <div class="info">
+            <span class="num">01</span>
+            <h3 id="web-card-title">Websites</h3>
+          </div>
+        </article>
+        <article class="card card-run reveal" id="card-running" style="--h:15">
+          <div class="thumb run-thumb">
+            <svg class="route-map" viewBox="0 -230 940 1130" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ff6a1a" />
+                  <stop offset="1" stop-color="#ffd23f" />
+                </linearGradient>
+                <pattern id="mapGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M60 0H0V60" fill="none" stroke="#ffffff12" stroke-width="1" />
+                </pattern>
+              </defs>
+              <rect x="-50" y="-300" width="1100" height="1300" fill="url(#mapGrid)" />
+              <path class="lake"
+                d="M870 780 L700 790 L560 700 L480 650 L380 570 L300 470 L240 360 L190 260 L130 215 L50 185 L40 120 L70 85 L130 90 L200 120 L260 215 L320 270 L350 285 L440 275 L500 235 L545 210 L545 300 L580 360 L630 385 L640 420 L690 460 L700 520 L715 620 L740 680 L790 700 Z" />
+              <path class="route-glow" pathLength="1"
+                d="M870 780 L700 790 L560 700 L480 650 L380 570 L300 470 L240 360 L190 260 L130 215 L50 185 L40 120 L70 85 L130 90 L200 120 L260 215 L320 270 L350 285 L440 275 L500 235 L545 210 L545 300 L580 360 L630 385 L640 420 L690 460 L700 520 L715 620 L740 680 L790 700 L850 760 Z" />
+              <path class="route" id="routePath" pathLength="1"
+                d="M870 780 L700 790 L560 700 L480 650 L380 570 L300 470 L240 360 L190 260 L130 215 L50 185 L40 120 L70 85 L130 90 L200 120 L260 215 L320 270 L350 285 L440 275 L500 235 L545 210 L545 300 L580 360 L630 385 L640 420 L690 460 L700 520 L715 620 L740 680 L790 700 L850 760 Z" />
+              <circle class="runner" r="16">
+                <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#routePath" />
+                </animateMotion>
+              </circle>
+            </svg>
+            <div class="run-stats">
+              <div><b>3:44</b><small>1K PB</small></div>
+              <div><b>20:57</b><small>5K PB</small></div>
+              <div><b>46:01</b><small>10K PB</small></div>
+            </div>
+            <div class="live"><i></i>LIVE ON STRAVA</div>
+            <span class="run-note">Strathclyde Country Park loop</span>
+          </div>
+          <div class="info"><span class="num">02</span>
+            <h3>Running</h3>
+            <p>Miles, routes &amp; races.</p>
+          </div>
+          <a class="strava-link" id="strava-link" href="https://strava.app.link/JdmjD6Vc86b" target="_blank"
+            rel="noopener" aria-label="Open my Strava profile">View on Strava ↗</a>
+        </article>
+        <article class="card reveal" id="card-photography" style="--h:320">
+          <div class="thumb photo-thumb"><img src="photographs/web/IMG_0867.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide on"><img src="photographs/web/IMG_0965.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_1077.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_1204.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_3982.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_4203.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_4243.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_4285.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_4306.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_4996.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><img src="photographs/web/IMG_5009.jpg" alt="Photograph by Clark"
+              loading="lazy" class="slide"><span class="photo-count" id="photo-count">01 / 11</span><a
+              class="insta-link" id="insta-link" href="https://www.instagram.com/clarkconcarne" target="_blank"
+              rel="noopener">@clarkconcarne ↗</a></div>
+          <div class="info"><span class="num">03</span>
+            <h3>Photography</h3>
+            <p>Light, frames &amp; places.</p>
+          </div>
+        </article>
+        <article class="card card-dnd reveal" id="card-dnd" style="--h:0">
+          <div class="thumb dnd-thumb">
+            <img src="projects/crimsonsac.jpg" alt="The Crimson Sacrament - D&D Campaign" class="dnd-bg-img"
+              loading="lazy">
+            <div class="dnd-overlay"></div>
+            <div class="dnd-badge">✦ Campaign Lore</div>
+            <button class="dnd-lore-btn" id="dnd-lore-btn" type="button"
+              aria-label="Explore The Crimson Sacrament lore">
+              <span>Explore Story ↗</span>
+            </button>
+          </div>
+          <div class="info">
+            <span class="num">04</span>
+            <h3>The Crimson Sacrament</h3>
+            <p>D&amp;D campaign &amp; dark fantasy worldbuilding.</p>
+          </div>
+        </article>
+        <article class="card card-phil reveal" id="card-philosophy" style="--h:190">
+          <div class="thumb phil-thumb" id="phil-thumb">
+            <div class="phil-columns" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="phil-badge">Seven minds · 4 BC → today</div>
+            <div class="phil-stage" id="phil-stage" aria-live="off"></div>
+            <div class="phil-timeline" id="phil-timeline" aria-hidden="true"></div>
+            <button class="phil-btn" id="phil-btn" type="button" aria-label="Open philosophers gallery">
+              <span>Meet the Thinkers ↗</span>
+            </button>
+          </div>
+          <div class="info"><span class="num">05</span>
+            <h3>Philosophy</h3>
+            <p>Big questions, slow thinking.</p>
+          </div>
+        </article>
+        <article class="card card-lang reveal" id="card-languages" style="--h:155">
+          <div class="thumb lang-thumb">
+            <div class="lang-sun" aria-hidden="true"></div>
+            <div class="lang-rain" id="lang-rain" aria-hidden="true"></div>
+            <div class="lang-badge">🇯🇵 日本語 · Nihongo</div>
+            <div class="lang-stage" id="lang-stage" aria-live="off">
+              <div class="lang-phrase active" lang="ja">
+                <span class="lang-jp">はじめまして</span>
+                <span class="lang-romaji">Hajimemashite</span>
+                <span class="lang-en">Nice to meet you</span>
+              </div>
+              <div class="lang-phrase" lang="ja">
+                <span class="lang-jp">よろしくお願いします</span>
+                <span class="lang-romaji">Yoroshiku onegaishimasu</span>
+                <span class="lang-en">Please treat me well</span>
+              </div>
+              <div class="lang-phrase" lang="ja">
+                <span class="lang-jp">日本語</span>
+                <span class="lang-romaji">Nihongo</span>
+                <span class="lang-en">The Japanese language</span>
+              </div>
+              <div class="lang-phrase" lang="ja">
+                <span class="lang-jp">ありがとう</span>
+                <span class="lang-romaji">Arigatou</span>
+                <span class="lang-en">Thank you</span>
+              </div>
+              <div class="lang-phrase" lang="ja">
+                <span class="lang-jp">こんにちは</span>
+                <span class="lang-romaji">Konnichiwa</span>
+                <span class="lang-en">Hello</span>
+              </div>
+            </div>
+            <div class="lang-dots" id="lang-dots" aria-hidden="true"></div>
+          </div>
+          <div class="info"><span class="num">06</span>
+            <h3>Languages</h3>
+            <p>Words that open doors. Open portal ↗</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <h2 class="section-title reveal">About</h2>
+      <div class="about-body">
+        <div class="portrait-window reveal" id="portrait-window">
+          <div class="mirror-frame" id="mirror-frame">
+            <!-- Deep Spatial Layer: Background Scenery -->
+            <img src="projects/portrait-bg.jpg" alt="Harbor scenery background" class="spatial-layer spatial-bg" id="spatial-bg" loading="lazy">
+            <!-- Mid-Deep Spatial Layer: Dynamic Ambient Shadow -->
+            <div class="spatial-shadow" id="spatial-shadow" aria-hidden="true"></div>
+            <!-- Mid Spatial Layer: Clark Galloway (Recessed inside the portal) -->
+            <img src="projects/portrait-subject.png" alt="Clark Galloway" class="spatial-layer spatial-subject" id="spatial-subject" loading="lazy">
+            <!-- Atmospheric Portal Sunlight Bloom -->
+            <div class="window-atmosphere" aria-hidden="true"></div>
+            <!-- Surface Glass Optics -->
+            <div class="glass-reflection" aria-hidden="true"></div>
+            <div class="glass-glare" id="glass-glare" aria-hidden="true"></div>
+            <div class="glass-bevel" aria-hidden="true"></div>
+            <div class="mirror-tag">✦ Clark Galloway</div>
+          </div>
+        </div>
+        <div class="about-text">
+          <p class="reveal">I'm a great believer in being able to carve your own path. Using a strong foundation of
+            philosophy, I know the greatest obstacle in our lives is often ourselves and once we learn to tame our
+            instincts, we can achieve anything.
+          </p>
+          <p class="reveal">So why dont you join me on a journey to bring your dreams into reality.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <h2 class="section-title reveal">Let's talk</h2>
+      <a class="big-link magnetic reveal" id="email-link"
+        href="mailto:clarkjrgalloway@icloud.com">clarkjrgalloway@icloud.com</a>
+      <p class="reveal social"><a id="contact-insta" href="https://www.instagram.com/clarkconcarne" target="_blank"
+          rel="noopener">Instagram @clarkconcarne ↗</a></p>
+    </section>
   </main>
-  <!-- Scripts -->
-  <script src="script.js" defer></script>
+
+  <!-- Project Showcase Modal -->
+  <div class="web-modal" id="web-modal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Website Projects Showcase">
+    <div class="web-modal-backdrop" id="web-modal-backdrop"></div>
+    <div class="web-modal-content">
+      <button class="web-modal-close" id="web-modal-close" aria-label="Close modal">&times;</button>
+      <div class="web-modal-window">
+        <div class="web-modal-header">
+          <div class="web-dots"><span></span><span></span><span></span></div>
+          <a class="web-modal-url" id="web-modal-url" href="https://www.lgrfitness.uk" target="_blank"
+            rel="noopener">www.lgrfitness.uk ↗</a>
+          <span class="web-modal-counter" id="web-modal-counter">01 / 03</span>
+        </div>
+        <div class="web-modal-image-wrap">
+          <img id="web-modal-img" src="projects/lgr-fitness.png" alt="Project preview">
+          <button class="web-modal-nav prev" id="web-modal-prev" aria-label="Previous project">&#8592;</button>
+          <button class="web-modal-nav next" id="web-modal-next" aria-label="Next project">&#8594;</button>
+        </div>
+        <div class="web-modal-footer">
+          <div class="web-modal-meta">
+            <div class="web-modal-tags">
+              <span class="web-modal-chip" id="web-modal-chip">Fitness App</span>
+              <span class="web-modal-tag" id="web-modal-tag">Hypertrophy Training Tracker</span>
+            </div>
+            <h3 class="web-modal-title" id="web-modal-title">LGR Fitness</h3>
+            <p class="web-modal-desc" id="web-modal-desc">Complete hypertrophy tracker for dumbbells, machines & cables
+              with periodized routines.</p>
+          </div>
+          <div class="web-modal-actions">
+            <a class="modal-visit-btn" id="modal-visit-btn" href="https://www.lgrfitness.uk" target="_blank"
+              rel="noopener">Launch Live Site ↗</a>
+            <div class="web-modal-pills">
+              <button class="modal-pill active" data-modal-idx="0" type="button">01 LGR</button>
+              <button class="modal-pill" data-modal-idx="1" type="button">02 Apex</button>
+              <button class="modal-pill" data-modal-idx="2" type="button">03 Clueless</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D&D Campaign Lore Modal -->
+  <div class="dnd-modal" id="dnd-modal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="The Crimson Sacrament Story Lore">
+    <div class="dnd-modal-backdrop" id="dnd-modal-backdrop"></div>
+    <div class="dnd-modal-content">
+      <button class="dnd-modal-close" id="dnd-modal-close" aria-label="Close lore modal">&times;</button>
+      <div class="dnd-modal-window">
+        <div class="dnd-modal-grid">
+          <div class="dnd-modal-art">
+            <img src="projects/crimsonsac.jpg" alt="The Crimson Sacrament ceremonial dagger artwork">
+          </div>
+          <div class="dnd-modal-details">
+            <div class="dnd-modal-tags">
+              <span class="dnd-chip">D&amp;D Campaign</span>
+              <span class="dnd-tag">Dark Fantasy / Gothic Mystery</span>
+            </div>
+            <h2 class="dnd-modal-title">The Crimson Sacrament</h2>
+            <p class="dnd-quote">"Blood remembers what the stones have forgotten."</p>
+            <div class="dnd-story-body">
+              <p>An original dark fantasy Dungeons &amp; Dragons campaign exploring ancient covenants, blood rites, and
+                long-buried heresies. The narrative follows the rediscovery of the ceremonial obsidian and crimson-glass
+                blade, pulling investigators into an occult conspiracy across desolate stone sanctums.</p>
+              <div class="dnd-meta-grid">
+                <div>
+                  <small>ROLE</small>
+                  <b>Dungeon Master &amp; Writer</b>
+                </div>
+                <div>
+                  <small>SETTING</small>
+                  <b>Homebrew Dark Fantasy</b>
+                </div>
+                <div>
+                  <small>GENRE</small>
+                  <b>Gothic Mystery &amp; Horror</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Philosophy Modal -->
+  <div class="phil-modal" id="phil-modal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Favourite philosophers">
+    <div class="phil-modal-backdrop" id="phil-modal-backdrop"></div>
+    <div class="phil-modal-content">
+      <button class="phil-modal-close" id="phil-modal-close" aria-label="Close philosophers modal">&times;</button>
+      <h2 class="phil-modal-title">The Thinkers</h2>
+      <p class="phil-modal-sub">From the Stoa to the modern day, oldest to newest.</p>
+      <div class="phil-cards" id="phil-cards"></div>
+    </div>
+  </div>
+
+  <footer>© 2026 Clark Galloway</footer>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
