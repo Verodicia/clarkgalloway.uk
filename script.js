@@ -313,6 +313,14 @@ window.addEventListener('keydown', e => {
       window.location.href = 'japanese.html';
     });
   }
+
+  const cardArcade = document.getElementById('card-arcade');
+  if (cardArcade) {
+    cardArcade.addEventListener('click', e => {
+      if (e.target.closest('.arcade-play-btn')) return;
+      window.location.href = 'arcade-minigames/index.html';
+    });
+  }
 })();
 
 // Philosophy card + modal
@@ -417,31 +425,31 @@ window.addEventListener('keydown', e => {
     // 2. Distant Harbor & Horizon (Deepest layer inside portal, moving with deep counter-parallax)
     const bgX = -currentX * 22;
     const bgY = -currentY * 15;
-    spatialBg.style.transform = `translateZ(-85px) scale(1.24) translate(${bgX.toFixed(2)}px, ${bgY.toFixed(2)}px)`;
+    spatialBg.style.transform = `scale(1.24) translate(${bgX.toFixed(2)}px, ${bgY.toFixed(2)}px)`;
 
     // 3. Dynamic Ambient Shadow behind Clark
     if (spatialShadow) {
       const shX = -currentX * 15;
       const shY = -currentY * 11;
-      spatialShadow.style.transform = `translateZ(-50px) translate(${shX.toFixed(2)}px, ${shY.toFixed(2)}px)`;
+      spatialShadow.style.transform = `translate(${shX.toFixed(2)}px, ${shY.toFixed(2)}px)`;
     }
 
     // 4. Clark (Recessed inside the portal room - seated deep behind the window glass)
     const subX = -currentX * 10;
     const subY = -currentY * 7.5;
-    spatialSubject.style.transform = `translateZ(-30px) scale(1.0) translate(${subX.toFixed(2)}px, ${subY.toFixed(2)}px)`;
+    spatialSubject.style.transform = `scale(1.0) translate(${subX.toFixed(2)}px, ${subY.toFixed(2)}px)`;
 
     // 5. Atmospheric Sunlight Bloom inside the portal
     if (windowAtmosphere) {
       const atmX = -currentX * 14;
       const atmY = -currentY * 10;
-      windowAtmosphere.style.transform = `translateZ(-10px) translate(${atmX.toFixed(2)}px, ${atmY.toFixed(2)}px)`;
+      windowAtmosphere.style.transform = `translate(${atmX.toFixed(2)}px, ${atmY.toFixed(2)}px)`;
     }
 
     // 6. Surface Glass Glare (Glides across front glass pane between user and window)
     const glareX = currentX * 45;
     const glareY = currentY * 45;
-    glassGlare.style.transform = `translateZ(18px) translate(${glareX.toFixed(2)}px, ${glareY.toFixed(2)}px)`;
+    glassGlare.style.transform = `translate(${glareX.toFixed(2)}px, ${glareY.toFixed(2)}px)`;
 
     if (isHovered) {
       const dist = Math.hypot(currentX, currentY);
