@@ -148,6 +148,126 @@ document.addEventListener('DOMContentLoaded', () => {
       controls: 'Arrows / WASD / Touch Buttons • Space / Tap to Fire ⚡',
       quickHint: 'THUMB JOYSTICK TO STEER • ⚡ TO FIRE',
       status: 'playable'
+    },
+    {
+      id: 'neonmazechaser',
+      title: 'Neon Maze Chaser',
+      category: 'retro',
+      difficulty: 'Medium',
+      icon: '🛰️',
+      bgGradient: 'linear-gradient(135deg, #03001e 0%, #7303c0 50%, #ec38bc 100%)',
+      desc: 'Pilot Cyber Probe Delta-7 through a high-voltage cyber labyrinth! Harvest data bits, trigger EMP overloads, and extract hunter drone AI cores.',
+      controls: 'Swipe / Arrows / WASD / Touch D-Pad',
+      quickHint: 'SWIPE OR USE D-PAD TO STEER PROBE • ⚡ EMP OVERLOAD',
+      status: 'playable'
+    },
+    {
+      id: 'cyber2048',
+      title: 'Cyber 2048',
+      category: 'brain',
+      difficulty: 'Medium',
+      icon: '🔢',
+      bgGradient: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
+      desc: 'Cyberpunk slide-and-merge arithmetic puzzle! Merge matching glowing energy cells on a 4x4 matrix and reach 2048.',
+      controls: 'Swipe / Arrows / WASD / Touch D-Pad',
+      quickHint: 'SWIPE OR USE D-PAD TO MERGE MATCHING CELLS 🔢',
+      status: 'playable'
+    },
+    {
+      id: 'spacegalaxian',
+      title: 'Space Galaxian',
+      category: 'retro',
+      difficulty: 'Hard',
+      icon: '🛸',
+      bgGradient: 'linear-gradient(135deg, #050515 0%, #150935 50%, #40053a 100%)',
+      desc: 'Classic dive-bombing squadron warfare! Blast swaying alien formations, dodge kamikaze dives behind energy shields, and snatch power-ups.',
+      controls: 'Drag / Arrows to Steer • Tap / Space to Fire ⚡',
+      quickHint: 'DRAG SHIP OR ARROWS • TAP / SPACE TO FIRE 🛸',
+      status: 'playable'
+    },
+    {
+      id: 'cyberhopper',
+      title: 'Cyber Hopper',
+      category: 'reflex',
+      difficulty: 'Medium',
+      icon: '🦘',
+      bgGradient: 'linear-gradient(135deg, #051923 0%, #006466 50%, #065a60 100%)',
+      desc: 'Infinite vertical ascension! Bounce across neon platforms, hit spring pads, trigger supersonic jetpacks, and climb into orbit.',
+      controls: 'Tilt / Drag / Left & Right arrows',
+      quickHint: 'DRAG OR ARROWS TO BOUNCE HIGHER ⚡',
+      status: 'playable'
+    },
+    {
+      id: 'hexpulse',
+      title: 'Hex Pulse',
+      category: 'timing',
+      difficulty: 'Hard',
+      icon: '⬡',
+      bgGradient: 'linear-gradient(135deg, #1f041b 0%, #4a0072 50%, #7b1fa2 100%)',
+      desc: '360° rotational geometric survival! Orbit a pulsing cyber-core and evade contracting polygonal hazard walls synced to the beat.',
+      controls: 'Hold Left / Right • Tap screen sides',
+      quickHint: 'HOLD LEFT / RIGHT TO EVADE WALLS ⬡',
+      status: 'playable'
+    },
+    {
+      id: 'cybercrosser',
+      title: 'Cyber Crosser',
+      category: 'retro',
+      difficulty: 'Medium',
+      icon: '🐸',
+      bgGradient: 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)',
+      desc: 'Retro traffic and stream hopper! Dodge speeding neon hover-cruisers, ride floating data logs, and dock 5 terminal bays.',
+      controls: 'Swipe / Arrows / WASD / Touch D-Pad',
+      quickHint: 'SWIPE OR USE D-PAD TO HOP TO DOCK 🐸',
+      status: 'playable'
+    },
+    {
+      id: 'neonracer',
+      title: 'Neon Racer',
+      category: 'reflex',
+      difficulty: 'Medium',
+      icon: '🏎️',
+      bgGradient: 'linear-gradient(135deg, #1f0528 0%, #4a0058 50%, #880066 100%)',
+      desc: 'OutRun-style pseudo-3D synthwave highway racer! Weave through traffic, blast nitro boost pads, and chain close near-miss passes.',
+      controls: 'Left/Right to Steer • Up/Space/Nitro Pedal • Down/Brake',
+      quickHint: 'STEER THROUGH TRAFFIC • HIT NITRO PADS FOR SUPERSONIC SPEED 🏎️',
+      status: 'playable'
+    },
+    {
+      id: 'cyberfall',
+      title: 'Cyber Fall',
+      category: 'reflex',
+      difficulty: 'Medium',
+      icon: '⚡',
+      bgGradient: 'linear-gradient(135deg, #100018 0%, #350040 50%, #680066 100%)',
+      desc: 'Downwell-style vertical descent survival! Slip through descending platform gaps to outrun the lethal electrified ceiling laser.',
+      controls: 'Left/Right arrows / A/D / Tap screen sides',
+      quickHint: 'FALL THROUGH GAPS QUICKLY • EVADE TOP LASER CEILING ⚡',
+      status: 'playable'
+    },
+    {
+      id: 'circuitconnect',
+      title: 'Circuit Connect',
+      category: 'brain',
+      difficulty: 'Medium',
+      icon: '🔌',
+      bgGradient: 'linear-gradient(135deg, #06131c 0%, #0d2a3e 50%, #154564 100%)',
+      desc: 'Cybernetic logic conduit rotation puzzle! Rotate PCB chip traces to route electrical power from the Reactor Core to the Mainframe CPU.',
+      controls: 'Tap / Click conduits to rotate 90°',
+      quickHint: 'TAP CONDUITS TO ROTATE & CONNECT POWER TO CPU 🔌',
+      status: 'playable'
+    },
+    {
+      id: 'gravitylander',
+      title: 'Gravity Lander',
+      category: 'timing',
+      difficulty: 'Hard',
+      icon: '🚀',
+      bgGradient: 'linear-gradient(135deg, #05030f 0%, #120e28 50%, #201548 100%)',
+      desc: 'Precision vector lunar lander physics! Manage propellant, regulate descent velocity with thruster burns, and touch down safely on jagged canyon pads.',
+      controls: 'Up/Space/Thrust • Left/Right RCS to Rotate',
+      quickHint: 'REGULATE BURN • TOUCH DOWN AT SAFE SPEED (V-SPEED < 1.6) 🚀',
+      status: 'playable'
     }
   ];
 
@@ -278,7 +398,17 @@ document.addEventListener('DOMContentLoaded', () => {
     knifethrow: KnifeThrowGame,
     rhythmmemory: RhythmMemoryGame,
     bricksmasher: BrickSmasherGame,
-    asteroids: MiniAsteroidsGame
+    asteroids: MiniAsteroidsGame,
+    neonmazechaser: NeonMazeChaserGame,
+    cyber2048: Cyber2048Game,
+    spacegalaxian: SpaceGalaxianGame,
+    cyberhopper: CyberHopperGame,
+    hexpulse: HexPulseGame,
+    cybercrosser: CyberCrosserGame,
+    neonracer: NeonRacerGame,
+    cyberfall: CyberFallGame,
+    circuitconnect: CircuitConnectGame,
+    gravitylander: GravityLanderGame
   };
 
   const createGameInstance = (gameId) => {

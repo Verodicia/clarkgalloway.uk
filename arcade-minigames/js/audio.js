@@ -169,6 +169,99 @@ const ArcadeAudio = (() => {
       [330, 440, 550, 660, 880].forEach((freq, idx) => {
         setTimeout(() => playTone(freq, 'triangle', 0.22, 0.15), idx * 100);
       });
+    },
+    flap: () => {
+      playTone(400, 'sine', 0.08, 0.12, 260);
+      playTone(620, 'triangle', 0.06, 0.06, 120);
+    },
+    pellet: () => {
+      playTone(330, 'square', 0.035, 0.07, -40);
+    },
+    powerPellet: () => {
+      playTone(520, 'sine', 0.14, 0.15, 180);
+      setTimeout(() => playTone(780, 'triangle', 0.18, 0.16, -100), 60);
+    },
+    ghostEaten: (multiplier = 1) => {
+      const base = 440 * Math.min(multiplier, 4);
+      playTone(base, 'sawtooth', 0.15, 0.18, 300);
+      setTimeout(() => playTone(base * 1.5, 'sine', 0.2, 0.15, 200), 80);
+    },
+    tileSlide: () => {
+      playTone(180, 'sine', 0.06, 0.08, 60);
+    },
+    tileMerge: (value = 4) => {
+      const step = Math.min(11, Math.round(Math.log2(value)));
+      const baseFreq = 261.63 * Math.pow(1.08, step);
+      playTone(baseFreq, 'sine', 0.14, 0.18);
+      setTimeout(() => playTone(baseFreq * 1.5, 'triangle', 0.18, 0.14), 45);
+    },
+    diveBomb: () => {
+      playTone(680, 'sawtooth', 0.22, 0.15, -420);
+    },
+    alienShoot: () => {
+      playTone(420, 'square', 0.05, 0.08, -200);
+    },
+    springBounce: () => {
+      playTone(320, 'sine', 0.15, 0.18, 480);
+      setTimeout(() => playTone(820, 'triangle', 0.12, 0.15, 200), 50);
+    },
+    hexPulseTick: () => {
+      playTone(720, 'triangle', 0.04, 0.09, -150);
+    },
+    hop: () => {
+      playTone(480, 'sine', 0.06, 0.1, 160);
+    },
+    trafficZap: () => {
+      playTone(280, 'sawtooth', 0.08, 0.1, -120);
+    },
+    splash: () => {
+      playTone(180, 'square', 0.18, 0.16, -100);
+      playTone(110, 'sawtooth', 0.22, 0.14, -60);
+    },
+    jetpack: () => {
+      playTone(220, 'sawtooth', 0.12, 0.12, 80);
+    },
+    nitroBoost: () => {
+      playTone(320, 'sawtooth', 0.28, 0.22, 540);
+      setTimeout(() => playTone(860, 'sine', 0.18, 0.18, 200), 80);
+    },
+    carHorn: () => {
+      playTone(380, 'square', 0.12, 0.15, 0);
+      playTone(475, 'square', 0.12, 0.15, 0);
+    },
+    screech: () => {
+      playTone(680, 'sawtooth', 0.09, 0.14, -300);
+    },
+    fallGap: () => {
+      playTone(520, 'sine', 0.05, 0.09, -180);
+    },
+    laserBuzz: () => {
+      playTone(130, 'sawtooth', 0.12, 0.16, 20);
+    },
+    gemCollect: () => {
+      playTone(740, 'triangle', 0.08, 0.12, 240);
+      setTimeout(() => playTone(1100, 'sine', 0.1, 0.15, 0), 40);
+    },
+    rotateTile: () => {
+      playTone(560, 'triangle', 0.04, 0.1, -120);
+    },
+    circuitConnect: () => {
+      playTone(440, 'sine', 0.08, 0.15, 120);
+      setTimeout(() => playTone(660, 'sine', 0.09, 0.16, 140), 60);
+      setTimeout(() => playTone(880, 'sine', 0.14, 0.18, 200), 120);
+      setTimeout(() => playTone(1320, 'triangle', 0.22, 0.2, 0), 180);
+    },
+    thrusterRCS: () => {
+      playTone(160, 'sawtooth', 0.06, 0.08, -30);
+    },
+    softLanding: () => {
+      playTone(520, 'sine', 0.12, 0.16, 140);
+      setTimeout(() => playTone(780, 'triangle', 0.18, 0.18, 160), 80);
+      setTimeout(() => playTone(1040, 'sine', 0.25, 0.22, 0), 160);
+    },
+    fuelPickup: () => {
+      playTone(460, 'sine', 0.08, 0.14, 180);
+      setTimeout(() => playTone(690, 'sine', 0.12, 0.16, 220), 50);
     }
   };
 
