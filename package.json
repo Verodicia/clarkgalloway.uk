@@ -1,0 +1,11 @@
+{
+  "name": "clarkgalloway.uk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Clark Galloway Portfolio & Interactive Hub",
+  "scripts": {
+    "dev": "npx -y serve -l 3000 .",
+    "start": "npx -y serve -l 3000 .",
+    "build:flags": "cd fun-with-flags && npm run build"
+  }
+}

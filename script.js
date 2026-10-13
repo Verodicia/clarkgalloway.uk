@@ -321,6 +321,14 @@ window.addEventListener('keydown', e => {
       window.location.href = 'arcade-minigames/index.html';
     });
   }
+
+  const cardFlags = document.getElementById('card-flags');
+  if (cardFlags) {
+    cardFlags.addEventListener('click', e => {
+      if (e.target.closest('.flags-play-btn')) return;
+      window.location.href = 'fun-with-flags/dist/index.html';
+    });
+  }
 })();
 
 // Philosophy card + modal
