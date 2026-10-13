@@ -14,19 +14,11 @@
     },
     {
       "source": "/fun-with-flags",
-      "destination": "/fun-with-flags/dist/index.html"
+      "destination": "/fun-with-flags/index.html"
     },
     {
-      "source": "/fun-with-flags/",
+      "source": "/fun-with-flags/dist",
       "destination": "/fun-with-flags/dist/index.html"
-    },
-    {
-      "source": "/fun-with-flags/index.html",
-      "destination": "/fun-with-flags/dist/index.html"
-    },
-    {
-      "source": "/fun-with-flags/:path*",
-      "destination": "/fun-with-flags/dist/:path*"
     }
   ]
 }
