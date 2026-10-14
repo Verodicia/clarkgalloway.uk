@@ -347,6 +347,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('article');
       card.className = `game-card ${isPlayable ? 'playable' : ''}`;
       card.id = `card-${game.id}`;
+      if (isPlayable) {
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Play ${game.title}`);
+      }
 
       card.innerHTML = `
         <div class="card-media">
@@ -367,21 +372,25 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="card-score-label">HI-SCORE</span>
             <span class="card-score-value" id="card-score-${game.id}">${hiscore > 0 ? hiscore.toLocaleString() : '---'}</span>
           </div>
-          <button class="arcade-btn play-btn ${isPlayable ? 'active-play' : 'disabled-btn'}" data-game-id="${game.id}">
+          <button class="arcade-btn play-btn ${isPlayable ? 'active-play' : 'disabled-btn'}" data-game-id="${game.id}" tabindex="-1">
             ${isPlayable ? '▶ PLAY NOW' : 'COMING SOON'}
           </button>
         </div>
       `;
 
-      gamesGrid.appendChild(card);
-    });
+      if (isPlayable) {
+        card.addEventListener('click', () => {
+          openGameModal(game.id);
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGameModal(game.id);
+          }
+        });
+      }
 
-    // Attach card play listeners
-    document.querySelectorAll('.active-play').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = e.currentTarget.getAttribute('data-game-id');
-        openGameModal(id);
-      });
+      gamesGrid.appendChild(card);
     });
   };
 
@@ -540,6 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const openGameModal = (gameId) => {
     const gameData = GAMES.find(g => g.id === gameId);
     if (!gameData || gameData.status !== 'playable') return;
+    if (gameModal.classList.contains('open') && activeGameId === gameId) return;
 
     ArcadeAudio.sfx.click();
     activeGameId = gameId;
@@ -727,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isGameInteraction = e.target.closest('#game-modal') ||
                                 e.target.closest('#game-canvas') ||
                                 e.target.closest('.game-viewport') ||
-                                !e.target.closest('a, button, input');
+                                !e.target.closest('a, button, input, .game-card');
       if (isGameInteraction) {
         e.preventDefault();
       }

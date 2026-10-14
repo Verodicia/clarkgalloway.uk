@@ -135,6 +135,7 @@ class BlackjackGame {
             <!-- Betting phase buttons -->
             <div class="btn-group betting-btns" id="bj-betting-controls">
               <button class="casino-btn btn-secondary" id="bj-clear-bet">Clear</button>
+              <button class="casino-btn btn-secondary" id="bj-sub-chip" title="Subtract one active chip from bet">- Chip</button>
               <button class="casino-btn btn-secondary" id="bj-add-25">+ 25</button>
               <button class="casino-btn btn-secondary" id="bj-add-100">+ 100</button>
               <button class="casino-btn btn-secondary" id="bj-double-bet">2x Bet</button>
@@ -162,6 +163,13 @@ class BlackjackGame {
     betSpot?.addEventListener('click', () => {
       if (this.gameState !== 'betting') return;
       this.addBet(this.selectedChip);
+    });
+
+    // Right-click on Bet Spot removes selected chip
+    betSpot?.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      if (this.gameState !== 'betting') return;
+      this.removeBet(this.selectedChip);
     });
 
     // Drag and drop handlers for Bet Spot
@@ -213,6 +221,12 @@ class BlackjackGame {
       this.currentBet = 0;
       window.casinoAudio?.playChip();
       this.updateUI();
+    });
+
+    // Subtract chip
+    this.container.querySelector('#bj-sub-chip')?.addEventListener('click', () => {
+      if (this.gameState !== 'betting') return;
+      this.removeBet(this.selectedChip);
     });
 
     // Quick add buttons
@@ -292,6 +306,13 @@ class BlackjackGame {
     } else {
       this.currentBet += amount;
     }
+    window.casinoAudio?.playChip();
+    this.updateUI();
+  }
+
+  removeBet(amount) {
+    if (this.gameState !== 'betting') return;
+    this.currentBet = Math.max(0, this.currentBet - amount);
     window.casinoAudio?.playChip();
     this.updateUI();
   }

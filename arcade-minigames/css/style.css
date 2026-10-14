@@ -311,11 +311,26 @@ body.modal-open {
 
 .game-card.playable {
   border-color: rgba(0, 255, 136, 0.35);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .game-card.playable:hover {
   border-color: var(--accent-green);
-  box-shadow: 0 10px 24px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 10px 24px rgba(0, 255, 136, 0.25);
+  transform: translateY(-4px);
+}
+
+.game-card.playable:focus-visible {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 3px;
+}
+
+.game-card.playable:hover .play-btn.active-play {
+  background: linear-gradient(135deg, #2fff9b, var(--accent-green));
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+  transform: translateY(-1px);
 }
 
 /* Card Visual Header */

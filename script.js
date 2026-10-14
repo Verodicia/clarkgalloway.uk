@@ -318,7 +318,7 @@ window.addEventListener('keydown', e => {
   if (cardArcade) {
     cardArcade.addEventListener('click', e => {
       if (e.target.closest('.arcade-play-btn')) return;
-      window.location.href = 'arcade-minigames/index.html';
+      window.location.href = 'arcade-minigames/';
     });
   }
 

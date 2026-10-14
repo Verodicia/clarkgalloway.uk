@@ -12,6 +12,7 @@ class BaccaratGame {
     this.bankerCards = [];
     this.isDealing = false;
     this.deck = [];
+    this.betHistory = [];
   }
 
   mount(containerEl) {
@@ -126,10 +127,13 @@ class BaccaratGame {
             <button class="chip-btn chip-50 active" data-val="50" draggable="true" title="Drag or click to bet 50">50</button>
             <button class="chip-btn chip-100" data-val="100" draggable="true" title="Drag or click to bet 100">100</button>
             <button class="chip-btn chip-500" data-val="500" draggable="true" title="Drag or click to bet 500">500</button>
+            <button class="chip-btn chip-1000" data-val="1000" draggable="true" title="Drag or click to bet 1K">1K</button>
           </div>
 
           <div class="game-action-buttons">
             <button class="casino-btn btn-secondary" id="bac-clear-btn">Clear Bets</button>
+            <button class="casino-btn btn-secondary" id="bac-undo-btn">Undo</button>
+            <button class="casino-btn btn-secondary" id="bac-double-btn">2x Bets</button>
             <button class="casino-btn btn-gold btn-large" id="bac-deal-btn">DEAL HAND</button>
           </div>
         </div>
@@ -163,6 +167,15 @@ class BaccaratGame {
         this.placeBet(betKey, this.selectedChip);
       });
 
+      // Right-click reduces bet
+      spot.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        if (this.isDealing) return;
+        const betKey = spot.dataset.bet;
+        if (!betKey || !this.bets[betKey]) return;
+        this.removeBet(betKey, this.selectedChip);
+      });
+
       spot.addEventListener('dragover', (e) => {
         if (this.isDealing) return;
         e.preventDefault();
@@ -189,8 +202,26 @@ class BaccaratGame {
     this.container.querySelector('#bac-clear-btn')?.addEventListener('click', () => {
       if (this.isDealing) return;
       this.bets = { player: 0, banker: 0, tie: 0 };
+      this.betHistory = [];
       window.casinoAudio?.playChip();
       this.updateUI();
+    });
+
+    this.container.querySelector('#bac-undo-btn')?.addEventListener('click', () => {
+      this.undoLastBet();
+    });
+
+    this.container.querySelector('#bac-double-btn')?.addEventListener('click', () => {
+      if (this.isDealing) return;
+      const total = this.getTotalBet();
+      if (total === 0) return;
+      if (window.casinoEconomy.hasFunds(total)) {
+        for (const k in this.bets) this.bets[k] *= 2;
+        window.casinoAudio?.playChip();
+        this.updateUI();
+      } else {
+        this.setStatus('Insufficient Clark Coins to double bets!');
+      }
     });
 
     this.container.querySelector('#bac-deal-btn')?.addEventListener('click', () => {
@@ -209,8 +240,26 @@ class BaccaratGame {
       return;
     }
     this.bets[betKey] += chipAmt;
+    this.betHistory.push({ key: betKey, amount: chipAmt });
     window.casinoAudio?.playChip();
     this.updateUI();
+  }
+
+  removeBet(betKey, chipAmt = this.selectedChip) {
+    if (!this.bets[betKey]) return;
+    this.bets[betKey] = Math.max(0, this.bets[betKey] - chipAmt);
+    window.casinoAudio?.playChip();
+    this.updateUI();
+  }
+
+  undoLastBet() {
+    if (this.isDealing || this.betHistory.length === 0) return;
+    const last = this.betHistory.pop();
+    if (last && this.bets[last.key]) {
+      this.bets[last.key] = Math.max(0, this.bets[last.key] - last.amount);
+      window.casinoAudio?.playChip();
+      this.updateUI();
+    }
   }
 
   updateUI() {

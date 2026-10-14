@@ -16,6 +16,7 @@ class RouletteGame {
     this.ballAngle = 0;
     this.ballRadius = 0;
     this.rafId = null;
+    this.betHistory = [];
 
     // European Roulette Wheel Sequence (37 numbers)
     this.wheelNumbers = [
@@ -156,10 +157,12 @@ class RouletteGame {
             <button class="chip-btn chip-50" data-val="50" draggable="true" title="Drag or click to bet 50">50</button>
             <button class="chip-btn chip-100" data-val="100" draggable="true" title="Drag or click to bet 100">100</button>
             <button class="chip-btn chip-500" data-val="500" draggable="true" title="Drag or click to bet 500">500</button>
+            <button class="chip-btn chip-1000" data-val="1000" draggable="true" title="Drag or click to bet 1K">1K</button>
           </div>
 
           <div class="game-action-buttons">
             <button class="casino-btn btn-secondary" id="roulette-clear-btn">Clear All</button>
+            <button class="casino-btn btn-secondary" id="roulette-undo-btn">Undo</button>
             <button class="casino-btn btn-secondary" id="roulette-double-btn">2x Bets</button>
             <button class="casino-btn btn-gold btn-large" id="roulette-spin-btn">SPIN WHEEL</button>
           </div>
@@ -217,6 +220,15 @@ class RouletteGame {
         this.placeFeltBet(betKey, this.selectedChip);
       });
 
+      // Right-click removes/reduces bet from spot
+      cell.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        if (this.isSpinning) return;
+        const betKey = cell.dataset.bet;
+        if (!betKey || !this.bets[betKey]) return;
+        this.removeFeltBet(betKey, this.selectedChip);
+      });
+
       cell.addEventListener('dragover', (e) => {
         if (this.isSpinning) return;
         e.preventDefault();
@@ -244,8 +256,14 @@ class RouletteGame {
     this.container.querySelector('#roulette-clear-btn')?.addEventListener('click', () => {
       if (this.isSpinning) return;
       this.bets = {};
+      this.betHistory = [];
       window.casinoAudio?.playChip();
       this.updateUI();
+    });
+
+    // Undo last bet
+    this.container.querySelector('#roulette-undo-btn')?.addEventListener('click', () => {
+      this.undoLastBet();
     });
 
     // Double bets
@@ -281,8 +299,32 @@ class RouletteGame {
       return;
     }
     this.bets[betKey] = (this.bets[betKey] || 0) + chipAmount;
+    this.betHistory.push({ key: betKey, amount: chipAmount });
     window.casinoAudio?.playChip();
     this.updateUI();
+  }
+
+  removeFeltBet(betKey, chipAmount = this.selectedChip) {
+    if (!this.bets[betKey]) return;
+    this.bets[betKey] = Math.max(0, this.bets[betKey] - chipAmount);
+    if (this.bets[betKey] === 0) {
+      delete this.bets[betKey];
+    }
+    window.casinoAudio?.playChip();
+    this.updateUI();
+  }
+
+  undoLastBet() {
+    if (this.isSpinning || this.betHistory.length === 0) return;
+    const last = this.betHistory.pop();
+    if (last && this.bets[last.key]) {
+      this.bets[last.key] = Math.max(0, this.bets[last.key] - last.amount);
+      if (this.bets[last.key] === 0) {
+        delete this.bets[last.key];
+      }
+      window.casinoAudio?.playChip();
+      this.updateUI();
+    }
   }
 
   updateUI() {
@@ -357,8 +399,9 @@ class RouletteGame {
     for (let i = 0; i < totalPockets; i++) {
       const num = this.wheelNumbers[i];
       const color = this.getColor(num);
-      const startA = i * pocketAngle - pocketAngle / 2;
-      const endA = startA + pocketAngle;
+      const midA = i * pocketAngle - Math.PI / 2;
+      const startA = midA - pocketAngle / 2;
+      const endA = midA + pocketAngle / 2;
 
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -382,13 +425,13 @@ class RouletteGame {
       ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      // Number text
+      // Number text centered in pocket wedge
       ctx.save();
-      ctx.rotate(i * pocketAngle);
-      ctx.translate(0, -pocketR + 18);
-      ctx.rotate(Math.PI);
+      ctx.rotate(midA);
+      ctx.translate(pocketR - 16, 0);
+      ctx.rotate(Math.PI / 2);
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 10px sans-serif';
+      ctx.font = 'bold 11px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(num.toString(), 0, 0);
@@ -468,16 +511,26 @@ class RouletteGame {
     const winNumber = this.wheelNumbers[winIndex];
 
     const pocketAngle = (Math.PI * 2) / this.wheelNumbers.length;
-    // Calculate final resting rotation so winIndex aligns with top (or ball angle)
-    const targetPocketAngle = winIndex * pocketAngle;
 
-    const startRot = this.wheelRotation % (Math.PI * 2);
+    // Desired wheel resting rotation so pocket winIndex aligns with 12 o'clock (-Math.PI / 2)
+    // Pocket winIndex's world angle is: wheelRotation + winIndex * pocketAngle - Math.PI / 2
+    // We want worldAngle === -Math.PI / 2, so wheelRotation === -winIndex * pocketAngle (mod 2*PI)
+    const desiredWheelMod = (Math.PI * 2 - ((winIndex * pocketAngle) % (Math.PI * 2))) % (Math.PI * 2);
+    const curWheelMod = ((this.wheelRotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    let wheelDelta = desiredWheelMod - curWheelMod;
+    if (wheelDelta <= 0) wheelDelta += Math.PI * 2;
     const extraWheelSpins = 4 * Math.PI * 2;
-    const finalWheelRot = startRot + extraWheelSpins + (Math.PI * 2 - targetPocketAngle) - Math.PI / 2;
+    const startRot = this.wheelRotation;
+    const finalWheelRot = this.wheelRotation + extraWheelSpins + wheelDelta;
 
-    const ballExtraSpins = -7 * Math.PI * 2;
-    const startBallA = 0;
-    const finalBallA = ballExtraSpins - Math.PI / 2;
+    // Ball spins counter-clockwise (negative angle) and stops at 12 o'clock (-Math.PI / 2)
+    const targetBallMod = ((-Math.PI / 2 % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    const curBallMod = ((this.ballAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    let ballDiff = targetBallMod - curBallMod;
+    if (ballDiff >= 0) ballDiff -= Math.PI * 2;
+    const ballExtraSpins = -6 * Math.PI * 2;
+    const startBallA = this.ballAngle;
+    const finalBallA = this.ballAngle + ballExtraSpins + ballDiff;
 
     const outerTrackR = this.canvas.width / 2 - 20;
     const pocketRestingR = outerTrackR - 45;

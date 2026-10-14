@@ -131,10 +131,33 @@ body {
   box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
 }
 
-/* Flashy Las Vegas Marquee Logo */
+/* Flashy Las Vegas Marquee Logo (Clickable to Floor Lobby) */
 .casino-marquee-sign {
   display: flex;
   flex-direction: column;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  margin: -4px -8px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.25s var(--ease), filter 0.25s var(--ease);
+  user-select: none;
+}
+
+.casino-marquee-sign:hover {
+  transform: translateY(-1px) scale(1.02);
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.7));
+}
+
+.casino-marquee-sign:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.casino-marquee-sign:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 4px;
 }
 
 .marquee-badge {
@@ -144,6 +167,7 @@ body {
   text-transform: uppercase;
   color: var(--gold-primary);
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+  pointer-events: none;
 }
 
 .marquee-title {
@@ -157,6 +181,8 @@ body {
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
   line-height: 1.1;
+  margin: 0;
+  pointer-events: none;
 }
 
 /* HUD BAR (Balance, VIP, Buttons) */
@@ -185,6 +211,63 @@ body {
   border-color: var(--gold-primary);
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(14, 20, 29, 0.95));
   box-shadow: 0 0 18px rgba(212, 175, 55, 0.25), inset 0 0 8px rgba(212, 175, 55, 0.15);
+}
+
+.btn-clickable-balance {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s var(--ease);
+  position: relative;
+  font-family: inherit;
+}
+
+.btn-clickable-balance:hover {
+  transform: translateY(-2px);
+  border-color: #ffd700;
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.25);
+}
+
+.hud-add-badge {
+  background: rgba(255, 215, 0, 0.18);
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  color: #ffd700;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  margin-left: 0.35rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-clickable-balance:hover .hud-add-badge {
+  background: #ffd700;
+  color: #0d1520;
+}
+
+.hud-btn-add-credits {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(184, 134, 11, 0.45));
+  border: 1px solid var(--gold-primary);
+  color: #fff9db;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s var(--ease);
+  font-family: inherit;
+}
+
+.hud-btn-add-credits:hover {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(212, 175, 55, 0.6));
+  border-color: #ffeaa7;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.55);
 }
 
 .hud-coin-amt {
@@ -248,6 +331,12 @@ body {
   background: rgba(255, 255, 255, 0.14);
   border-color: var(--gold-primary);
   color: var(--gold-glow);
+}
+
+.hud-icon-btn.is-muted {
+  background: rgba(220, 53, 69, 0.18);
+  border-color: rgba(220, 53, 69, 0.45);
+  color: #ff6b81;
 }
 
 /* ==========================================================================
@@ -1327,14 +1416,112 @@ body {
   font-weight: 700;
 }
 
-.slot-cabinet {
-  max-width: 620px;
+.slot-cabinet-housing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 730px;
   margin: 0 auto;
-  background: linear-gradient(180deg, #2a0b12 0%, #150508 100%);
-  border: 10px solid #aa8010;
-  border-radius: 20px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.slot-cabinet {
+  flex: 1;
+  max-width: 630px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #2e0c14 0%, #170509 50%, #0d0205 100%);
+  border: 10px solid #c29b27;
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.95), inset 0 0 35px rgba(0, 0, 0, 0.85);
   padding: 1.5rem;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.slot-cabinet.anticipation-mode {
+  border-color: #ffd700;
+  box-shadow: 0 0 45px rgba(255, 215, 0, 0.8), inset 0 0 35px rgba(255, 215, 0, 0.4);
+  animation: cabinetTensionPulse 0.35s infinite alternate;
+}
+
+@keyframes cabinetTensionPulse {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.2) drop-shadow(0 0 20px #ff3366); }
+}
+
+/* Mechanical Slot Arm Lever */
+.slot-lever-assembly {
+  position: absolute;
+  right: -56px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  z-index: 25;
+  user-select: none;
+}
+
+.slot-lever-assembly:active {
+  cursor: grabbing;
+}
+
+.slot-lever-base {
+  width: 32px;
+  height: 54px;
+  background: linear-gradient(90deg, #333 0%, #aaa 35%, #fff 55%, #666 85%, #222 100%);
+  border: 2px solid #aa8010;
+  border-radius: 8px;
+  box-shadow: 3px 5px 12px rgba(0, 0, 0, 0.9), inset 0 0 6px rgba(0,0,0,0.6);
+}
+
+.slot-lever-arm {
+  position: absolute;
+  bottom: 14px;
+  left: 11px;
+  width: 10px;
+  height: 145px;
+  transform-origin: bottom center;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slot-lever-rod {
+  width: 10px;
+  height: 125px;
+  background: linear-gradient(90deg, #555 0%, #eee 40%, #fff 55%, #888 80%, #333 100%);
+  border-radius: 5px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.slot-lever-knob {
+  position: absolute;
+  top: -24px;
+  left: -15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff7675 0%, #d63031 55%, #631212 90%, #2b0404 100%);
+  border: 2px solid #ffeaa7;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+.slot-lever-assembly:hover .slot-lever-knob {
+  filter: brightness(1.2) drop-shadow(0 0 12px #ff3366);
+  transform: scale(1.1);
+}
+
+.slot-lever-arm.pulling {
+  animation: leverPullMotion 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes leverPullMotion {
+  0% { transform: rotate(0deg) scaleY(1); }
+  35% { transform: rotate(58deg) scaleY(0.76); }
+  60% { transform: rotate(52deg) scaleY(0.8); }
+  100% { transform: rotate(0deg) scaleY(1); }
 }
 
 .slot-marquee-header {
@@ -1359,15 +1546,50 @@ body {
 
 .reels-window-frame {
   position: relative;
-  background: #ffffff;
-  border: 6px solid #4a1521;
-  border-radius: 12px;
-  box-shadow: inset 0 10px 25px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(180deg, #18191c 0%, #0d0e10 100%);
+  border: 6px solid #aa8010;
+  border-radius: 14px;
+  box-shadow: inset 0 12px 30px rgba(0, 0, 0, 0.95), 0 4px 15px rgba(0,0,0,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 0.5rem 0;
+  padding: 0.6rem 0.4rem;
+}
+
+/* Dynamic Payline Laser SVG Layer */
+.payline-svg-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.payline-laser {
+  stroke-dasharray: 8 4;
+  animation: laserDash 0.8s linear infinite;
+  filter: drop-shadow(0 0 8px var(--laser-color, #ffd700));
+}
+
+@keyframes laserDash {
+  to { stroke-dashoffset: -24; }
+}
+
+/* Center Payline Glass Wire */
+.reels-window-frame::before {
+  content: '';
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.35) 15%, rgba(255, 51, 102, 0.75) 50%, rgba(255, 215, 0, 0.35) 85%, transparent);
+  box-shadow: 0 0 8px rgba(255, 51, 102, 0.5);
+  pointer-events: none;
+  z-index: 8;
 }
 
 .payline-indicators {
@@ -1375,7 +1597,7 @@ body {
   flex-direction: column;
   gap: 0.6rem;
   padding: 0 0.5rem;
-  z-index: 3;
+  z-index: 9;
 }
 
 .line-tag {
@@ -1386,6 +1608,7 @@ body {
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   user-select: none;
+  transition: all 0.2s ease;
 }
 
 .line-tag.active {
@@ -1394,57 +1617,112 @@ body {
   box-shadow: 0 0 8px #ff3366;
 }
 
+.line-tag.winner-line {
+  background: #f1c40f;
+  color: #000;
+  box-shadow: 0 0 14px #ffd700, 0 0 25px #ff3366;
+  transform: scale(1.15);
+}
+
 .reels-container {
   display: flex;
   gap: 0.75rem;
-  z-index: 2;
+  z-index: 4;
+  perspective: 700px;
 }
 
 .slot-reel {
   width: 120px;
   height: 240px;
+  position: relative;
   overflow: hidden;
-  background: #fdfdfd;
+  background: linear-gradient(90deg, #e4e4e4 0%, #ffffff 25%, #ffffff 75%, #dedede 100%);
+  border-radius: 10px;
+  border: 2px solid #5a1824;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.45), 0 3px 10px rgba(0,0,0,0.6);
+}
+
+/* 3D Cylindrical Drum Shading (Realistic mechanical curved drum) */
+.slot-reel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.58) 10%,
+    rgba(0, 0, 0, 0.18) 24%,
+    rgba(255, 255, 255, 0.0) 38%,
+    rgba(255, 255, 255, 0.26) 50%,
+    rgba(255, 255, 255, 0.0) 62%,
+    rgba(0, 0, 0, 0.18) 76%,
+    rgba(0, 0, 0, 0.58) 90%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+  box-shadow: inset 0 8px 18px rgba(0, 0, 0, 0.85), inset 0 -8px 18px rgba(0, 0, 0, 0.85);
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.35);
+  z-index: 7;
+}
+
+.reel-strip-viewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .reel-strip {
   display: flex;
   flex-direction: column;
-  transition: transform 0.1s linear;
+  width: 100%;
+  will-change: transform;
 }
 
 .reel-cell {
   height: 80px;
-  display: grid;
-  place-items: center;
-  font-size: 3rem;
+  min-height: 80px;
+  max-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
   user-select: none;
+  position: relative;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+/* Motion blur and vertical stretch when spinning */
+.reel-spinning .reel-cell {
+  filter: blur(2.5px) contrast(1.15);
+  transform: scaleY(1.08);
+}
+
+/* Suspense spin anticipation on reel 3 */
+.reel-suspense {
+  animation: suspenseGlow 0.32s infinite alternate;
+}
+
+@keyframes suspenseGlow {
+  0% { box-shadow: 0 0 8px #ffd700, inset 0 0 16px #ffd700; border-color: #ffd700; }
+  100% { box-shadow: 0 0 24px #ff3366, inset 0 0 28px #ff3366; border-color: #ff3366; }
+}
+
+/* Winning Symbol High-Octane Las Vegas Celebration */
 .reel-cell.win-symbol {
-  animation: pulseSymbol 0.6s infinite alternate;
+  animation: winSymbolCelebration 0.7s infinite alternate ease-in-out;
+  z-index: 6;
 }
 
-@keyframes pulseSymbol {
-  0% { transform: scale(1); filter: drop-shadow(0 0 4px #ffd700); }
-  100% { transform: scale(1.22); filter: drop-shadow(0 0 16px #ff3366); }
-}
-
-.reel-spinning {
-  filter: blur(2px);
-}
-
-.reel-bounce {
-  animation: reelBounce 0.28s ease-out;
-}
-
-@keyframes reelBounce {
-  0% { transform: translateY(-16px); }
-  60% { transform: translateY(6px); }
-  100% { transform: translateY(0); }
+@keyframes winSymbolCelebration {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px #ffd700) brightness(1);
+  }
+  100% {
+    transform: scale(1.24);
+    filter: drop-shadow(0 0 22px #ff3366) drop-shadow(0 0 35px #ffd700) brightness(1.25);
+  }
 }
 
 .slot-meter-display {
@@ -1618,6 +1896,8 @@ body {
 
 .craps-table {
   background: radial-gradient(circle at 50% 30%, #0d3b24 0%, #051b10 100%);
+  border-radius: 20px;
+  padding: 1.25rem;
 }
 
 .craps-hud-bar {
@@ -1628,6 +1908,7 @@ body {
   flex-wrap: wrap;
   border-bottom: 1px solid rgba(212, 175, 55, 0.25);
   padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .puck-wrapper {
@@ -1637,27 +1918,30 @@ body {
 }
 
 .craps-puck {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 0.75rem;
   font-weight: 900;
-  letter-spacing: 0.05em;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-  border: 3px solid #fff;
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  border: 3px solid #d4af37;
+  user-select: none;
 }
 
 .craps-puck.off {
-  background: #111;
+  background: #151515;
   color: #fff;
+  border-color: #888;
 }
 
 .craps-puck.on {
-  background: #fff;
+  background: #ffffff;
   color: #111;
-  box-shadow: 0 0 20px #fff;
+  border-color: #ffd700;
+  box-shadow: 0 0 16px #ffd700;
 }
 
 .puck-desc {
@@ -1666,10 +1950,21 @@ body {
   font-weight: 600;
 }
 
-/* Realistic 3D Translucent Red Casino Dice */
+.craps-roll-summary {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.4rem 0.85rem;
+  border-radius: 99px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
 .dice-arena {
   display: flex;
   gap: 1.25rem;
+  align-items: center;
+  cursor: pointer;
 }
 
 .casino-die {
@@ -1681,6 +1976,12 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.5);
   position: relative;
   transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.casino-die:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255, 255, 255, 0.6);
 }
 
 .casino-die.rolling {
@@ -1711,94 +2012,400 @@ body {
 .pip-ml { top: 24px; left: 10px; }
 .pip-mr { top: 24px; right: 10px; }
 
-/* Craps Layout */
-.craps-felt-layout {
+/* Craps Main Layout (Table + History Panel Side-by-Side) */
+.craps-main-layout {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+/* Casino Wooden Tub with Padded Armrest Rail */
+.craps-tub-frame {
+  position: relative;
+  flex: 1 1 820px;
+  max-width: 940px;
+  min-width: 300px;
+  background: #240f06;
+  border: 14px solid #3d1c0b;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(0, 0, 0, 0.8);
+  padding: 8px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* History Sidebar Panel next to table */
+.craps-history-panel {
+  flex: 0 0 280px;
+  width: 280px;
+  background: radial-gradient(circle at 50% 15%, #1f0d06 0%, #0d0502 100%);
+  border: 10px solid #3d1c0b;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), inset 0 0 25px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.3);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.craps-points-row {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.6rem;
+.history-panel-header {
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.craps-point-box {
-  background: rgba(0, 0, 0, 0.4);
-  border: 2px solid var(--gold-primary);
-  border-radius: 8px;
-  padding: 0.6rem;
-  text-align: center;
+.history-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.craps-point-box.active-point {
-  background: rgba(212, 175, 55, 0.3);
-  box-shadow: 0 0 16px var(--gold-primary);
+.history-badge-icon {
+  font-size: 1rem;
 }
 
-.point-num {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 900;
+.history-heading {
+  font-family: var(--font-serif, "Cinzel", Georgia, serif);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #d4af37;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.history-reset-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 6px;
+  color: #dcdcdc;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.history-reset-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
   color: #fff;
+  border-color: #ffd700;
+}
+
+.history-panel-body {
+  flex: 1 1 auto;
+  min-height: 220px;
+  max-height: 330px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-panel-body::-webkit-scrollbar {
+  width: 5px;
+}
+.history-panel-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.history-panel-body::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+}
+
+.history-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 180px;
+  color: #888;
+  text-align: center;
+  gap: 6px;
+}
+.history-empty-state .empty-icon {
+  font-size: 2rem;
+  opacity: 0.4;
+}
+.history-empty-state .empty-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #bbb;
+}
+.history-empty-state .empty-sub {
+  font-size: 0.72rem;
+  color: #777;
+}
+
+.history-entry {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.history-entry:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-2px);
+}
+
+.entry-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entry-roll-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #f0f0f0;
+}
+
+.entry-num {
+  color: #888;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.entry-dice-sum {
+  background: #a00;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.76rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.entry-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.badge-win {
+  background: rgba(0, 230, 118, 0.15);
+  border: 1px solid #00e676;
+  color: #00e676;
+}
+.badge-loss {
+  background: rgba(255, 51, 102, 0.15);
+  border: 1px solid #ff3366;
+  color: #ff3366;
+}
+.badge-push {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid #d4af37;
+  color: #ffd700;
+}
+.badge-point {
+  background: rgba(33, 150, 243, 0.15);
+  border: 1px solid #2196f3;
+  color: #64b5f6;
+}
+.badge-neutral {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #aaa;
+}
+
+.entry-row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+}
+
+.entry-desc {
+  color: #bbb;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 170px;
+}
+
+.entry-net {
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+.net-win { color: #00e676; }
+.net-loss { color: #ff3366; }
+.net-neutral { color: #aaa; }
+
+.history-panel-footer {
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.55);
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history-counts-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+.history-count-badge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.count-wins { background: rgba(0, 230, 118, 0.15); color: #00e676; }
+.count-losses { background: rgba(255, 51, 102, 0.15); color: #ff3366; }
+.count-pushes { background: rgba(212, 175, 55, 0.15); color: #ffd700; }
+
+.history-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.history-total-label {
+  font-family: var(--font-serif, "Cinzel", Georgia, serif);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #d4af37;
+}
+
+.history-total-value {
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+.total-win { color: #00e676; text-shadow: 0 0 10px rgba(0, 230, 118, 0.4); }
+.total-loss { color: #ff3366; text-shadow: 0 0 10px rgba(255, 51, 102, 0.4); }
+.total-neutral { color: #ffd700; }
+
+@media (max-width: 1100px) {
+  .craps-main-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+  .craps-tub-frame {
+    width: 100%;
+    max-width: 940px;
+  }
+  .craps-history-panel {
+    width: 100%;
+    max-width: 940px;
+  }
+  .history-panel-body {
+    max-height: 200px;
+  }
+}
+
+/* Rubber Pyramid Dice Bumper Wall */
+.craps-pyramid-wall {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.craps-pyramid-wall.top-wall {
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 10px;
+  background: repeating-linear-gradient(45deg, #184d2a 0, #184d2a 5px, #0e2d19 5px, #0e2d19 10px);
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.craps-pyramid-wall.left-wall {
+  top: 15px;
+  bottom: 15px;
+  left: 0;
+  width: 10px;
+  background: repeating-linear-gradient(-45deg, #184d2a 0, #184d2a 5px, #0e2d19 5px, #0e2d19 10px);
+  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Felt Stage containing the SVG & 3D Dice Layer */
+.craps-felt-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 800 / 400;
+  background: #009933;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 8px 24px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+
+/* Table SVG */
+.craps-table-svg {
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
-.point-sub {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: var(--gold-glow);
-}
-
-.craps-main-areas {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.craps-bet-cell {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid var(--gold-primary);
-  border-radius: 8px;
-  padding: 0.85rem;
+/* Interactive SVG Hit-Zones */
+.craps-zone {
+  fill: rgba(0, 0, 0, 0.001);
+  stroke: transparent;
+  stroke-width: 2.5;
   cursor: pointer;
-  position: relative;
-  transition: all 0.2s ease;
+  transition: fill 0.2s ease, stroke 0.2s ease;
 }
 
-.craps-bet-cell:hover {
-  background: rgba(212, 175, 55, 0.15);
+.craps-zone:hover {
+  fill: rgba(255, 215, 0, 0.22);
+  stroke: #ffd700;
+  stroke-dasharray: 6 3;
+  filter: drop-shadow(0 0 6px #ffd700);
 }
 
-.craps-bet-cell.active-bet {
-  border-color: #ffd700;
-  box-shadow: inset 0 0 12px rgba(255, 215, 0, 0.4);
+.craps-zone.active-bet {
+  fill: rgba(255, 215, 0, 0.12);
+  stroke: rgba(255, 215, 0, 0.75);
 }
 
-.cell-label {
-  font-family: var(--font-serif);
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: #fff;
-  margin-bottom: 0.2rem;
+.craps-zone.winner-flash {
+  animation: crapsWinFlash 0.6s infinite alternate;
 }
 
-.cell-sub {
-  font-size: 0.72rem;
-  color: var(--text-muted);
+@keyframes crapsWinFlash {
+  0% { fill: rgba(255, 215, 0, 0.2); stroke: #ffd700; }
+  100% { fill: rgba(255, 51, 102, 0.45); stroke: #ff3366; filter: drop-shadow(0 0 12px #ffd700); }
 }
 
-.craps-lower-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0.75rem;
+/* Chip Badge in SVG */
+.craps-chip-group {
+  pointer-events: none;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.75));
+  animation: chipDropIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.craps-props-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+@keyframes chipDropIn {
+  0% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Animated Point Puck in SVG */
+.craps-svg-puck {
+  pointer-events: none;
+  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
 }
 
 /* ==========================================================================
@@ -2068,6 +2675,197 @@ body {
   font-size: 1.2rem;
   font-weight: 900;
   color: #fff;
+}
+
+/* VIP Vault Add Credits Modal Styles */
+.modal-vault-content {
+  max-width: 600px;
+}
+
+.vault-current-balance-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(13, 21, 32, 0.95));
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 14px;
+  padding: 1.25rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(212, 175, 55, 0.1);
+}
+
+.vault-balance-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--gold-primary);
+  margin-bottom: 0.35rem;
+}
+
+.vault-balance-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  margin-bottom: 0.3rem;
+}
+
+.vault-subtext {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.vault-section-heading {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #ffd700;
+  letter-spacing: 0.05em;
+  margin: 1.25rem 0 0.75rem;
+  font-family: var(--font-sans);
+}
+
+.credit-packages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 540px) {
+  .credit-packages-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.credit-pkg-card {
+  background: rgba(14, 21, 31, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+}
+
+.credit-pkg-card:hover {
+  background: rgba(26, 38, 56, 0.95);
+  border-color: var(--gold-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(212, 175, 55, 0.3);
+}
+
+.credit-pkg-card.featured {
+  border-color: rgba(46, 204, 113, 0.6);
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.12), rgba(14, 21, 31, 0.9));
+}
+
+.credit-pkg-card.featured:hover {
+  border-color: #2ecc71;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(46, 204, 113, 0.4);
+}
+
+.credit-pkg-card.legend {
+  border-color: rgba(255, 215, 0, 0.7);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(14, 21, 31, 0.9));
+}
+
+.credit-pkg-card.legend:hover {
+  border-color: #ffd700;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6), 0 0 24px rgba(255, 215, 0, 0.5);
+}
+
+.pkg-coins {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.pkg-name {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.pkg-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--gold-glow);
+  margin-top: 0.2rem;
+}
+
+.credit-pkg-card.featured .pkg-tag {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.credit-pkg-card.legend .pkg-tag {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffd700;
+}
+
+.custom-credit-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.input-with-symbol {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 10px;
+  padding: 0.4rem 0.85rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input-with-symbol:focus-within {
+  border-color: #ffd700;
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.35);
+}
+
+.input-symbol {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+.input-unit {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--gold-primary);
+  margin-left: 0.5rem;
+}
+
+.input-with-symbol input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 100%;
+  outline: none;
+}
+
+.vault-footer-actions {
+  text-align: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Toast */

@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/casino/css/casino.css">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/casino.css">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 </head>
 
 <body>
@@ -40,39 +40,24 @@
         <a href="../index.html#card-casino" class="btn-portfolio-back" id="btn-portfolio-back" title="Return to Clark's Portfolio">
           <span>←</span> Clark Galloway
         </a>
-        <div class="casino-marquee-sign">
+        <button class="casino-marquee-sign" id="btn-marquee-lobby" title="Return to Floor Lobby" aria-label="Return to Floor Lobby">
           <span class="marquee-badge">LAS VEGAS & MONTE CARLO</span>
           <h1 class="marquee-title">CLARK'S CASINO</h1>
-        </div>
+        </button>
       </div>
 
       <!-- HUD: Coins, VIP Tier, Audio, Faucet -->
       <div class="casino-hud-cluster">
-        <!-- Balance Pill -->
-        <div class="hud-pill hud-balance-pill" title="Your current Clark Coins bankroll">
+        <!-- Balance Pill (Interactive button to Add Credits) -->
+        <button class="hud-pill hud-balance-pill btn-clickable-balance" id="hud-balance-pill" title="Your current Clark Coins bankroll · Click to Add Credits">
           <span class="hud-coin-amt" id="hud-balance-amt">🪙 2,500 CC</span>
-        </div>
+          <span class="hud-add-badge">+ Add</span>
+        </button>
 
         <!-- VIP Tier Pill -->
         <div class="hud-pill hud-vip-badge" id="hud-vip-badge" title="High Roller Rank">
           🥈 Silver Stacker
         </div>
-
-        <!-- Free Daily / Bailout Stash -->
-        <button class="btn-faucet-stash" id="btn-claim-stash" onclick="window.clarkCasino ? window.clarkCasino.claimFaucetDirect() : window.casinoEconomy.claimFaucet()" title="Refill free Clark Coins">
-          <span>+ 🪙 1,000 Free</span>
-        </button>
-
-        <!-- Stats Modal Trigger -->
-        <button class="hud-icon-btn" id="btn-open-stats" title="Career Stats">
-          <span>📊 Stats</span>
-        </button>
-
-        <!-- Rules & Guide Modal Trigger -->
-        <button class="hud-icon-btn" id="btn-open-rules" title="Game Rules & Paytables">
-          <span>ℹ️ Rules</span>
-        </button>
-
         <!-- Sound Toggle -->
         <button class="hud-icon-btn" id="btn-sound-toggle" title="Toggle Sound FX">
           <span>🔊 <small>Sound ON</small></span>
@@ -80,20 +65,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Interactive Game Category Nav Tabs -->
-  <nav class="casino-game-nav">
-    <div class="game-nav-inner">
-      <button class="game-nav-tab active" data-tab-id="lobby">🏛️ Floor Lobby</button>
-      <button class="game-nav-tab" data-tab-id="blackjack">♠️ Blackjack</button>
-      <button class="game-nav-tab" data-tab-id="roulette">🎡 Roulette</button>
-      <button class="game-nav-tab" data-tab-id="slots">🎰 777 Slots</button>
-      <button class="game-nav-tab" data-tab-id="videopoker">🃏 Video Poker</button>
-      <button class="game-nav-tab" data-tab-id="craps">🎲 Craps</button>
-      <button class="game-nav-tab" data-tab-id="baccarat">⚜️ Baccarat</button>
-      <button class="game-nav-tab" data-tab-id="wheel">🌟 Fortune Wheel</button>
-    </div>
-  </nav>
 
   <!-- Main Container -->
   <main class="casino-main-content">
@@ -135,98 +106,77 @@
   <!-- Toast Container -->
   <div class="casino-toast" id="casino-toast">Notification</div>
 
-  <!-- Rules & Paytables Modal -->
-  <div class="casino-modal" id="modal-rules" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
+  <!-- Add Credits / VIP Vault Modal -->
+  <div class="casino-modal" id="modal-add-credits" role="dialog" aria-modal="true" aria-labelledby="credits-modal-title">
     <div class="casino-modal-backdrop"></div>
-    <div class="casino-modal-content">
+    <div class="casino-modal-content modal-vault-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="rules-modal-title">🏛️ Casino House Guide</h3>
-        <button class="btn-modal-close" id="btn-close-rules" aria-label="Close modal">&times;</button>
+        <h3 class="modal-title" id="credits-modal-title">🏛️ VIP Bankroll Vault</h3>
+        <button class="btn-modal-close" id="btn-close-add-credits" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
-        <h4 style="color: #ffd700; margin-bottom: 0.5rem; font-family: var(--font-serif);">Clark Coins (CC) System</h4>
-        <p style="margin-bottom: 1rem; color: #cbd5e1; font-size: 0.9rem;">
-          Clark Coins are 100% fictional gaming tokens designed purely to measure your betting strategies and hot streaks. You start with <strong>🪙 2,500 CC</strong>. If your balance ever drops low, tap the <strong>+ 🪙 1,000 Free</strong> button to claim a free bailout anytime!
-        </p>
+        <div class="vault-current-balance-card">
+          <span class="vault-balance-label">CURRENT ACTIVE BANKROLL</span>
+          <span class="vault-balance-val" id="vault-current-balance">🪙 2,500 CC</span>
+          <span class="vault-subtext">Artificial Clark Coins (CC) · 100% Free Leisure · Zero Financial Risk</span>
+        </div>
 
-        <h4 style="color: #ffd700; margin-bottom: 0.5rem; font-family: var(--font-serif);">Game Rules Summary</h4>
-        <ul style="color: #cbd5e1; font-size: 0.88rem; padding-left: 1.25rem; line-height: 1.8;">
-          <li><strong>Blackjack (21):</strong> Dealer stands on 17. Blackjack pays 3:2. Double down on any initial 2 cards.</li>
-          <li><strong>European Roulette:</strong> Single zero (37 pockets). Straight-up numbers pay 35:1. Red/Black, Even/Odd pay 1:1. Dozens and Columns pay 2:1.</li>
-          <li><strong>Vegas Neon 777 Slots:</strong> 3-reel 5-payline classic machine. Flaming 7s pay 100x. Three Clark Coins trigger the 500x Mega Jackpot.</li>
-          <li><strong>Video Poker:</strong> Jacks or Better (9/6). Hold your strongest cards, draw replacements. Royal Flush pays 4,000 CC at Max Bet!</li>
-          <li><strong>Craps:</strong> Come Out roll: 7 & 11 win Pass Line; 2, 3, 12 lose. Any other number sets the Point! Roll the Point before 7 to win.</li>
-          <li><strong>Baccarat:</strong> Punto Banco rules. Bet on Player (1:1), Banker (0.95:1), or Tie (8:1). Hand closest to 9 wins.</li>
-          <li><strong>Wheel of Fortune:</strong> 24-wedge carnival wheel. Multipliers range from 1x up to the 100x Mega Jackpot wedge!</li>
-        </ul>
+        <h4 class="vault-section-heading">⚡ Instant Free Credit Packages</h4>
+        <div class="credit-packages-grid">
+          <button class="credit-pkg-card" data-amount="1000">
+            <span class="pkg-coins">+ 🪙 1,000 CC</span>
+            <span class="pkg-name">Starter Bailout</span>
+            <span class="pkg-tag">Free Refill</span>
+          </button>
+          <button class="credit-pkg-card featured" data-amount="5000">
+            <span class="pkg-coins">+ 🪙 5,000 CC</span>
+            <span class="pkg-name">High Roller Stack</span>
+            <span class="pkg-tag">★ POPULAR ★</span>
+          </button>
+          <button class="credit-pkg-card" data-amount="25000">
+            <span class="pkg-coins">+ 🪙 25,000 CC</span>
+            <span class="pkg-name">Diamond Stash</span>
+            <span class="pkg-tag">VIP TIER</span>
+          </button>
+          <button class="credit-pkg-card legend" data-amount="100000">
+            <span class="pkg-coins">+ 🪙 100,000 CC</span>
+            <span class="pkg-name">Monte Carlo Whale</span>
+            <span class="pkg-tag">👑 LEGEND</span>
+          </button>
+        </div>
+
+        <h4 class="vault-section-heading">✏️ Custom Credit Amount</h4>
+        <div class="custom-credit-form">
+          <div class="input-with-symbol">
+            <span class="input-symbol">🪙</span>
+            <input type="number" id="input-custom-credits" placeholder="e.g. 50000" min="10" max="10000000" step="100" />
+            <span class="input-unit">CC</span>
+          </div>
+          <button class="casino-btn btn-gold" id="btn-submit-custom-credits">Add to Bankroll</button>
+        </div>
+
+        <div class="vault-footer-actions">
+          <button class="casino-btn btn-secondary btn-sm" id="btn-reset-bankroll-vault">Reset Bankroll to 🪙 2,500 CC</button>
+        </div>
       </div>
       <div class="modal-footer">
-        <button class="casino-btn btn-gold" onclick="document.getElementById('modal-rules').classList.remove('open');">Understood</button>
+        <button class="casino-btn btn-gold" onclick="document.getElementById('modal-add-credits').classList.remove('open');">Done</button>
       </div>
     </div>
   </div>
 
-  <!-- Career Stats Modal -->
-  <div class="casino-modal" id="modal-stats" role="dialog" aria-modal="true" aria-labelledby="stats-modal-title">
-    <div class="casino-modal-backdrop"></div>
-    <div class="casino-modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="stats-modal-title">📊 Career High Roller Stats</h3>
-        <button class="btn-modal-close" id="btn-close-stats" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">VIP Prestige Rank</span>
-            <span class="stat-val" id="stat-vip-tier">Silver Stacker</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Total Rounds Played</span>
-            <span class="stat-val" id="stat-games-played">0</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Total Wagered</span>
-            <span class="stat-val" id="stat-total-wagered">🪙 0</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Total Coins Won</span>
-            <span class="stat-val" id="stat-total-won">🪙 0</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Biggest Single Payout</span>
-            <span class="stat-val" id="stat-biggest-win">🪙 0</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Best Win Streak</span>
-            <span class="stat-val" id="stat-best-streak">0 wins</span>
-          </div>
-          <div class="stat-card" style="grid-column: span 2;">
-            <span class="stat-label">Current Active Streak</span>
-            <span class="stat-val" id="stat-current-streak">0 wins</span>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 1rem;">
-          <button class="casino-btn btn-secondary btn-sm" id="btn-reset-stats">Reset Bankroll &amp; Stats</button>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="casino-btn btn-gold" onclick="document.getElementById('modal-stats').classList.remove('open');">Close</button>
-      </div>
-    </div>
-  </div>
-
+ 
   <!-- Scripts -->
-  <script src="/casino/js/audio.js"></script>
-  <script src="/casino/js/economy.js"></script>
-  <script src="/casino/js/games/blackjack.js"></script>
-  <script src="/casino/js/games/roulette.js"></script>
-  <script src="/casino/js/games/slots.js"></script>
-  <script src="/casino/js/games/videopoker.js"></script>
-  <script src="/casino/js/games/craps.js"></script>
-  <script src="/casino/js/games/baccarat.js"></script>
-  <script src="/casino/js/games/wheel.js"></script>
-  <script src="/casino/js/app.js"></script>
+  <script src="./js/audio.js"></script>
+  <script src="./js/economy.js"></script>
+  <script src="./js/games/blackjack.js"></script>
+  <script src="./js/games/roulette.js"></script>
+  <script src="./js/games/slots.js"></script>
+  <script src="./js/games/videopoker.js"></script>
+  <script src="./js/games/craps.js"></script>
+  <script src="./js/games/baccarat.js"></script>
+  <script src="./js/games/wheel.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 
 </html>

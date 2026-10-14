@@ -11,16 +11,20 @@ class ClarkCasinoEconomy {
     this.FAUCET_KEY = 'clark_casino_faucet_claim_v1';
     this.FAUCET_REWARD = 1000;
 
+    this.subscribers = [];
     this.balance = this.loadBalance();
     this.stats = this.loadStats();
-    this.subscribers = [];
   }
 
   loadBalance() {
-    const saved = localStorage.getItem(this.STORAGE_KEY);
-    if (saved !== null) {
-      const val = parseInt(saved, 10);
-      if (!isNaN(val) && val >= 0) return val;
+    try {
+      const saved = localStorage.getItem(this.STORAGE_KEY);
+      if (saved !== null) {
+        const val = parseInt(saved, 10);
+        if (!isNaN(val) && val >= 0) return val;
+      }
+    } catch (e) {
+      console.warn('localStorage read error:', e);
     }
     this.saveBalance(this.DEFAULT_BALANCE);
     return this.DEFAULT_BALANCE;
@@ -28,18 +32,22 @@ class ClarkCasinoEconomy {
 
   saveBalance(amt) {
     this.balance = Math.max(0, Math.floor(amt));
-    localStorage.setItem(this.STORAGE_KEY, this.balance);
+    try {
+      localStorage.setItem(this.STORAGE_KEY, this.balance);
+    } catch (e) {
+      console.warn('localStorage write error:', e);
+    }
     this.notifySubscribers();
   }
 
   loadStats() {
-    const saved = localStorage.getItem(this.STATS_KEY);
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem(this.STATS_KEY);
+      if (saved) {
         return JSON.parse(saved);
-      } catch (e) {
-        console.warn('Failed to parse stats:', e);
       }
+    } catch (e) {
+      console.warn('Failed to parse stats:', e);
     }
     const initialStats = {
       gamesPlayed: 0,
@@ -124,18 +132,7 @@ class ClarkCasinoEconomy {
     window.casinoAudio?.playLose();
   }
 
-  claimFaucet() {
-    this.balance += this.FAUCET_REWARD;
-    this.saveBalance(this.balance);
-    localStorage.setItem(this.FAUCET_KEY, Date.now());
-
-    try {
-      window.casinoAudio?.playWin();
-    } catch (e) {
-      console.warn('Audio play error:', e);
-    }
-
-    // Direct DOM sync guarantee
+  syncHUD() {
     const balEl = document.getElementById('hud-balance-amt');
     if (balEl) {
       balEl.textContent = `🪙 ${this.formatCoins(this.balance)} CC`;
@@ -157,9 +154,26 @@ class ClarkCasinoEconomy {
     if (lowWarning && this.balance >= 25) {
       lowWarning.classList.remove('visible');
     }
+  }
+
+  addCredits(amount, message = '') {
+    const num = Math.floor(Number(amount));
+    if (isNaN(num) || num <= 0) return this.balance;
+
+    this.balance += num;
+    this.saveBalance(this.balance);
+
+    try {
+      window.casinoAudio?.playWin();
+    } catch (e) {
+      console.warn('Audio play error:', e);
+    }
+
+    this.syncHUD();
 
     if (window.clarkCasino) {
-      window.clarkCasino.showToast?.(`🪙 1,000 Free Clark Coins added! Bankroll: 🪙 ${this.formatCoins(this.balance)} CC`);
+      const toastText = message || `🪙 +${this.formatCoins(num)} Clark Coins added! Bankroll: 🪙 ${this.formatCoins(this.balance)} CC`;
+      window.clarkCasino.showToast?.(toastText);
       window.clarkCasino.spawnCoinBursts?.();
       if (window.clarkCasino.currentGameInstance?.onBalanceUpdated) {
         window.clarkCasino.currentGameInstance.onBalanceUpdated(this.balance);
@@ -167,6 +181,13 @@ class ClarkCasinoEconomy {
     }
 
     return this.balance;
+  }
+
+  claimFaucet() {
+    try {
+      localStorage.setItem(this.FAUCET_KEY, Date.now());
+    } catch (e) {}
+    return this.addCredits(this.FAUCET_REWARD, `🪙 1,000 Free Clark Coins claimed! Bankroll: 🪙 ${this.formatCoins(this.balance + this.FAUCET_REWARD)} CC`);
   }
 
   resetBankroll(amount = this.DEFAULT_BALANCE) {

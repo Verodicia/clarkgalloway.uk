@@ -23,6 +23,14 @@
     {
       "source": "/casino",
       "destination": "/casino/index.html"
+    },
+    {
+      "source": "/arcade-minigames",
+      "destination": "/arcade-minigames/index.html"
+    },
+    {
+      "source": "/arcade-minigames/",
+      "destination": "/arcade-minigames/index.html"
     }
   ]
 }

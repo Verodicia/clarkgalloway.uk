@@ -152,11 +152,6 @@ class ClarkCasinoApp {
     if (stageTitle) stageTitle.textContent = gameConfig.title;
     if (stageIcon) stageIcon.textContent = gameConfig.icon;
 
-    // Highlight nav tabs
-    document.querySelectorAll('.game-nav-tab').forEach(tab => {
-      tab.classList.toggle('active', tab.dataset.tabId === gameId);
-    });
-
     // Instantiate and mount game
     const GameClass = gameConfig.classRef;
     if (GameClass) {
@@ -179,10 +174,10 @@ class ClarkCasinoApp {
     const stageView = document.getElementById('casino-stage-view');
 
     if (stageView) stageView.classList.add('hidden');
-    if (lobbyView) lobbyView.classList.remove('hidden');
-
-    document.querySelectorAll('.game-nav-tab').forEach(tab => tab.classList.remove('active'));
-    document.querySelector('.game-nav-tab[data-tab-id="lobby"]')?.classList.add('active');
+    if (lobbyView) {
+      lobbyView.classList.remove('hidden');
+      lobbyView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     window.casinoAudio?.playClick();
   }
@@ -192,13 +187,16 @@ class ClarkCasinoApp {
     const soundBtn = document.getElementById('btn-sound-toggle');
     if (soundBtn) {
       const updateSoundIcon = () => {
-        soundBtn.innerHTML = window.casinoAudio.isMuted() ? '🔇 <small>Muted</small>' : '🔊 <small>Sound ON</small>';
+        const isMuted = window.casinoAudio.isMuted();
+        soundBtn.innerHTML = isMuted ? '🔇 <small>Muted</small>' : '🔊 <small>Sound ON</small>';
+        soundBtn.classList.toggle('is-muted', isMuted);
       };
       updateSoundIcon();
       soundBtn.addEventListener('click', () => {
-        window.casinoAudio.toggleMute();
+        window.casinoAudio.ensureContext();
+        const isMuted = window.casinoAudio.toggleMute();
         updateSoundIcon();
-        if (!window.casinoAudio.isMuted()) {
+        if (!isMuted) {
           window.casinoAudio.playChip();
         }
       });
@@ -209,16 +207,9 @@ class ClarkCasinoApp {
       this.closeActiveGame();
     });
 
-    // Game Switcher Tabs
-    document.querySelectorAll('.game-nav-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.tabId;
-        if (target === 'lobby') {
-          this.closeActiveGame();
-        } else {
-          this.launchGame(target);
-        }
-      });
+    // Marquee Title logo -> Return to Floor Lobby
+    document.getElementById('btn-marquee-lobby')?.addEventListener('click', () => {
+      this.closeActiveGame();
     });
 
     // Claim Free Stash button
@@ -236,11 +227,15 @@ class ClarkCasinoApp {
   updateHUD(balance, vip) {
     const balEl = document.getElementById('hud-balance-amt');
     const vipEl = document.getElementById('hud-vip-badge');
+    const vaultBalEl = document.getElementById('vault-current-balance');
 
     if (balEl) {
       balEl.textContent = `🪙 ${window.casinoEconomy.formatCoins(balance)} CC`;
       balEl.classList.add('pulse');
       setTimeout(() => balEl.classList.remove('pulse'), 400);
+    }
+    if (vaultBalEl) {
+      vaultBalEl.textContent = `🪙 ${window.casinoEconomy.formatCoins(balance)} CC`;
     }
     if (vipEl) {
       vipEl.innerHTML = `${vip.icon} ${vip.title}`;
@@ -256,6 +251,64 @@ class ClarkCasinoApp {
   }
 
   bindModals() {
+    // Add Credits / VIP Vault Modal
+    const addCreditsBtn = document.getElementById('btn-open-add-credits');
+    const balancePillBtn = document.getElementById('hud-balance-pill');
+    const addCreditsModal = document.getElementById('modal-add-credits');
+    const addCreditsClose = document.getElementById('btn-close-add-credits');
+
+    const openVaultModal = () => {
+      const bal = window.casinoEconomy.getBalance();
+      const vaultBalEl = document.getElementById('vault-current-balance');
+      if (vaultBalEl) vaultBalEl.textContent = `🪙 ${window.casinoEconomy.formatCoins(bal)} CC`;
+      addCreditsModal?.classList.add('open');
+      window.casinoAudio?.playClick();
+    };
+
+    addCreditsBtn?.addEventListener('click', openVaultModal);
+    balancePillBtn?.addEventListener('click', openVaultModal);
+    addCreditsClose?.addEventListener('click', () => {
+      addCreditsModal?.classList.remove('open');
+    });
+
+    // Credit Packages in Vault Modal
+    addCreditsModal?.querySelectorAll('.credit-pkg-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const amt = parseInt(btn.dataset.amount, 10);
+        if (!isNaN(amt) && amt > 0) {
+          window.casinoEconomy.addCredits(amt);
+        }
+      });
+    });
+
+    // Custom Amount in Vault Modal
+    const customInput = document.getElementById('input-custom-credits');
+    const submitCustomBtn = document.getElementById('btn-submit-custom-credits');
+    const handleCustomAdd = () => {
+      if (!customInput) return;
+      const amt = parseInt(customInput.value, 10);
+      if (isNaN(amt) || amt <= 0) {
+        this.showToast('Please enter a valid number of Clark Coins.');
+        return;
+      }
+      window.casinoEconomy.addCredits(amt);
+      customInput.value = '';
+    };
+
+    submitCustomBtn?.addEventListener('click', handleCustomAdd);
+    customInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleCustomAdd();
+    });
+
+    // Reset Bankroll from Vault Modal
+    document.getElementById('btn-reset-bankroll-vault')?.addEventListener('click', () => {
+      if (confirm('Reset your bankroll back to the initial 🪙 2,500 Clark Coins?')) {
+        window.casinoEconomy.resetBankroll(2500);
+        window.casinoAudio?.playWin();
+        this.showToast('Bankroll reset to 🪙 2,500 Clark Coins!');
+      }
+    });
+
     // Rules Modal
     const rulesBtn = document.getElementById('btn-open-rules');
     const rulesModal = document.getElementById('modal-rules');

@@ -35,6 +35,7 @@ class StackerGame {
 
     // Bound input handlers
     this.handleInput = this.handleInput.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.loop = this.loop.bind(this);
   }
 
@@ -88,12 +89,12 @@ class StackerGame {
 
   attachEvents() {
     this.canvas.addEventListener('pointerdown', this.handleInput);
-    window.addEventListener('keydown', this.handleKeyDown.bind(this));
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   detachEvents() {
     this.canvas.removeEventListener('pointerdown', this.handleInput);
-    window.removeEventListener('keydown', this.handleKeyDown.bind(this));
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   handleKeyDown(e) {

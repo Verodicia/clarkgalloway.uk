@@ -13,6 +13,7 @@ class WheelGame {
     this.isSpinning = false;
     this.currentAngle = 0;
     this.rafId = null;
+    this.betHistory = [];
 
     // 24 segments around the wheel
     this.segments = [
@@ -91,10 +92,13 @@ class WheelGame {
             <button class="chip-btn chip-50" data-val="50" draggable="true" title="Drag or click to bet 50">50</button>
             <button class="chip-btn chip-100" data-val="100" draggable="true" title="Drag or click to bet 100">100</button>
             <button class="chip-btn chip-500" data-val="500" draggable="true" title="Drag or click to bet 500">500</button>
+            <button class="chip-btn chip-1000" data-val="1000" draggable="true" title="Drag or click to bet 1K">1K</button>
           </div>
 
           <div class="game-action-buttons">
             <button class="casino-btn btn-secondary" id="wheel-clear-btn">Clear Bets</button>
+            <button class="casino-btn btn-secondary" id="wheel-undo-btn">Undo</button>
+            <button class="casino-btn btn-secondary" id="wheel-double-btn">2x Bets</button>
             <button class="casino-btn btn-gold btn-large" id="wheel-spin-btn">SPIN WHEEL</button>
           </div>
         </div>
@@ -128,6 +132,16 @@ class WheelGame {
         this.placeBet(mult, this.selectedChip);
       });
 
+      // Right-click reduces bet
+      cell.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        if (this.isSpinning) return;
+        const mult = parseInt(cell.dataset.mult, 10);
+        if (!isNaN(mult) && this.bets[mult]) {
+          this.removeBet(mult, this.selectedChip);
+        }
+      });
+
       cell.addEventListener('dragover', (e) => {
         if (this.isSpinning) return;
         e.preventDefault();
@@ -154,8 +168,26 @@ class WheelGame {
     this.container.querySelector('#wheel-clear-btn')?.addEventListener('click', () => {
       if (this.isSpinning) return;
       this.bets = {};
+      this.betHistory = [];
       window.casinoAudio?.playChip();
       this.updateUI();
+    });
+
+    this.container.querySelector('#wheel-undo-btn')?.addEventListener('click', () => {
+      this.undoLastBet();
+    });
+
+    this.container.querySelector('#wheel-double-btn')?.addEventListener('click', () => {
+      if (this.isSpinning) return;
+      const curTotal = this.getTotalBet();
+      if (curTotal === 0) return;
+      if (window.casinoEconomy.hasFunds(curTotal)) {
+        for (const k in this.bets) this.bets[k] *= 2;
+        window.casinoAudio?.playChip();
+        this.updateUI();
+      } else {
+        this.setStatus('Insufficient Clark Coins to double bets!');
+      }
     });
 
     this.container.querySelector('#wheel-spin-btn')?.addEventListener('click', () => {
@@ -174,8 +206,28 @@ class WheelGame {
       return;
     }
     this.bets[mult] = (this.bets[mult] || 0) + chipAmt;
+    this.betHistory.push({ mult, amount: chipAmt });
     window.casinoAudio?.playChip();
     this.updateUI();
+  }
+
+  removeBet(mult, chipAmt = this.selectedChip) {
+    if (!this.bets[mult]) return;
+    this.bets[mult] = Math.max(0, this.bets[mult] - chipAmt);
+    if (this.bets[mult] === 0) delete this.bets[mult];
+    window.casinoAudio?.playChip();
+    this.updateUI();
+  }
+
+  undoLastBet() {
+    if (this.isSpinning || this.betHistory.length === 0) return;
+    const last = this.betHistory.pop();
+    if (last && this.bets[last.mult]) {
+      this.bets[last.mult] = Math.max(0, this.bets[last.mult] - last.amount);
+      if (this.bets[last.mult] === 0) delete this.bets[last.mult];
+      window.casinoAudio?.playChip();
+      this.updateUI();
+    }
   }
 
   updateUI() {
