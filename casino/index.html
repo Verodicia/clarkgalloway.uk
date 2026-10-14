@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Clark's Casino Royale | Free Casino Games & Clark Coins</title>
+  <meta name="description" content="Classic flashy Las Vegas style casino hub with 7 games: Blackjack, European Roulette, 777 Slots, Video Poker, Craps, Baccarat & Wheel of Fortune. Powered by fictional Clark Coins with zero real money gambling.">
+  <script>
+    if (location.pathname.endsWith('/casino')) {
+      location.replace(location.pathname + '/' + location.search + location.hash);
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/casino/css/casino.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+  <!-- Ambient Gold Dust Floating Particles -->
+  <div class="ambient-particles" id="ambient-particles"></div>
+
+  <!-- Disclaimer Strip -->
+  <div class="casino-disclaimer-strip">
+    <span>⚠️ <strong>ENTERTAINMENT ONLY:</strong> No real money or real gambling. All bets and stakes use artificial <strong>Clark Coins (CC)</strong> for pure leisure and fun.</span>
+  </div>
+
+  <!-- Low Balance Warning Strip -->
+  <div class="low-balance-alert" id="low-balance-alert">
+    <span>Down on your luck? The VIP Vault has your back!</span>
+    <button id="btn-alert-bailout" onclick="window.casinoEconomy.claimFaucet(); this.parentElement.classList.remove('visible');">Claim Free 🪙 1,000 CC</button>
+  </div>
+
+  <!-- Header & HUD Bar -->
+  <header class="casino-header">
+    <div class="casino-header-inner">
+      <div class="casino-brand-group">
+        <a href="../index.html#card-casino" class="btn-portfolio-back" id="btn-portfolio-back" title="Return to Clark's Portfolio">
+          <span>←</span> Clark Galloway
+        </a>
+        <div class="casino-marquee-sign">
+          <span class="marquee-badge">LAS VEGAS & MONTE CARLO</span>
+          <h1 class="marquee-title">CLARK'S CASINO</h1>
+        </div>
+      </div>
+
+      <!-- HUD: Coins, VIP Tier, Audio, Faucet -->
+      <div class="casino-hud-cluster">
+        <!-- Balance Pill -->
+        <div class="hud-pill hud-balance-pill" title="Your current Clark Coins bankroll">
+          <span class="hud-coin-amt" id="hud-balance-amt">🪙 2,500 CC</span>
+        </div>
+
+        <!-- VIP Tier Pill -->
+        <div class="hud-pill hud-vip-badge" id="hud-vip-badge" title="High Roller Rank">
+          🥈 Silver Stacker
+        </div>
+
+        <!-- Free Daily / Bailout Stash -->
+        <button class="btn-faucet-stash" id="btn-claim-stash" onclick="window.clarkCasino ? window.clarkCasino.claimFaucetDirect() : window.casinoEconomy.claimFaucet()" title="Refill free Clark Coins">
+          <span>+ 🪙 1,000 Free</span>
+        </button>
+
+        <!-- Stats Modal Trigger -->
+        <button class="hud-icon-btn" id="btn-open-stats" title="Career Stats">
+          <span>📊 Stats</span>
+        </button>
+
+        <!-- Rules & Guide Modal Trigger -->
+        <button class="hud-icon-btn" id="btn-open-rules" title="Game Rules & Paytables">
+          <span>ℹ️ Rules</span>
+        </button>
+
+        <!-- Sound Toggle -->
+        <button class="hud-icon-btn" id="btn-sound-toggle" title="Toggle Sound FX">
+          <span>🔊 <small>Sound ON</small></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Game Category Nav Tabs -->
+  <nav class="casino-game-nav">
+    <div class="game-nav-inner">
+      <button class="game-nav-tab active" data-tab-id="lobby">🏛️ Floor Lobby</button>
+      <button class="game-nav-tab" data-tab-id="blackjack">♠️ Blackjack</button>
+      <button class="game-nav-tab" data-tab-id="roulette">🎡 Roulette</button>
+      <button class="game-nav-tab" data-tab-id="slots">🎰 777 Slots</button>
+      <button class="game-nav-tab" data-tab-id="videopoker">🃏 Video Poker</button>
+      <button class="game-nav-tab" data-tab-id="craps">🎲 Craps</button>
+      <button class="game-nav-tab" data-tab-id="baccarat">⚜️ Baccarat</button>
+      <button class="game-nav-tab" data-tab-id="wheel">🌟 Fortune Wheel</button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="casino-main-content">
+    <!-- View 1: Casino Floor Lobby -->
+    <section class="casino-lobby-view" id="casino-lobby-view">
+      <div class="casino-floor-hero">
+        <div class="chase-lights-marquee">
+          <div class="chase-bulbs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="marquee-subtitle">HIGH ROLLER SUITE · ARTIFICIAL STAKES</span>
+          <div class="chase-bulbs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <h2 class="floor-headline">THE CASINO FLOOR</h2>
+        <p class="floor-lead">Step onto the grand green felt with fictional Clark Coins. Authentic rules, zero real financial risk, and all the thrill of classic Las Vegas and Monaco.</p>
+      </div>
+
+      <!-- Games Grid -->
+      <div class="casino-games-grid" id="casino-games-grid">
+        <!-- Generated by js/app.js -->
+      </div>
+    </section>
+
+    <!-- View 2: Active Game Stage -->
+    <section class="casino-stage-view hidden" id="casino-stage-view">
+      <div class="stage-top-bar">
+        <div class="stage-game-info">
+          <span class="stage-game-icon" id="stage-game-icon">♠️</span>
+          <h2 class="stage-game-title" id="stage-game-title">GAME TITLE</h2>
+        </div>
+        <button class="btn-stage-close" id="btn-back-lobby" title="Exit to Casino Lobby">
+          <span>✕ Return to Lobby</span>
+        </button>
+      </div>
+
+      <!-- Mount point for active game -->
+      <div class="game-mount-point" id="game-mount-point"></div>
+    </section>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="casino-toast" id="casino-toast">Notification</div>
+
+  <!-- Rules & Paytables Modal -->
+  <div class="casino-modal" id="modal-rules" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
+    <div class="casino-modal-backdrop"></div>
+    <div class="casino-modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="rules-modal-title">🏛️ Casino House Guide</h3>
+        <button class="btn-modal-close" id="btn-close-rules" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 style="color: #ffd700; margin-bottom: 0.5rem; font-family: var(--font-serif);">Clark Coins (CC) System</h4>
+        <p style="margin-bottom: 1rem; color: #cbd5e1; font-size: 0.9rem;">
+          Clark Coins are 100% fictional gaming tokens designed purely to measure your betting strategies and hot streaks. You start with <strong>🪙 2,500 CC</strong>. If your balance ever drops low, tap the <strong>+ 🪙 1,000 Free</strong> button to claim a free bailout anytime!
+        </p>
+
+        <h4 style="color: #ffd700; margin-bottom: 0.5rem; font-family: var(--font-serif);">Game Rules Summary</h4>
+        <ul style="color: #cbd5e1; font-size: 0.88rem; padding-left: 1.25rem; line-height: 1.8;">
+          <li><strong>Blackjack (21):</strong> Dealer stands on 17. Blackjack pays 3:2. Double down on any initial 2 cards.</li>
+          <li><strong>European Roulette:</strong> Single zero (37 pockets). Straight-up numbers pay 35:1. Red/Black, Even/Odd pay 1:1. Dozens and Columns pay 2:1.</li>
+          <li><strong>Vegas Neon 777 Slots:</strong> 3-reel 5-payline classic machine. Flaming 7s pay 100x. Three Clark Coins trigger the 500x Mega Jackpot.</li>
+          <li><strong>Video Poker:</strong> Jacks or Better (9/6). Hold your strongest cards, draw replacements. Royal Flush pays 4,000 CC at Max Bet!</li>
+          <li><strong>Craps:</strong> Come Out roll: 7 & 11 win Pass Line; 2, 3, 12 lose. Any other number sets the Point! Roll the Point before 7 to win.</li>
+          <li><strong>Baccarat:</strong> Punto Banco rules. Bet on Player (1:1), Banker (0.95:1), or Tie (8:1). Hand closest to 9 wins.</li>
+          <li><strong>Wheel of Fortune:</strong> 24-wedge carnival wheel. Multipliers range from 1x up to the 100x Mega Jackpot wedge!</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button class="casino-btn btn-gold" onclick="document.getElementById('modal-rules').classList.remove('open');">Understood</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Career Stats Modal -->
+  <div class="casino-modal" id="modal-stats" role="dialog" aria-modal="true" aria-labelledby="stats-modal-title">
+    <div class="casino-modal-backdrop"></div>
+    <div class="casino-modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="stats-modal-title">📊 Career High Roller Stats</h3>
+        <button class="btn-modal-close" id="btn-close-stats" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">VIP Prestige Rank</span>
+            <span class="stat-val" id="stat-vip-tier">Silver Stacker</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Total Rounds Played</span>
+            <span class="stat-val" id="stat-games-played">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Total Wagered</span>
+            <span class="stat-val" id="stat-total-wagered">🪙 0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Total Coins Won</span>
+            <span class="stat-val" id="stat-total-won">🪙 0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Biggest Single Payout</span>
+            <span class="stat-val" id="stat-biggest-win">🪙 0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Best Win Streak</span>
+            <span class="stat-val" id="stat-best-streak">0 wins</span>
+          </div>
+          <div class="stat-card" style="grid-column: span 2;">
+            <span class="stat-label">Current Active Streak</span>
+            <span class="stat-val" id="stat-current-streak">0 wins</span>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <button class="casino-btn btn-secondary btn-sm" id="btn-reset-stats">Reset Bankroll &amp; Stats</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="casino-btn btn-gold" onclick="document.getElementById('modal-stats').classList.remove('open');">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/casino/js/audio.js"></script>
+  <script src="/casino/js/economy.js"></script>
+  <script src="/casino/js/games/blackjack.js"></script>
+  <script src="/casino/js/games/roulette.js"></script>
+  <script src="/casino/js/games/slots.js"></script>
+  <script src="/casino/js/games/videopoker.js"></script>
+  <script src="/casino/js/games/craps.js"></script>
+  <script src="/casino/js/games/baccarat.js"></script>
+  <script src="/casino/js/games/wheel.js"></script>
+  <script src="/casino/js/app.js"></script>
+</body>
+
+</html>

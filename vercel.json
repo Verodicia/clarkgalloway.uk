@@ -19,6 +19,10 @@
     {
       "source": "/fun-with-flags/dist",
       "destination": "/fun-with-flags/dist/index.html"
+    },
+    {
+      "source": "/casino",
+      "destination": "/casino/index.html"
     }
   ]
 }

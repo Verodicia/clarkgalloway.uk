@@ -329,6 +329,14 @@ window.addEventListener('keydown', e => {
       window.location.href = 'fun-with-flags/dist/index.html';
     });
   }
+
+  const cardCasino = document.getElementById('card-casino');
+  if (cardCasino) {
+    cardCasino.addEventListener('click', e => {
+      if (e.target.closest('.casino-play-btn')) return;
+      window.location.href = 'casino/index.html';
+    });
+  }
 })();
 
 // Philosophy card + modal

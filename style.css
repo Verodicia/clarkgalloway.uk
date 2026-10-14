@@ -2168,6 +2168,150 @@ footer {
   100% { transform: translateX(-50%); }
 }
 
+/* Clark's Casino Card */
+.card-casino {
+  cursor: pointer;
+}
+
+.card-casino:hover {
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 215, 0, 0.3), 0 0 50px rgba(220, 20, 60, 0.22);
+}
+
+.casino-thumb {
+  padding: 0;
+  background: #140d07;
+  place-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+.casino-thumb::after {
+  display: none;
+}
+
+.casino-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 6s cubic-bezier(.16, 1, .3, 1), filter .6s ease;
+}
+
+.card-casino:hover .casino-bg-img {
+  transform: scale(1.08);
+  filter: brightness(1.1) contrast(1.08);
+}
+
+.casino-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(18, 11, 6, 0.65) 75%, rgba(10, 5, 2, 0.92) 100%),
+              linear-gradient(to top, rgba(14, 8, 4, 0.92) 0%, transparent 55%);
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+
+.card-casino:hover .casino-overlay {
+  opacity: .75;
+}
+
+.casino-glitter {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 30%),
+                    radial-gradient(circle at 80% 70%, rgba(255, 51, 102, 0.12) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+.casino-badge {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  z-index: 2;
+  font-family: "Delta", "Helvetica Neue", sans-serif;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #ffd700;
+  background: rgba(20, 12, 5, 0.88);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  padding: .3rem .75rem;
+  border-radius: 99px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 14px rgba(255, 215, 0, 0.3);
+}
+
+.casino-play-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 3;
+  padding: .45rem .85rem;
+  border-radius: 99px;
+  font-size: .72rem;
+  color: #1a0f02;
+  font-weight: 800;
+  font-family: "Delta", "Helvetica Neue", sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #f9e79f, #d4af37, #aa8010);
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: all .35s var(--ease);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-casino:hover .casino-play-btn {
+  opacity: 1;
+  transform: none;
+}
+
+.casino-play-btn:hover {
+  background: linear-gradient(135deg, #ffffff, #ffd700);
+  border-color: #ffffff;
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.8);
+  transform: scale(1.05);
+}
+
+.casino-ticker {
+  position: absolute;
+  bottom: 5.5rem;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0.9;
+  background: rgba(18, 10, 4, 0.82);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 0.28rem 0;
+}
+
+.casino-ticker span {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-family: "Delta", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+  animation: casinoMarquee 26s linear infinite;
+}
+
+@keyframes casinoMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 @media (min-width: 1200px) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
