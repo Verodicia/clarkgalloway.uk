@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npx -y serve -l 3000 .",
     "start": "npx -y serve -l 3000 .",
-    "build:flags": "cd fun-with-flags && npm run build"
+    "build:vexillum": "cd vexillum && npm run build",
+    "build:flags": "cd vexillum && npm run build"
   }
 }

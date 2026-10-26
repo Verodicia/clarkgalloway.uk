@@ -13,12 +13,36 @@
       "destination": "https://clueless-ruddy.vercel.app/"
     },
     {
+      "source": "/vexillum",
+      "destination": "/vexillum/index.html"
+    },
+    {
+      "source": "/vexillum/",
+      "destination": "/vexillum/index.html"
+    },
+    {
+      "source": "/vexillum/dist",
+      "destination": "/vexillum/index.html"
+    },
+    {
+      "source": "/vexillum/dist/",
+      "destination": "/vexillum/index.html"
+    },
+    {
       "source": "/fun-with-flags",
-      "destination": "/fun-with-flags/index.html"
+      "destination": "/vexillum/index.html"
+    },
+    {
+      "source": "/fun-with-flags/",
+      "destination": "/vexillum/index.html"
     },
     {
       "source": "/fun-with-flags/dist",
-      "destination": "/fun-with-flags/dist/index.html"
+      "destination": "/vexillum/index.html"
+    },
+    {
+      "source": "/fun-with-flags/dist/",
+      "destination": "/vexillum/index.html"
     },
     {
       "source": "/casino",

@@ -5,12 +5,12 @@ addEventListener('mousemove', e => {
   cursor.style.top = e.clientY + 'px';
 });
 document.addEventListener('mouseover', e => {
-  if (e.target.closest('a, .card, button, [role="button"], .web-tab, .modal-pill, .web-modal-nav, .web-modal-close, .web-preview-btn')) {
+  if (e.target.closest('a, .card, button, [role="button"], .web-launch-btn, .web-url-pill')) {
     cursor.classList.add('big');
   }
 });
 document.addEventListener('mouseout', e => {
-  if (e.target.closest('a, .card, button, [role="button"], .web-tab, .modal-pill, .web-modal-nav, .web-modal-close, .web-preview-btn')) {
+  if (e.target.closest('a, .card, button, [role="button"], .web-launch-btn, .web-url-pill')) {
     cursor.classList.remove('big');
   }
 });
@@ -78,203 +78,447 @@ setInterval(() => {
   counter.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
 }, 3500);
 
-// Websites Thumbnail & Lightbox Showcase
-const webProjects = [
-  {
-    name: "LGR Fitness",
-    tag: "Hypertrophy Training Tracker",
-    chip: "Fitness App",
-    url: "www.lgrfitness.uk",
-    link: "https://www.lgrfitness.uk",
-    img: "projects/lgr-fitness.png",
-    desc: "Complete gym tracker engineered for progressive overload and hypertrophy. Covers dumbbells, machines, and cables with 10-week periodized plans and real-time visual progress analytics."
+// Universal Project Showcase Modal System (Crimson Sacrament Architecture)
+const projectModal = document.getElementById('project-modal');
+const projectModalClose = document.getElementById('project-modal-close');
+const projectModalBackdrop = document.getElementById('project-modal-backdrop');
+const modalArtImg = document.getElementById('modal-art-img');
+const modalChip = document.getElementById('modal-chip');
+const modalTag = document.getElementById('modal-tag');
+const modalTitle = document.getElementById('modal-title');
+const modalQuote = document.getElementById('modal-quote');
+const modalDesc = document.getElementById('modal-desc');
+const modalMetaGrid = document.getElementById('modal-meta-grid');
+const modalLaunchBtn = document.getElementById('modal-launch-btn');
+const modalLaunchText = document.getElementById('modal-launch-text');
+
+const projectsData = {
+  vexillum: {
+    title: 'Vexillum',
+    image: 'projects/Vexillum.jpg',
+    chip: 'Vexillology Portal',
+    tag: '500+ Flags · 8 Game Modes',
+    quote: '"Test your knowledge of every sovereign flag, banner, and emblem on Earth."',
+    desc: 'An expansive, feature-packed flag quiz and vexillology companion built with React, Vite, and Lucide icons. Features 8 game modes including Classic Quiz, 60-Second Blitz, Memory Match, Detective Zoom, Survival Streak, and Flag Painter, backed by a comprehensive vector flag encyclopedia and study center.',
+    meta: [
+      { label: 'TECH STACK', value: 'React · Vite · TypeScript' },
+      { label: 'GAME MODES', value: '8 Modes · 500+ Vector Flags' },
+      { label: 'FEATURES', value: 'Sound FX · Audio · High Scores' }
+    ],
+    btnText: 'Play Vexillum ↗',
+    btnUrl: 'vexillum/',
+    target: '_self',
+    theme: {
+      backdrop: '#0f0a06ed',
+      border: 'rgba(245, 158, 11, 0.35)',
+      glow: 'rgba(245, 158, 11, 0.25)',
+      windowBg: '#140e08',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #291809, #140e08 70%)',
+      chipBg: 'rgba(245, 158, 11, 0.18)',
+      chipColor: '#fbbf24',
+      chipBorder: 'rgba(245, 158, 11, 0.45)',
+      quote: '#fcd34d',
+      titleGlow: 'rgba(245, 158, 11, 0.4)',
+      btnBg: 'linear-gradient(135deg, #d97706, #ea580c)',
+      btnBorder: 'rgba(251, 191, 36, 0.4)',
+      btnShadow: 'rgba(217, 119, 6, 0.4)',
+      btnGlow: 'rgba(245, 158, 11, 0.6)',
+      close: '#fbbf24'
+    }
   },
-  {
-    name: "Apex Practice",
-    tag: "Dental Clinical Software",
-    chip: "Healthcare SaaS",
-    url: "apex-practice-muo3.vercel.app",
-    link: "https://apex-practice-muo3.vercel.app",
-    img: "projects/apex-practice.png",
-    desc: "Specialized clinical software for dental practitioners. Includes an interactive six-point periodontal pocket chart, appointment logs, patient consultation workflows, and treatment planning."
+  arcade: {
+    title: 'Arcade Minigames',
+    image: 'projects/arcade-minigames.jpg',
+    chip: 'Retro Arcade',
+    tag: '22 Mini-Games · Web Audio',
+    quote: '"Classic pocket arcade thrills with authentic CRT aesthetics and chiptune sound."',
+    desc: 'A curated collection of 22 fast-paced retro games packed into a nostalgic arcade cabinet interface. Complete with dynamic CRT scanlines, arcade bezel glass reflections, Web Audio synthesizer effects, particle physics, local high-score tracking, and instant keyboard or touch controls.',
+    meta: [
+      { label: 'COLLECTION', value: '22 Retro Mini-Games' },
+      { label: 'ENGINE', value: 'Vanilla JS · HTML5 Canvas' },
+      { label: 'AUDIO', value: 'Web Audio API Chiptunes' }
+    ],
+    btnText: 'Play Arcade ↗',
+    btnUrl: 'arcade-minigames/',
+    target: '_self',
+    theme: {
+      backdrop: '#04090ded',
+      border: 'rgba(6, 182, 212, 0.35)',
+      glow: 'rgba(6, 182, 212, 0.25)',
+      windowBg: '#081018',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #0d2230, #081018 70%)',
+      chipBg: 'rgba(6, 182, 212, 0.18)',
+      chipColor: '#67e8f9',
+      chipBorder: 'rgba(6, 182, 212, 0.45)',
+      quote: '#a5f3fc',
+      titleGlow: 'rgba(6, 182, 212, 0.4)',
+      btnBg: 'linear-gradient(135deg, #0891b2, #7c3aed)',
+      btnBorder: 'rgba(103, 232, 249, 0.4)',
+      btnShadow: 'rgba(6, 182, 212, 0.4)',
+      btnGlow: 'rgba(6, 182, 212, 0.6)',
+      close: '#67e8f9'
+    }
   },
-  {
-    name: "Clueless Closet",
-    tag: "90s Interactive Wardrobe",
-    chip: "Interactive UI",
-    url: "clueless-ruddy.vercel.app",
-    link: "https://clueless-ruddy.vercel.app",
-    img: "projects/clueless-closet.png",
-    desc: "A faithful, modern interactive remake of Cher Horowitz's iconic 1995 wardrobe computer system, complete with retro Mac OS window chrome, beveled buttons, outfit mixer, and fall fashion catalogs."
+  casino: {
+    title: "Clark's Casino",
+    image: 'projects/clark-casino.jpg',
+    chip: 'Casino Royale',
+    tag: '7 Classic Games · Clark Coins',
+    quote: '"High stakes, velvet tables, and Vegas lights — strictly for fun, zero real money."',
+    desc: 'An authentic, immersive virtual casino experience featuring Blackjack, European Roulette, Vegas 777 Slots, Video Poker, Craps, Baccarat, and Fortune Wheel. Features authentic dealer voiceovers, felt lighting effects, chip stacks, daily bonus spins, and persistent Clark Coins bankrolls.',
+    meta: [
+      { label: 'GAMES', value: 'Blackjack, Roulette, Slots & More' },
+      { label: 'CURRENCY', value: 'Clark Coins (Free Daily)' },
+      { label: 'SAFETY', value: '100% Free · No Real Gambling' }
+    ],
+    btnText: 'Play Casino ↗',
+    btnUrl: 'casino/index.html',
+    target: '_self',
+    theme: {
+      backdrop: '#0c0a05ed',
+      border: 'rgba(234, 179, 8, 0.35)',
+      glow: 'rgba(234, 179, 8, 0.25)',
+      windowBg: '#131008',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #241d08, #131008 70%)',
+      chipBg: 'rgba(234, 179, 8, 0.18)',
+      chipColor: '#fde047',
+      chipBorder: 'rgba(234, 179, 8, 0.45)',
+      quote: '#fef08a',
+      titleGlow: 'rgba(234, 179, 8, 0.4)',
+      btnBg: 'linear-gradient(135deg, #ca8a04, #dc2626)',
+      btnBorder: 'rgba(253, 224, 71, 0.4)',
+      btnShadow: 'rgba(202, 138, 4, 0.4)',
+      btnGlow: 'rgba(234, 179, 8, 0.6)',
+      close: '#fde047'
+    }
+  },
+  fitness: {
+    title: 'LG Fitness',
+    image: 'projects/lgr-fitness.png',
+    chip: 'Workout SaaS',
+    tag: 'Hypertrophy · Progressive Overload',
+    quote: '"Data-driven hypertrophy tracking engineered for serious strength progression."',
+    desc: 'A dedicated training and progressive overload web application designed for lifters who prioritize precision. Features periodized split templates, set-by-set RPE logging, rest timers, volume distribution graphs, and historical PR tracking to guarantee consistent muscular adaptation.',
+    meta: [
+      { label: 'ROLE', value: 'Full-Stack Developer & Designer' },
+      { label: 'CORE FOCUS', value: 'Progressive Overload Tracking' },
+      { label: 'PLATFORM', value: 'Responsive Web App (SaaS)' }
+    ],
+    btnText: 'Visit www.lgrfitness.uk ↗',
+    btnUrl: 'https://www.lgrfitness.uk',
+    target: '_blank',
+    theme: {
+      backdrop: '#040e0aed',
+      border: 'rgba(16, 185, 129, 0.35)',
+      glow: 'rgba(16, 185, 129, 0.25)',
+      windowBg: '#071510',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #0c2b1f, #071510 70%)',
+      chipBg: 'rgba(16, 185, 129, 0.18)',
+      chipColor: '#6ee7b7',
+      chipBorder: 'rgba(16, 185, 129, 0.45)',
+      quote: '#a7f3d0',
+      titleGlow: 'rgba(16, 185, 129, 0.4)',
+      btnBg: 'linear-gradient(135deg, #059669, #0d9488)',
+      btnBorder: 'rgba(110, 231, 183, 0.4)',
+      btnShadow: 'rgba(16, 185, 129, 0.4)',
+      btnGlow: 'rgba(16, 185, 129, 0.6)',
+      close: '#6ee7b7'
+    }
+  },
+  apex: {
+    title: 'Apex Practice',
+    image: 'projects/apex-practice.png',
+    chip: 'Healthcare Tech',
+    tag: 'Clinical Dental Software',
+    quote: '"Modern clinical workflows and periodontal charting for dental healthcare professionals."',
+    desc: 'A sophisticated dental practice management platform featuring full graphical odontogram charting, interactive 6-point periodontal probing, appointment scheduling, patient clinical history, and treatment planning in an intuitive, ergonomic digital interface.',
+    meta: [
+      { label: 'SPECIALTY', value: 'Periodontal & Dental Charting' },
+      { label: 'ARCHITECTURE', value: 'Modern Clinical UI Suite' },
+      { label: 'DEPLOYMENT', value: 'Vercel Cloud Platform' }
+    ],
+    btnText: 'Launch Apex Practice ↗',
+    btnUrl: 'https://apex-practice-muo3.vercel.app',
+    target: '_blank',
+    theme: {
+      backdrop: '#040912ed',
+      border: 'rgba(59, 130, 246, 0.35)',
+      glow: 'rgba(59, 130, 246, 0.25)',
+      windowBg: '#08101c',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #0e2038, #08101c 70%)',
+      chipBg: 'rgba(59, 130, 246, 0.18)',
+      chipColor: '#93c5fd',
+      chipBorder: 'rgba(59, 130, 246, 0.45)',
+      quote: '#bfdbfe',
+      titleGlow: 'rgba(59, 130, 246, 0.4)',
+      btnBg: 'linear-gradient(135deg, #2563eb, #0ea5e9)',
+      btnBorder: 'rgba(147, 197, 253, 0.4)',
+      btnShadow: 'rgba(59, 130, 246, 0.4)',
+      btnGlow: 'rgba(59, 130, 246, 0.6)',
+      close: '#93c5fd'
+    }
+  },
+  running: {
+    title: 'Running',
+    image: 'projects/portrait-bg.jpg',
+    chip: 'Endurance',
+    tag: '5K · 10K · Half Marathon',
+    quote: '"Pounding pavement around Strathclyde Park, chasing personal bests one kilometre at a time."',
+    desc: 'Documenting my endurance running journey, training regimes, and race milestones. From freezing morning interval sessions around Strathclyde Country Park to race day PBs (3:44 1K, 20:57 5K, 46:01 10K) and long-distance aerobic conditioning.',
+    meta: [
+      { label: '1K PB', value: '3:44' },
+      { label: '5K PB', value: '20:57' },
+      { label: '10K PB', value: '46:01' }
+    ],
+    btnText: 'View on Strava ↗',
+    btnUrl: 'https://strava.app.link/JdmjD6Vc86b',
+    target: '_blank',
+    theme: {
+      backdrop: '#0f0704ed',
+      border: 'rgba(255, 106, 26, 0.35)',
+      glow: 'rgba(255, 106, 26, 0.25)',
+      windowBg: '#160b06',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #2b1408, #160b06 70%)',
+      chipBg: 'rgba(255, 106, 26, 0.18)',
+      chipColor: '#fdba74',
+      chipBorder: 'rgba(255, 106, 26, 0.45)',
+      quote: '#fed7aa',
+      titleGlow: 'rgba(255, 106, 26, 0.4)',
+      btnBg: 'linear-gradient(135deg, #fc4c02, #ea580c)',
+      btnBorder: 'rgba(253, 186, 116, 0.4)',
+      btnShadow: 'rgba(252, 76, 2, 0.4)',
+      btnGlow: 'rgba(255, 106, 26, 0.6)',
+      close: '#fdba74'
+    }
+  },
+  photography: {
+    title: 'Photography',
+    image: 'photographs/web/IMG_4996.jpg',
+    chip: 'Visual Arts',
+    tag: 'Street & Landscape Photography',
+    quote: '"Chasing fleeting light, architectural geometry, and raw atmospheric moments."',
+    desc: 'A curated visual journal capturing natural landscapes, moody urban geometry, and quiet human moments. Focused on natural light contrast, high dynamic range composition, and evocative color grading across Scotland, Europe, and travels abroad.',
+    meta: [
+      { label: 'MEDIUM', value: 'Digital & 35mm Photography' },
+      { label: 'SUBJECTS', value: 'Architecture, Street & Coast' },
+      { label: 'GALLERY', value: 'Curated Instagram Portfolio' }
+    ],
+    btnText: 'Explore on Instagram @clarkconcarne ↗',
+    btnUrl: 'https://www.instagram.com/clarkconcarne',
+    target: '_blank',
+    theme: {
+      backdrop: '#0e0409ed',
+      border: 'rgba(244, 63, 94, 0.35)',
+      glow: 'rgba(244, 63, 94, 0.25)',
+      windowBg: '#16080f',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #2c0e1e, #16080f 70%)',
+      chipBg: 'rgba(244, 63, 94, 0.18)',
+      chipColor: '#f472b6',
+      chipBorder: 'rgba(244, 63, 94, 0.45)',
+      quote: '#fbcfe8',
+      titleGlow: 'rgba(244, 63, 94, 0.4)',
+      btnBg: 'linear-gradient(135deg, #e11d48, #833ab4)',
+      btnBorder: 'rgba(244, 114, 182, 0.4)',
+      btnShadow: 'rgba(244, 63, 94, 0.4)',
+      btnGlow: 'rgba(244, 63, 94, 0.6)',
+      close: '#f472b6'
+    }
+  },
+  crimson: {
+    title: 'The Crimson Sacrament',
+    image: 'projects/crimsonsac.jpg',
+    chip: 'D&D Campaign',
+    tag: 'Dark Fantasy / Gothic Mystery',
+    quote: '"Blood remembers what the stones have forgotten."',
+    desc: 'An original dark fantasy Dungeons & Dragons campaign exploring ancient covenants, blood rites, and long-buried heresies. The narrative follows the rediscovery of the ceremonial obsidian and crimson-glass blade, pulling investigators into an occult conspiracy across desolate stone sanctums.',
+    meta: [
+      { label: 'ROLE', value: 'Dungeon Master & Writer' },
+      { label: 'SETTING', value: 'Homebrew Dark Fantasy' },
+      { label: 'GENRE', value: 'Gothic Mystery & Horror' }
+    ],
+    btnText: 'Enter World Compendium & Character Forge ↗',
+    btnUrl: 'crimson-sacrament.html',
+    target: '_self',
+    theme: {
+      backdrop: '#080204ed',
+      border: '#dc262644',
+      glow: '#991b1b33',
+      windowBg: '#110508',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #20040a, #110508 70%)',
+      chipBg: '#991b1b33',
+      chipColor: '#fca5a5',
+      chipBorder: '#ef444466',
+      quote: '#f87171',
+      titleGlow: '#dc262655',
+      btnBg: 'linear-gradient(135deg, #c81e3a 0%, #8b1828 100%)',
+      btnBorder: 'rgba(255, 100, 120, 0.4)',
+      btnShadow: 'rgba(200, 30, 58, 0.35)',
+      btnGlow: 'rgba(200, 30, 58, 0.55)',
+      close: '#fca5a5'
+    }
+  },
+  philosophy: {
+    title: 'Philosophy',
+    image: 'photographs/web/IMG_1077.jpg',
+    chip: 'Intellectual Inquiry',
+    tag: 'Stoicism to Modern Thought',
+    quote: '"We suffer more often in imagination than in reality." — Seneca',
+    desc: 'An exploration of seven pivotal thinkers across two millennia: Seneca, Marcus Aurelius, Thomas Hobbes, Immanuel Kant, Adam Smith, Jean-Paul Sartre, and Thomas Sowell. Examining stoic resilience, social contracts, moral duty, free market coordination, and existential accountability.',
+    meta: [
+      { label: 'SPAN', value: '4 BC — Present Day' },
+      { label: 'CANON', value: '7 Key Thinkers & Maxims' },
+      { label: 'THEMES', value: 'Stoicism, Ethics, Freedom' }
+    ],
+    btnText: 'Meet the Thinkers ↗',
+    btnAction: 'openPhilModal',
+    target: '_self',
+    theme: {
+      backdrop: '#040e0ded',
+      border: 'rgba(20, 184, 166, 0.35)',
+      glow: 'rgba(20, 184, 166, 0.25)',
+      windowBg: '#071514',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #0d2826, #071514 70%)',
+      chipBg: 'rgba(20, 184, 166, 0.18)',
+      chipColor: '#5eead4',
+      chipBorder: 'rgba(20, 184, 166, 0.45)',
+      quote: '#99f6e4',
+      titleGlow: 'rgba(20, 184, 166, 0.4)',
+      btnBg: 'linear-gradient(135deg, #0d9488, #0284c7)',
+      btnBorder: 'rgba(94, 234, 212, 0.4)',
+      btnShadow: 'rgba(20, 184, 166, 0.4)',
+      btnGlow: 'rgba(20, 184, 166, 0.6)',
+      close: '#5eead4'
+    }
+  },
+  languages: {
+    title: 'Languages',
+    image: 'projects/portrait-bg.jpg',
+    chip: 'Linguistics',
+    tag: '日本語 · Japanese Language Study',
+    quote: '"一期一会 — Treasure every unrepeatable encounter in life."',
+    desc: 'Deep dive into the Japanese language, writing systems (Hiragana, Katakana, and Kanji), and conversational grammar. Features an interactive reinforcement learning portal with 28 bite-sized lessons, spaced repetition, audio synthesis, XP progression, and daily streaks.',
+    meta: [
+      { label: 'LANGUAGE', value: 'Japanese (日本語)' },
+      { label: 'SCRIPTS', value: 'Kanji · Hiragana · Katakana' },
+      { label: 'HUB', value: 'Interactive Study Portal' }
+    ],
+    btnText: 'Enter Japanese Study Hub ↗',
+    btnUrl: 'japanese.html',
+    target: '_self',
+    theme: {
+      backdrop: '#0c0512ed',
+      border: 'rgba(168, 85, 247, 0.35)',
+      glow: 'rgba(168, 85, 247, 0.25)',
+      windowBg: '#110817',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #230d30, #110817 70%)',
+      chipBg: 'rgba(168, 85, 247, 0.18)',
+      chipColor: '#d8b4fe',
+      chipBorder: 'rgba(168, 85, 247, 0.45)',
+      quote: '#e9d5ff',
+      titleGlow: 'rgba(168, 85, 247, 0.4)',
+      btnBg: 'linear-gradient(135deg, #9333ea, #db2777)',
+      btnBorder: 'rgba(216, 180, 254, 0.4)',
+      btnShadow: 'rgba(168, 85, 247, 0.4)',
+      btnGlow: 'rgba(168, 85, 247, 0.6)',
+      close: '#d8b4fe'
+    }
   }
-];
+};
 
-let curWebIdx = 0;
-const webSlides = [...document.querySelectorAll('#web-screen .web-slide')];
-const webTabs = [...document.querySelectorAll('#web-nav-tabs .web-tab')];
-const webUrlPill = document.getElementById('web-url-pill');
-const webTagChip = document.getElementById('web-tag-chip');
-const webCardTitle = document.getElementById('web-card-title');
-let webAutoTimer = null;
+function openProjectModal(key) {
+  const p = projectsData[key];
+  if (!p || !projectModal) return;
 
-function setWebProject(idx) {
-  curWebIdx = (idx + webProjects.length) % webProjects.length;
-  const p = webProjects[curWebIdx];
-
-  webSlides.forEach((s, i) => s.classList.toggle('active', i === curWebIdx));
-  webTabs.forEach((t, i) => t.classList.toggle('active', i === curWebIdx));
-
-  if (webUrlPill) {
-    webUrlPill.textContent = p.url + ' ↗';
-    webUrlPill.href = p.link;
+  if (modalArtImg) {
+    modalArtImg.src = p.image;
+    modalArtImg.alt = p.title;
   }
-  if (webTagChip) webTagChip.textContent = p.chip;
+  if (modalChip) modalChip.textContent = p.chip;
+  if (modalTag) modalTag.textContent = p.tag;
+  if (modalTitle) modalTitle.textContent = p.title;
+  if (modalQuote) modalQuote.textContent = p.quote;
+  if (modalDesc) modalDesc.textContent = p.desc;
+
+  if (modalMetaGrid) {
+    modalMetaGrid.innerHTML = '';
+    p.meta.forEach(m => {
+      const col = document.createElement('div');
+      col.innerHTML = `<small>${m.label}</small><b>${m.value}</b>`;
+      modalMetaGrid.appendChild(col);
+    });
+  }
+
+  if (modalLaunchBtn) {
+    modalLaunchText.textContent = p.btnText;
+    if (p.btnAction === 'openPhilModal') {
+      modalLaunchBtn.href = '#';
+      modalLaunchBtn.target = '_self';
+      modalLaunchBtn.onclick = e => {
+        e.preventDefault();
+        closeProjectModal();
+        if (typeof window.openPhilModal === 'function') {
+          window.openPhilModal();
+        }
+      };
+    } else {
+      modalLaunchBtn.href = p.btnUrl;
+      modalLaunchBtn.target = p.target || '_self';
+      modalLaunchBtn.onclick = null;
+      if (p.target === '_blank') {
+        modalLaunchBtn.rel = 'noopener noreferrer';
+      } else {
+        modalLaunchBtn.removeAttribute('rel');
+      }
+    }
+  }
+
+  const t = p.theme;
+  if (t) {
+    projectModal.style.setProperty('--pm-backdrop', t.backdrop);
+    projectModal.style.setProperty('--pm-border', t.border);
+    projectModal.style.setProperty('--pm-glow', t.glow);
+    projectModal.style.setProperty('--pm-window-bg', t.windowBg);
+    projectModal.style.setProperty('--pm-details-bg', t.detailsBg);
+    projectModal.style.setProperty('--pm-chip-bg', t.chipBg);
+    projectModal.style.setProperty('--pm-chip-color', t.chipColor);
+    projectModal.style.setProperty('--pm-chip-border', t.chipBorder);
+    projectModal.style.setProperty('--pm-quote', t.quote);
+    projectModal.style.setProperty('--pm-title-glow', t.titleGlow);
+    projectModal.style.setProperty('--pm-btn-bg', t.btnBg);
+    projectModal.style.setProperty('--pm-btn-border', t.btnBorder);
+    projectModal.style.setProperty('--pm-btn-shadow', t.btnShadow);
+    projectModal.style.setProperty('--pm-btn-glow', t.btnGlow);
+    projectModal.style.setProperty('--pm-close', t.close);
+  }
+
+  projectModal.classList.add('open');
+  projectModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
 
-webTabs.forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    setWebProject(+btn.dataset.tab);
+function closeProjectModal() {
+  if (!projectModal) return;
+  projectModal.classList.remove('open');
+  projectModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (cursor) cursor.classList.remove('big');
+}
+
+// Wire all cards to open the universal project modal
+document.querySelectorAll('.card[data-project]').forEach(card => {
+  card.addEventListener('click', e => {
+    const key = card.getAttribute('data-project');
+    if (key) {
+      openProjectModal(key);
+    }
   });
 });
 
-function startWebTimer() {
-  if (webAutoTimer) clearInterval(webAutoTimer);
-  webAutoTimer = setInterval(() => {
-    setWebProject(curWebIdx + 1);
-  }, 4200);
-}
-function stopWebTimer() {
-  if (webAutoTimer) {
-    clearInterval(webAutoTimer);
-    webAutoTimer = null;
-  }
-}
-
-const cardWeb = document.getElementById('card-websites');
-if (cardWeb) {
-  cardWeb.addEventListener('mouseenter', stopWebTimer);
-  cardWeb.addEventListener('mouseleave', startWebTimer);
-  startWebTimer();
-}
-
-// Lightbox Modal
-const webModal = document.getElementById('web-modal');
-const modalImg = document.getElementById('web-modal-img');
-const modalUrl = document.getElementById('web-modal-url');
-const modalCounter = document.getElementById('web-modal-counter');
-const modalChip = document.getElementById('web-modal-chip');
-const modalTag = document.getElementById('web-modal-tag');
-const modalTitle = document.getElementById('web-modal-title');
-const modalDesc = document.getElementById('web-modal-desc');
-const modalPills = [...document.querySelectorAll('.modal-pill')];
-const prevBtn = document.getElementById('web-modal-prev');
-const nextBtn = document.getElementById('web-modal-next');
-const closeBtn = document.getElementById('web-modal-close');
-const backdrop = document.getElementById('web-modal-backdrop');
-const previewBtn = document.getElementById('web-preview-btn');
-const webScreen = document.getElementById('web-screen');
-
-let modalIdx = 0;
-
-function updateModal(idx) {
-  modalIdx = (idx + webProjects.length) % webProjects.length;
-  const p = webProjects[modalIdx];
-  if (modalImg) {
-    modalImg.src = p.img;
-    modalImg.alt = p.name;
-  }
-  if (modalUrl) {
-    modalUrl.textContent = p.url + ' ↗';
-    modalUrl.href = p.link;
-  }
-  const modalVisitBtn = document.getElementById('modal-visit-btn');
-  if (modalVisitBtn) {
-    modalVisitBtn.href = p.link;
-  }
-  if (modalCounter) modalCounter.textContent = `0${modalIdx + 1} / 0${webProjects.length}`;
-  if (modalChip) modalChip.textContent = p.chip;
-  if (modalTag) modalTag.textContent = p.tag;
-  if (modalTitle) modalTitle.textContent = p.name;
-  if (modalDesc) modalDesc.textContent = p.desc;
-  modalPills.forEach((pill, i) => pill.classList.toggle('active', i === modalIdx));
-  setWebProject(modalIdx);
-}
-
-function openModal(idx) {
-  updateModal(typeof idx === 'number' ? idx : curWebIdx);
-  webModal.classList.add('open');
-  webModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  webModal.classList.remove('open');
-  webModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  cursor.classList.remove('big');
-}
-
-if (previewBtn) previewBtn.addEventListener('click', () => openModal(curWebIdx));
-if (webScreen) {
-  webScreen.style.cursor = 'pointer';
-  webScreen.addEventListener('click', () => openModal(curWebIdx));
-}
-if (closeBtn) closeBtn.addEventListener('click', closeModal);
-if (backdrop) backdrop.addEventListener('click', closeModal);
-if (prevBtn) prevBtn.addEventListener('click', () => updateModal(modalIdx - 1));
-if (nextBtn) nextBtn.addEventListener('click', () => updateModal(modalIdx + 1));
-
-modalPills.forEach(pill => {
-  pill.addEventListener('click', () => updateModal(+pill.dataset.modalIdx));
-});
-
+if (projectModalClose) projectModalClose.addEventListener('click', closeProjectModal);
+if (projectModalBackdrop) projectModalBackdrop.addEventListener('click', closeProjectModal);
 window.addEventListener('keydown', e => {
-  if (!webModal.classList.contains('open')) return;
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'ArrowLeft') updateModal(modalIdx - 1);
-  if (e.key === 'ArrowRight') updateModal(modalIdx + 1);
-});
-
-// D&D Lore Modal - The Crimson Sacrament
-const dndModal = document.getElementById('dnd-modal');
-const dndCloseBtn = document.getElementById('dnd-modal-close');
-const dndBackdrop = document.getElementById('dnd-modal-backdrop');
-const dndLoreBtn = document.getElementById('dnd-lore-btn');
-const dndCard = document.getElementById('card-dnd');
-
-function openDndModal() {
-  if (!dndModal) return;
-  dndModal.classList.add('open');
-  dndModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDndModal() {
-  if (!dndModal) return;
-  dndModal.classList.remove('open');
-  dndModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  cursor.classList.remove('big');
-}
-
-if (dndLoreBtn) dndLoreBtn.addEventListener('click', e => {
-  e.stopPropagation();
-  openDndModal();
-});
-if (dndCard) {
-  const dndThumb = dndCard.querySelector('.dnd-thumb');
-  if (dndThumb) {
-    dndThumb.style.cursor = 'pointer';
-    dndThumb.addEventListener('click', openDndModal);
-  }
-}
-if (dndCloseBtn) dndCloseBtn.addEventListener('click', closeDndModal);
-if (dndBackdrop) dndBackdrop.addEventListener('click', closeDndModal);
-
-window.addEventListener('keydown', e => {
-  if (dndModal && dndModal.classList.contains('open') && e.key === 'Escape') {
-    closeDndModal();
+  if (e.key === 'Escape' && projectModal && projectModal.classList.contains('open')) {
+    closeProjectModal();
   }
 });
 
@@ -307,36 +551,6 @@ window.addEventListener('keydown', e => {
     rain.appendChild(s);
   }
 
-  const cardLang = document.getElementById('card-languages');
-  if (cardLang) {
-    cardLang.addEventListener('click', () => {
-      window.location.href = 'japanese.html';
-    });
-  }
-
-  const cardArcade = document.getElementById('card-arcade');
-  if (cardArcade) {
-    cardArcade.addEventListener('click', e => {
-      if (e.target.closest('.arcade-play-btn')) return;
-      window.location.href = 'arcade-minigames/';
-    });
-  }
-
-  const cardFlags = document.getElementById('card-flags');
-  if (cardFlags) {
-    cardFlags.addEventListener('click', e => {
-      if (e.target.closest('.flags-play-btn')) return;
-      window.location.href = 'fun-with-flags/dist/index.html';
-    });
-  }
-
-  const cardCasino = document.getElementById('card-casino');
-  if (cardCasino) {
-    cardCasino.addEventListener('click', e => {
-      if (e.target.closest('.casino-play-btn')) return;
-      window.location.href = 'casino/index.html';
-    });
-  }
 })();
 
 // Philosophy card + modal
@@ -399,12 +613,26 @@ window.addEventListener('keydown', e => {
     cardsEl.appendChild(c);
   });
 
-  function open() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
-  function close() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; document.getElementById('cursor').classList.remove('big'); }
-  document.getElementById('phil-btn').addEventListener('click', e => { e.stopPropagation(); open(); });
-  document.getElementById('phil-thumb').addEventListener('click', open);
-  document.getElementById('phil-modal-close').addEventListener('click', close);
-  document.getElementById('phil-modal-backdrop').addEventListener('click', close);
+  function open() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    const cur = document.getElementById('cursor');
+    if (cur) cur.classList.remove('big');
+  }
+
+  window.openPhilModal = open;
+  window.closePhilModal = close;
+
+  const philClose = document.getElementById('phil-modal-close');
+  if (philClose) philClose.addEventListener('click', close);
+  const philBackdrop = document.getElementById('phil-modal-backdrop');
+  if (philBackdrop) philBackdrop.addEventListener('click', close);
   addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
 })();
 

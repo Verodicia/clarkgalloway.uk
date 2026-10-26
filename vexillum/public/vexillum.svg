@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 245" width="100%" height="100%">
+  <defs>
+    <!-- Metallic Red Primary Gradient -->
+    <linearGradient id="rubyMetallic" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff8da1"/>
+      <stop offset="12%" stop-color="#ff3355"/>
+      <stop offset="35%" stop-color="#df0a2c"/>
+      <stop offset="58%" stop-color="#aa051e"/>
+      <stop offset="85%" stop-color="#6a0211"/>
+      <stop offset="100%" stop-color="#3d0109"/>
+    </linearGradient>
+
+    <!-- Bevel Top Highlight Gradient -->
+    <linearGradient id="bevelLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="30%" stop-color="#ff99aa" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#aa0022" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Chrome Edge Stroke Gradient -->
+    <linearGradient id="chromeStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffccd5"/>
+      <stop offset="25%" stop-color="#ff3355"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="75%" stop-color="#7a0014"/>
+      <stop offset="100%" stop-color="#330006"/>
+    </linearGradient>
+
+    <!-- 3D Bevel & Emboss Filter -->
+    <filter id="bevel3D" x="-20%" y="-20%" width="140%" height="140%">
+      <!-- Drop Shadow -->
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.9"/>
+      <!-- Deep Red Ambient Underglow -->
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#e11d48" flood-opacity="0.4"/>
+    </filter>
+
+    <filter id="chiselEdge" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&amp;family=Cinzel+Decorative:wght@700;900&amp;display=swap');
+
+    .top-title {
+      font-family: 'Cinzel', 'Trajan Pro', 'Georgia', serif;
+      font-weight: 900;
+      font-size: 44px;
+      letter-spacing: 0.12em;
+      text-anchor: middle;
+      fill: url(#rubyMetallic);
+      stroke: url(#chromeStroke);
+      stroke-width: 1.5px;
+      paint-order: stroke fill;
+    }
+
+    .main-title {
+      font-family: 'Cinzel Decorative', 'Cinzel', 'Trajan Pro', 'Georgia', serif;
+      font-weight: 900;
+      font-size: 154px;
+      letter-spacing: 0.08em;
+      text-anchor: middle;
+      fill: url(#rubyMetallic);
+      stroke: url(#chromeStroke);
+      stroke-width: 3.5px;
+      paint-order: stroke fill;
+    }
+
+    .shadow-under {
+      fill: #1a0004;
+      stroke: #0a0002;
+      stroke-width: 8px;
+    }
+  </style>
+
+  <g filter="url(#bevel3D)">
+    <!-- Top Line: CLARK GALLOWAY'S -->
+    <g transform="translate(512, 52)">
+      <!-- Under-shadow layer -->
+      <text class="top-title shadow-under" dy="3">CLARK GALLOWAY'S</text>
+      <!-- Main metallic layer -->
+      <text class="top-title" filter="url(#chiselEdge)">CLARK GALLOWAY'S</text>
+    </g>
+
+    <!-- Bottom Line: VEXILLUM -->
+    <g transform="translate(512, 202)">
+      <!-- Deep 3D extrude shadow layers -->
+      <text class="main-title shadow-under" dy="6">VEXILLUM</text>
+      <text class="main-title shadow-under" dy="3">VEXILLUM</text>
+      <!-- Main metallic chisel layer -->
+      <text class="main-title" filter="url(#chiselEdge)">VEXILLUM</text>
+    </g>
+  </g>
+</svg>
