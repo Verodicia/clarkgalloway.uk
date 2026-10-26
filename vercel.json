@@ -55,6 +55,14 @@
     {
       "source": "/arcade-minigames/",
       "destination": "/arcade-minigames/index.html"
+    },
+    {
+      "source": "/airport-puzzles",
+      "destination": "/airport-puzzles/index.html"
+    },
+    {
+      "source": "/airport-puzzles/",
+      "destination": "/airport-puzzles/index.html"
     }
   ]
 }

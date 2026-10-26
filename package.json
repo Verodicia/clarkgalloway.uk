@@ -7,6 +7,7 @@
     "dev": "npx -y serve -l 3000 .",
     "start": "npx -y serve -l 3000 .",
     "build:vexillum": "cd vexillum && npm run build",
-    "build:flags": "cd vexillum && npm run build"
+    "build:flags": "cd vexillum && npm run build",
+    "build:airport": "cd ../airport-puzzles && npx expo export -p web && cp -r dist/* ../clarkgalloway.uk/airport-puzzles/"
   }
 }

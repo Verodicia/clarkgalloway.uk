@@ -192,6 +192,39 @@ const projectsData = {
       close: '#fde047'
     }
   },
+  airport: {
+    title: 'Airport Puzzles',
+    image: 'projects/airport-puzzles.jpg',
+    chip: 'Offline In-Flight Game',
+    tag: '7 Puzzle Gates · Visa Stamp Passport',
+    quote: '"Digital kiosk-style offline puzzle book crafted for layovers and cruising altitude."',
+    desc: 'An editorial, tactile puzzle collection designed specifically for layovers, flights in Airplane Mode, and distraction-free offline play. Features 7 classic terminals: Gate A1 Sudoku, Gate A2 Terminal Crossword, Gate B1 Word Search, Gate B2 Nonograms, Gate C1 Codewords, Gate C2 Kakuro, and Gate D1 Word Ladders. Includes collectible passport visa stamps, frequent flyer air miles, tactile airport audio, and seatmate pass-and-play mode.',
+    meta: [
+      { label: 'ENGINE', value: 'React Native Web · Expo' },
+      { label: 'GATES', value: '7 Classic Puzzle Terminals' },
+      { label: 'AUDIO', value: 'Offline Solari Board & PA FX' }
+    ],
+    btnText: 'Play Airport Puzzles ↗',
+    btnUrl: 'airport-puzzles/',
+    target: '_self',
+    theme: {
+      backdrop: '#040b14ed',
+      border: 'rgba(217, 169, 75, 0.4)',
+      glow: 'rgba(30, 80, 140, 0.35)',
+      windowBg: '#081424',
+      detailsBg: 'radial-gradient(circle at 100% 0%, #102a43, #081424 70%)',
+      chipBg: 'rgba(217, 169, 75, 0.18)',
+      chipColor: '#f1c40f',
+      chipBorder: 'rgba(217, 169, 75, 0.45)',
+      quote: '#fed7aa',
+      titleGlow: 'rgba(217, 169, 75, 0.4)',
+      btnBg: 'linear-gradient(135deg, #1b4965, #c8963e)',
+      btnBorder: 'rgba(241, 196, 15, 0.45)',
+      btnShadow: 'rgba(16, 42, 67, 0.5)',
+      btnGlow: 'rgba(200, 150, 62, 0.6)',
+      close: '#f1c40f'
+    }
+  },
   fitness: {
     title: 'LG Fitness',
     image: 'projects/lgr-fitness.png',
