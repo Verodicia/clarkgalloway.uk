@@ -260,7 +260,7 @@ const projectsData = {
   },
   running: {
     title: 'Running',
-    image: 'projects/portrait-bg.jpg',
+    image: 'projects/toughmudder.png',
     chip: 'Endurance',
     tag: '5K · 10K · Half Marathon',
     quote: '"Pounding pavement around Strathclyde Park, chasing personal bests one kilometre at a time."',
@@ -392,7 +392,7 @@ const projectsData = {
   },
   languages: {
     title: 'Languages',
-    image: 'projects/portrait-bg.jpg',
+    image: 'projects/japanese.jpg',
     chip: 'Linguistics',
     tag: '日本語 · Japanese Language Study',
     quote: '"一期一会 — Treasure every unrepeatable encounter in life."',
